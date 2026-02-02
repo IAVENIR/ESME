@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark IA Sectoriel - IAvenir</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 50%, #eef2ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .info-box {
+            background: #f5f3ff;
+            border: 2px solid #ddd6fe;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            color: #6b21a8;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            color: #6b21a8;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .secteur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .secteur-btn {
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .secteur-btn:hover {
+            border-color: #8B5CF6;
+            background: #f5f3ff;
+        }
+        
+        .secteur-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+        
+        .secteur-info {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8B5CF6, #6366f1);
+            transition: width 0.3s;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .dimension-tag {
+            color: #8B5CF6;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+        
+        .option-btn {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            background: white;
+            cursor: pointer;
+            margin-bottom: 12px;
+            text-align: left;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-btn:hover {
+            border-color: #8B5CF6;
+        }
+        
+        .option-btn.selected {
+            border-color: #8B5CF6;
+            background: #f5f3ff;
+        }
+        
+        .radio {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .option-btn.selected .radio {
+            border-color: #8B5CF6;
+            background: #8B5CF6;
+        }
+        
+        .radio-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            display: none;
+        }
+        
+        .option-btn.selected .radio-dot {
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        
+        .btn-secondary {
+            padding: 12px 24px;
+            border: 1px solid #ddd6fe;
+            border-radius: 12px;
+            background: white;
+            color: #8B5CF6;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f3ff;
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        
+        .result-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .result-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .result-secteur {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        
+        .dimensions-grid {
+            display: grid;
+            gap: 16px;
+            margin: 30px 0;
+        }
+        
+        .dimension-item {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .dimension-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .dimension-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .dimension-score {
+            font-weight: bold;
+        }
+        
+        .bar-container {
+            width: 100%;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+        
+        .bar-above {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+        
+        .bar-below {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #8B5CF6, #6366f1);
+            color: white;
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .cta-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        
+        .cta-box p {
+            color: #ddd6fe;
+            margin-bottom: 24px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 14px 32px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-cta-primary {
+            background: white;
+            color: #8B5CF6;
+        }
+        
+        .btn-cta-primary:hover {
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+        
+        .btn-cta-secondary {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-cta-secondary:hover {
+            background: white;
+            color: #8B5CF6;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 24px;
+        }
+        
+        .footer a {
+            color: #8B5CF6;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 24px;
+            }
+            .result-score {
+                font-size: 2.5rem;
+            }
+            .result-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- WELCOME -->
+        <div id="welcome" class="card">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="display: inline-block; width: 80px; height: 80px; background: linear-gradient(135deg, #8B5CF6, #6366f1); border-radius: 24px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                    <span style="font-size: 40px;">📊</span>
+                </div>
+            </div>
+            <h1>Benchmark IA Sectoriel</h1>
+            <p class="subtitle">Où en êtes-vous vs votre secteur ?<br><small style="color: #9ca3af;">2 minutes • Comparaison instantanée</small></p>
+            
+            <div class="info-box">
+                <h3>✨ Votre résultat personnalisé</h3>
+                <ul>
+                    <li>✓ Score de maturité IA sur 100</li>
+                    <li>✓ Comparaison vs moyenne secteur</li>
+                    <li>✓ Classement (TOP 10%, TOP 25%...)</li>
+                    <li>✓ Analyse par dimension</li>
+                </ul>
+            </div>
+            
+            <button class="btn-primary" onclick="showSecteur()">Commencer le benchmark →</button>
+            
+            <div class="footer">
+                Par <strong style="color: #8B5CF6;">IAvenir</strong> • Conseil & Formation IA<br>
+                📧 <a href="mailto:mathieu.legeas@iavenir-formation.fr">mathieu.legeas@iavenir-formation.fr</a> • 📱 07 61 60 22 77
+            </div>
+        </div>
+        
+        <!-- SECTEUR -->
+        <div id="secteur" class="card hidden">
+            <h1 style="font-size: 2rem;">Quel est votre secteur d'activité ?</h1>
+            <p class="subtitle">Pour comparer avec vos pairs</p>
+            
+            <div class="secteur-grid" id="secteur-grid"></div>
+        </div>
+        
+        <!-- QUESTIONS -->
+        <div id="questions" class="card hidden">
+            <div class="question-header">
+                <span id="question-counter"></span>
+                <span id="secteur-name" style="color: #8B5CF6; font-weight: 600;"></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <div class="dimension-tag" id="dimension"></div>
+            <h2 class="question-title" id="question"></h2>
+            
+            <div id="options"></div>
+            
+            <div class="nav-buttons">
+                <button class="btn-secondary hidden" id="btn-prev" onclick="prevQuestion()">← Précédent</button>
+                <div></div>
+                <button class="btn-primary" id="btn-next" onclick="nextQuestion()" disabled style="width: auto; padding: 12px 24px;">Suivant →</button>
+            </div>
+        </div>
+        
+        <!-- RESULTS -->
+        <div id="results" class="card hidden">
+            <div class="result-header">
+                <div class="result-icon" id="result-icon"></div>
+                <div class="result-badge" id="result-badge"></div>
+                <div class="result-score" id="result-score"></div>
+                <div class="result-secteur" id="result-secteur-name"></div>
+                <div class="result-stats">
+                    <div class="stat">
+                        <div class="stat-label">Moyenne secteur</div>
+                        <div class="stat-value" id="moyenne-secteur"></div>
+                    </div>
+                    <div style="width: 1px; background: #e5e7eb;"></div>
+                    <div class="stat">
+                        <div class="stat-label">Classement</div>
+                        <div class="stat-value" id="classement"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; margin-bottom: 24px;">Analyse par dimension</h2>
+            <div class="dimensions-grid" id="dimensions-grid"></div>
+            
+            <div style="background: #f9fafb; border-radius: 20px; padding: 32px; margin-top: 40px;">
+                <h2 style="text-align: center; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px;">
+                    <span style="font-size: 1.5rem;">🎯</span>
+                    <span>Vos premiers leviers d'action</span>
+                </h2>
+                <div id="leviers-grid" style="display: grid; gap: 16px;"></div>
+            </div>
+            
+            <div class="cta-box">
+                <h2>Envie d'améliorer votre score ? 🚀</h2>
+                <p>IAvenir vous accompagne à performer grâce à l'IA</p>
+                <div class="cta-buttons">
+                    <a href="https://iavenir-formation.fr" target="_blank" class="btn-cta btn-cta-secondary">Découvrir IAvenir</a>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 20px;">
+                    📧 <a href="mailto:mathieu.legeas@iavenir-formation.fr" style="color: white; text-decoration: underline;">mathieu.legeas@iavenir-formation.fr</a> • 📱 07 61 60 22 77
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const secteurs = {
+            'Construction & BTP': { moyenne: 56, participants: 127 },
+            'Industrie & Manufacturing': { moyenne: 60, participants: 198 },
+            'Services & Conseil': { moyenne: 69, participants: 243 },
+            'Retail & Commerce': { moyenne: 53, participants: 156 },
+            'Santé & Pharmaceutique': { moyenne: 51, participants: 89 },
+            'Finance & Assurance': { moyenne: 66, participants: 167 },
+            'Tech & Digital': { moyenne: 78, participants: 289 },
+            'Éducation & Formation': { moyenne: 57, participants: 134 },
+            'Transport & Logistique': { moyenne: 54, participants: 112 },
+            'Énergie & Utilities': { moyenne: 58, participants: 98 }
+        };
+
+        const questions = [
+            {
+                id: 'vision',
+                dimension: 'Vision Stratégique',
+                question: "L'IA fait-elle partie de votre stratégie d'entreprise ?",
+                options: [
+                    { score: 0, text: "Pas encore à l'agenda" },
+                    { score: 5, text: "On en parle mais rien de formalisé" },
+                    { score: 10, text: "Quelques initiatives lancées" },
+                    { score: 15, text: "Stratégie IA définie avec objectifs clairs" },
+                    { score: 20, text: "Stratégie IA pilotée avec KPIs et budget dédié" }
+                ]
+            },
+            {
+                id: 'adoption',
+                dimension: 'Adoption Terrain',
+                question: "Quel pourcentage de vos équipes utilise l'IA au quotidien ?",
+                options: [
+                    { score: 0, text: "Moins de 10%" },
+                    { score: 5, text: "10-25%" },
+                    { score: 10, text: "25-50%" },
+                    { score: 15, text: "50-75%" },
+                    { score: 20, text: "Plus de 75%" }
+                ]
+            },
+            {
+                id: 'formation',
+                dimension: 'Formation & Compétences',
+                question: "Vos équipes sont-elles formées à l'IA ?",
+                options: [
+                    { score: 0, text: "Aucune formation à ce jour" },
+                    { score: 5, text: "Sensibilisation ponctuelle" },
+                    { score: 10, text: "Formation de base déployée" },
+                    { score: 15, text: "Formation continue sur plusieurs niveaux" },
+                    { score: 20, text: "Programme complet avec certification" }
+                ]
+            },
+            {
+                id: 'gouvernance',
+                dimension: 'Gouvernance & Sécurité',
+                question: "Avez-vous un cadre pour encadrer l'usage de l'IA ?",
+                options: [
+                    { score: 0, text: "Aucun cadre défini" },
+                    { score: 5, text: "Quelques recommandations informelles" },
+                    { score: 10, text: "Charte IA en cours de rédaction" },
+                    { score: 15, text: "Charte IA déployée avec process de validation" },
+                    { score: 20, text: "Gouvernance complète avec comité dédié" }
+                ]
+            },
+            {
+                id: 'mesure',
+                dimension: "Mesure d'Impact",
+                question: "Mesurez-vous le ROI de vos initiatives IA ?",
+                options: [
+                    { score: 0, text: "Aucune mesure" },
+                    { score: 5, text: "Perception qualitative seulement" },
+                    { score: 10, text: "Quelques indicateurs de suivi" },
+                    { score: 15, text: "KPIs définis et suivis régulièrement" },
+                    { score: 20, text: "Dashboard ROI complet avec optimisation continue" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let selectedSecteur = '';
+        let answers = {};
+
+        function showSecteur() {
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('secteur').classList.remove('hidden');
+            
+            const grid = document.getElementById('secteur-grid');
+            Object.keys(secteurs).forEach(secteur => {
+                const btn = document.createElement('button');
+                btn.className = 'secteur-btn';
+                btn.onclick = () => selectSecteur(secteur);
+                btn.innerHTML = `
+                    <div class="secteur-name">${secteur}</div>
+                    <div class="secteur-info">${secteurs[secteur].participants} entreprises • Moy. ${secteurs[secteur].moyenne}/100</div>
+                `;
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectSecteur(secteur) {
+            selectedSecteur = secteur;
+            document.getElementById('secteur').classList.add('hidden');
+            document.getElementById('questions').classList.remove('hidden');
+            document.getElementById('secteur-name').textContent = secteur;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-counter').textContent = `Question ${currentQuestion + 1} / ${questions.length}`;
+            document.getElementById('progress').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            document.getElementById('dimension').textContent = q.dimension;
+            document.getElementById('question').textContent = q.question;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn' + (answers[q.id]?.score === opt.score ? ' selected' : '');
+                btn.onclick = () => selectOption(q.id, opt);
+                btn.innerHTML = `
+                    <div class="radio"><div class="radio-dot"></div></div>
+                    <span>${opt.text}</span>
+                `;
+                optionsDiv.appendChild(btn);
+            });
+            
+            document.getElementById('btn-prev').classList.toggle('hidden', currentQuestion === 0);
+            document.getElementById('btn-next').disabled = !answers[q.id];
+            document.getElementById('btn-next').textContent = currentQuestion < questions.length - 1 ? 'Suivant →' : 'Voir les résultats →';
+        }
+
+        function selectOption(questionId, option) {
+            answers[questionId] = option;
+            showQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+
+        function showResults() {
+            const totalScore = Object.values(answers).reduce((sum, a) => sum + a.score, 0);
+            const benchmark = secteurs[selectedSecteur];
+            const percentile = totalScore < benchmark.moyenne 
+                ? Math.round(50 * (totalScore / benchmark.moyenne))
+                : Math.round(50 + 50 * ((totalScore - benchmark.moyenne) / (100 - benchmark.moyenne)));
+            
+            let ranking;
+            if (percentile >= 90) ranking = { label: 'TOP 10%', color: '#10b981', icon: '🏆' };
+            else if (percentile >= 75) ranking = { label: 'TOP 25%', color: '#3b82f6', icon: '⭐' };
+            else if (percentile >= 50) ranking = { label: 'Au-dessus de la moyenne', color: '#8B5CF6', icon: '📈' };
+            else if (percentile >= 25) ranking = { label: 'En progression', color: '#f59e0b', icon: '🎯' };
+            else ranking = { label: 'À développer', color: '#ef4444', icon: '🚀' };
+            
+            document.getElementById('questions').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            
+            document.getElementById('result-icon').textContent = ranking.icon;
+            const badge = document.getElementById('result-badge');
+            badge.textContent = ranking.label;
+            badge.style.backgroundColor = ranking.color + '33';
+            badge.style.color = ranking.color;
+            
+            document.getElementById('result-score').textContent = `Votre Score : ${totalScore}/100`;
+            document.getElementById('result-secteur-name').textContent = `Secteur : ${selectedSecteur}`;
+            document.getElementById('moyenne-secteur').textContent = `${benchmark.moyenne}/100`;
+            
+            const classementEl = document.getElementById('classement');
+            classementEl.textContent = `TOP ${100 - percentile}%`;
+            classementEl.style.color = ranking.color;
+            
+            // Générer les dimensions
+            const dimensionsGrid = document.getElementById('dimensions-grid');
+            const dimensionsData = [];
+            
+            questions.forEach(q => {
+                const score = (answers[q.id].score / 20) * 100;
+                const isAbove = score >= (benchmark.moyenne / questions.length);
+                
+                dimensionsData.push({ question: q, score: score, isAbove: isAbove });
+                
+                const div = document.createElement('div');
+                div.className = 'dimension-item';
+                div.innerHTML = `
+                    <div class="dimension-header">
+                        <span class="dimension-name">${q.dimension}</span>
+                        <span class="dimension-score" style="color: ${isAbove ? '#10b981' : '#f59e0b'}">${Math.round(score)}%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill ${isAbove ? 'bar-above' : 'bar-below'}" style="width: ${score}%"></div>
+                    </div>
+                `;
+                dimensionsGrid.appendChild(div);
+            });
+            
+            // Générer les leviers d'action pour les 2 dimensions les plus faibles
+            const leviers = {
+                'Vision Stratégique': {
+                    icon: '🎯',
+                    title: 'Structurer votre vision IA',
+                    actions: [
+                        'Réaliser un audit stratégique pour identifier les opportunités',
+                        'Définir 3-5 cas d\'usage prioritaires alignés avec vos objectifs',
+                        'Construire une roadmap IA avec quick wins à 90 jours'
+                    ]
+                },
+                'Adoption Terrain': {
+                    icon: '👥',
+                    title: 'Accélérer l\'adoption terrain',
+                    actions: [
+                        'Identifier et former vos champions IA internes',
+                        'Mettre en place des ateliers pratiques sur cas d\'usage métier',
+                        'Créer une communauté de pratique pour partager les succès'
+                    ]
+                },
+                'Formation & Compétences': {
+                    icon: '⚡',
+                    title: 'Développer les compétences',
+                    actions: [
+                        'Déployer une formation certifiée adaptée à chaque profil',
+                        'Organiser des ateliers 80/20 : 80% pratique, 20% théorie',
+                        'Mettre en place un programme de montée en compétence continue'
+                    ]
+                },
+                'Gouvernance & Sécurité': {
+                    icon: '🛡️',
+                    title: 'Sécuriser votre démarche IA',
+                    actions: [
+                        'Élaborer une charte IA claire et applicable dès J1',
+                        'Former vos équipes aux enjeux RGPD et éthique',
+                        'Mettre en place un processus de validation des outils'
+                    ]
+                },
+                'Mesure d\'Impact': {
+                    icon: '📊',
+                    title: 'Piloter la performance',
+                    actions: [
+                        'Définir des KPIs pertinents par cas d\'usage',
+                        'Mettre en place un système de mesure du ROI',
+                        'Organiser des revues mensuelles pour optimiser l\'impact'
+                    ]
+                }
+            };
+            
+            // Trier par score croissant et prendre les 2 plus faibles
+            const weakDimensions = dimensionsData
+                .sort((a, b) => a.score - b.score)
+                .slice(0, 2);
+            
+            const leviersGrid = document.getElementById('leviers-grid');
+            weakDimensions.forEach(dim => {
+                const levier = leviers[dim.question.dimension];
+                const div = document.createElement('div');
+                div.style.cssText = 'background: white; padding: 24px; border-radius: 16px; border-left: 4px solid #8B5CF6;';
+                div.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <span style="font-size: 2rem;">${levier.icon}</span>
+                        <div>
+                            <h3 style="font-size: 1.1rem; font-weight: bold; color: #1f2937; margin-bottom: 4px;">${levier.title}</h3>
+                            <div style="font-size: 0.85rem; color: #8B5CF6; font-weight: 600;">${dim.question.dimension} • ${Math.round(dim.score)}%</div>
+                        </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        ${levier.actions.map(action => `
+                            <li style="padding: 8px 0; color: #4b5563; font-size: 0.95rem; display: flex; align-items: start;">
+                                <span style="color: #8B5CF6; margin-right: 12px; font-weight: bold;">→</span>
+                                <span>${action}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                leviersGrid.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
