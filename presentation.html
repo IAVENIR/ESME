@@ -988,7 +988,7 @@
       const roi = calculateROI();
       const totalDevis = (state.includeAudit ? audit.total : 0) + (state.includeFormation ? formation.final : 0);
       const today = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-      const datePoint = state.dateProchainPoint ? new Date(state.dateProchainPoint).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }) : 'Dans 1 semaine';
+      const datePointText = state.dateProchainPoint ? 'Point le ' + new Date(state.dateProchainPoint).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }) : 'Point dans 1 semaine';
       const dateFormation = state.formationConfig.dateFormation ? new Date(state.formationConfig.dateFormation).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }) : 'A definir';
       const outils = state.formationConfig.outils || 'A definir';
       const casUsages = state.formationConfig.casUsages || 'A definir';
@@ -1028,7 +1028,7 @@
       }
       
       // Prochaines étapes
-      let etapesHTML = '<div style="text-align:center;margin-bottom:6px;"><div style="display:inline-block;background:#8B5CF6;color:white;padding:4px 10px;border-radius:12px;font-size:9px;font-weight:bold;">1 Point le ' + datePoint + '</div></div>';
+      let etapesHTML = '<div style="text-align:center;margin-bottom:6px;"><div style="display:inline-block;background:#8B5CF6;color:white;padding:4px 10px;border-radius:12px;font-size:9px;font-weight:bold;">1 ' + datePointText + '</div></div>';
       etapesHTML += '<div style="text-align:center;font-size:8px;color:#6b7280;margin-bottom:4px;">|</div>';
       etapesHTML += '<div style="text-align:center;margin-bottom:4px;"><div style="display:inline-block;background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:8px;color:#4b5563;">On avance ensemble ?</div></div>';
       etapesHTML += '<div style="display:flex;justify-content:center;gap:12px;font-size:8px;">';
