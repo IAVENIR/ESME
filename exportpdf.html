@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>IAvenir — Présentation Commerciale</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #7C3AED;
+  --purple-mid: #8B5CF6;
+  --purple-light: #EDE9FE;
+  --purple-xlight: #F5F3FF;
+  --purple-dark: #6D28D9;
+  --purple-text: #5B21B6;
+  --gray-900: #111827;
+  --gray-800: #1F2937;
+  --gray-700: #374151;
+  --gray-500: #6B7280;
+  --gray-300: #D1D5DB;
+  --gray-200: #E5E7EB;
+  --gray-100: #F3F4F6;
+  --gray-50: #F9FAFB;
+  --green: #059669;
+  --green-light: #D1FAE5;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+  font-size: 12px;
+  color: var(--gray-900);
+  background: #e5e7eb;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== PAGE ===== */
+.page {
+  width: 210mm;
+  height: 297mm;
+  background: white;
+  margin: 0 auto 14px;
+  padding: 12mm 14mm;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
+@page { size: A4 portrait; margin: 0; }
+
+/* ===== ZONE TEXTE EDITABLE ===== */
+.situation-input {
+  border: 1.5px dashed var(--purple-mid);
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: text;
+  transition: border-color 0.15s;
+  background: var(--purple-xlight);
+}
+.situation-input:focus { border-color: var(--purple); border-style: solid; background: white; }
+.situation-input:empty::before {
+  content: attr(data-placeholder);
+  color: var(--gray-300);
+  pointer-events: none;
+  font-style: italic;
+}
+@media print {
+  .situation-input { border: none; background: transparent; padding: 0; }
+  .situation-input:empty::before { display: none; }
+}
+
+/* ===== PRINT BAR ===== */
+.print-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--gray-800); color: white;
+  padding: 10px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 9999;
+}
+.print-bar p { font-size: 12px; color: #9CA3AF; }
+.print-btn {
+  background: var(--purple-mid); color: white; border: none;
+  padding: 9px 22px; border-radius: 8px; font-size: 13px;
+  font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;
+}
+.print-btn:hover { background: var(--purple-dark); }
+body { padding-top: 50px; }
+@media print { body { padding-top: 0; } }
+
+/* ===== HEADER ===== */
+.page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--purple-light);
+}
+.brand { font-size: 16px; font-weight: 900; color: var(--purple); letter-spacing: -0.5px; }
+.page-tag {
+  font-size: 9px; color: var(--gray-500);
+  background: var(--gray-100); padding: 3px 9px; border-radius: 20px; font-weight: 500;
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+  font-size: 13px; font-weight: 800; color: var(--gray-900);
+  margin-bottom: 5px; display: flex; align-items: center; gap: 7px;
+}
+.section-title::before {
+  content: ''; display: block; width: 3px; height: 14px;
+  background: var(--purple-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+/* ===== PAGE 1 HERO ===== */
+.hero-wrap {
+  background: linear-gradient(135deg, var(--purple-xlight) 0%, white 60%);
+  border-radius: 14px; padding: 16px; margin-bottom: 10px;
+  border: 1px solid var(--purple-light);
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;
+}
+.hero-left { text-align: center; }
+.hero-h1 { font-size: 22px; font-weight: 900; color: var(--gray-900); line-height: 1.15; margin-bottom: 5px; }
+.hero-sub { font-size: 11px; color: var(--gray-500); line-height: 1.5; }
+
+.arrow-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.arrow-icon { width: 36px; height: 36px; background: var(--purple-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+.point-card { border-radius: 12px; padding: 14px; }
+.point-a { border: 1.5px solid var(--gray-200); background: white; }
+.point-b { background: var(--purple-mid); color: white; }
+.point-label { font-size: 8px; font-weight: 800; letter-spacing: 0.8px; padding: 3px 8px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
+.label-a { background: var(--gray-100); color: var(--gray-700); }
+.label-b { background: rgba(255,255,255,0.2); color: white; }
+.point-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.icon-a { background: var(--purple-xlight); }
+.icon-b { background: rgba(255,255,255,0.2); }
+.point-title { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+.point-sub { font-size: 10px; font-style: italic; color: var(--gray-500); }
+.point-b .point-sub { color: rgba(255,255,255,0.75); }
+.result-line { font-size: 10px; font-weight: 700; color: white; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+.result-line::before { content: '✓'; font-size: 9px; opacity: 0.8; }
+
+/* KPIs */
+.kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
+.kpi { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.kpi-icon { width: 28px; height: 28px; background: var(--purple-light); border-radius: 7px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.kpi-val { font-size: 18px; font-weight: 900; color: var(--purple); line-height: 1; margin-bottom: 3px; }
+.kpi-label { font-size: 9px; color: var(--gray-500); }
+
+/* POURQUOI IAVENIR */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.why-item { display: flex; gap: 9px; align-items: flex-start; padding: 10px; background: var(--gray-50); border-radius: 9px; border: 1px solid var(--gray-200); }
+.why-icon { width: 28px; height: 28px; background: var(--purple-light); border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.why-title { font-size: 11px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+.why-sub { font-size: 9.5px; color: var(--gray-500); }
+
+/* QUALIOPI BANNER */
+.qualiopi-banner {
+  background: var(--purple-light); border-radius: 9px; padding: 9px 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.qualiopi-banner span { font-size: 10px; font-weight: 600; color: var(--purple-text); }
+
+/* ===== PAGE 2 — MÉTHODOLOGIE ===== */
+.metho-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.metho-card { border: 1.5px solid var(--purple-light); border-radius: 12px; overflow: hidden; }
+.metho-card-header { background: var(--purple-mid); padding: 10px 12px; }
+.metho-num { width: 24px; height: 24px; background: rgba(255,255,255,0.25); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: white; margin-bottom: 5px; }
+.metho-tag { font-size: 8.5px; color: rgba(255,255,255,0.75); margin-bottom: 3px; }
+.metho-card-title { font-size: 13px; font-weight: 800; color: white; }
+.metho-card-body { padding: 10px 12px; }
+.metho-desc { font-size: 10px; color: var(--gray-500); margin-bottom: 8px; line-height: 1.4; }
+.metho-phase { font-size: 9.5px; color: var(--gray-700); margin-bottom: 4px; display: flex; gap: 5px; }
+.metho-phase-num { color: var(--purple-mid); font-weight: 700; flex-shrink: 0; }
+.metho-sep { height: 1px; background: var(--purple-light); margin: 8px 0; }
+.metho-benefit { font-size: 9.5px; color: var(--gray-700); margin-bottom: 3px; display: flex; gap: 4px; }
+.check { color: var(--green); font-weight: 700; flex-shrink: 0; font-size: 10px; }
+
+/* TIMELINE */
+.timeline-box { background: var(--gray-50); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.tl-title { font-size: 12px; font-weight: 800; color: var(--gray-900); text-align: center; margin-bottom: 14px; }
+.timeline { display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
+.timeline::before { content:''; position:absolute; top: 18px; left: 18px; right: 18px; height: 2px; background: linear-gradient(to right, var(--purple-mid), var(--purple-dark)); }
+.tl-item { display: flex; flex-direction: column; align-items: center; gap: 5px; z-index: 1; }
+.tl-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; }
+.tl-filled { background: var(--purple-mid); color: white; }
+.tl-outline { background: white; border: 2px solid var(--purple-mid); color: var(--purple); }
+.tl-end { background: var(--purple-dark); color: white; }
+.tl-label { font-size: 9px; font-weight: 600; color: var(--gray-700); text-align: center; }
+.tl-note { font-size: 9px; color: var(--gray-400); text-align: center; margin-top: 10px; }
+
+/* RÉSULTATS */
+.resultats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin-bottom: 10px; }
+.resultat-card { border: 1px solid var(--gray-200); border-radius: 11px; padding: 12px 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.r-icon { width: 38px; height: 38px; background: var(--purple-light); border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 7px; }
+.r-val { font-size: 20px; font-weight: 900; color: var(--purple); line-height: 1; margin-bottom: 3px; }
+.r-label { font-size: 11px; font-weight: 700; color: var(--gray-800); }
+.r-sub { font-size: 9px; color: var(--gray-500); }
+
+/* ATOUTS */
+.atouts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.atout { background: var(--purple-light); border-radius: 10px; padding: 11px 13px; display: flex; align-items: center; gap: 10px; }
+.atout-icon { width: 32px; height: 32px; background: white; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.atout-title { font-size: 11px; font-weight: 800; color: var(--purple-text); margin-bottom: 2px; }
+.atout-sub { font-size: 9.5px; color: #5B21B6; }
+
+/* CITATION */
+.citation { background: var(--gray-50); border-left: 3px solid var(--purple-mid); border-radius: 0 9px 9px 0; padding: 11px 14px; }
+.citation p { font-size: 11px; color: var(--gray-700); font-style: italic; margin-bottom: 5px; line-height: 1.5; }
+.citation-author { font-size: 9px; color: var(--gray-500); font-weight: 600; }
+
+/* ===== PAGE 3 — ACTION ===== */
+.action-hero { background: var(--gray-800); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; }
+.action-title { font-size: 20px; font-weight: 900; color: white; text-align: center; margin-bottom: 3px; }
+.action-sub { font-size: 11px; color: #9CA3AF; text-align: center; margin-bottom: 14px; }
+
+.action-2col { display: grid; grid-template-columns: 1fr 1.1fr; gap: 10px; }
+.action-card { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 13px; }
+.ac-title { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+
+/* Étapes */
+.step-flow { display: flex; flex-direction: column; gap: 0; }
+.step-node { display: flex; align-items: center; gap: 9px; }
+.step-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--purple-mid); flex-shrink: 0; }
+.step-dot.done { background: var(--green); }
+.step-dot.next { background: white; border: 2px solid var(--purple-mid); }
+.step-label { font-size: 10px; color: white; font-weight: 600; }
+.step-label.faded { color: #9CA3AF; font-weight: 400; }
+.step-connector { width: 2px; height: 14px; background: rgba(255,255,255,0.15); margin-left: 4px; }
+
+/* Contact */
+.contact-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--purple-mid); display: flex; align-items: center; justify-content: center; font-weight: 900; color: white; font-size: 15px; margin-bottom: 9px; }
+.contact-name { font-size: 15px; font-weight: 800; color: white; }
+.contact-role { font-size: 10px; color: #9CA3AF; margin-bottom: 12px; }
+.contact-line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.contact-pill { background: rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 9px; display: flex; align-items: center; gap: 7px; }
+.contact-pill-text { font-size: 10px; color: #D1D5DB; }
+
+/* Garanties */
+.garanties { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.garantie { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 11px 12px; display: flex; gap: 9px; align-items: flex-start; }
+.garantie-icon { width: 30px; height: 30px; background: var(--purple-light); border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.garantie-title { font-size: 11px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+.garantie-sub { font-size: 9.5px; color: var(--gray-500); }
+
+/* FAQ / Objections */
+.faq { margin-bottom: 10px; }
+.faq-item { display: flex; gap: 9px; margin-bottom: 8px; align-items: flex-start; }
+.faq-q { font-size: 10px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+.faq-a { font-size: 9.5px; color: var(--gray-500); line-height: 1.45; }
+.faq-badge { width: 18px; height: 18px; border-radius: 50%; background: var(--purple-light); color: var(--purple); font-size: 9px; font-weight: 900; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+
+/* FOOTER */
+.footer { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { font-size: 13px; font-weight: 800; color: var(--purple); }
+.footer-sub { font-size: 9px; color: var(--gray-400); }
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <p>Ouvrir dans Chrome → Fichier → Imprimer → Enregistrer en PDF &nbsp;|&nbsp; Désactiver en-têtes/pieds de page, marges = Aucune</p>
+  <button class="print-btn" onclick="window.print()">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 16l-4-4h3V4h2v8h3l-4 4z"/><path d="M4 18h16v2H4z"/></svg>
+    Exporter en PDF
+  </button>
+</div>
+
+<!-- ======================================================
+     PAGE 1 — TOUT EN UNE PAGE
+     ====================================================== -->
+<div class="page" style="padding:9mm 11mm;">
+  <div class="page-header" style="margin-bottom:6px;">
+    <span class="brand">IAvenir</span>
+    <span class="page-tag">Présentation commerciale</span>
+  </div>
+
+  <!-- INTRO -->
+  <div style="margin-bottom:7px;">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+      <div style="font-size:16px;font-weight:900;color:var(--gray-900);line-height:1.2;">
+        Proposition d'accompagnement pour <span contenteditable="true" class="situation-input" data-placeholder="Nom du client" style="color:var(--purple);border-bottom:1.5px dashed var(--purple-light);padding:0 3px;min-width:80px;display:inline-block;font-size:16px;font-weight:900;"></span>
+      </div>
+      <div contenteditable="true" class="situation-input" data-placeholder="Date" style="font-size:10px;color:var(--gray-400);white-space:nowrap;border-bottom:1px dashed var(--gray-300);padding:0 3px;min-width:50px;text-align:right;flex-shrink:0;"></div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch;background:linear-gradient(135deg,var(--purple-xlight) 0%,white 60%);border:1px solid var(--purple-light);border-radius:12px;padding:9px 11px;margin-bottom:6px;">
+    <!-- Point A -->
+    <div style="border:1.5px solid var(--gray-200);border-radius:9px;padding:9px;background:white;">
+      <span style="font-size:7px;font-weight:800;letter-spacing:0.6px;background:var(--gray-100);color:var(--gray-700);padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;">AUJOURD'HUI</span>
+      <div style="font-size:10px;font-weight:800;color:var(--gray-900);margin-bottom:5px;">Votre Situation</div>
+      <div contenteditable="true" class="situation-input" data-placeholder="Décrivez ici la situation actuelle..." style="font-size:9px;color:var(--gray-700);line-height:1.4;min-height:38px;"></div>
+    </div>
+    <!-- Flèche -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+      <div style="width:26px;height:26px;background:var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+        <svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </div>
+    <!-- Point B -->
+    <div style="background:var(--purple-mid);border-radius:9px;padding:9px;">
+      <span style="font-size:7px;font-weight:800;letter-spacing:0.6px;background:rgba(255,255,255,0.2);color:white;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px;">VOS RÉSULTATS</span>
+      <div style="font-size:10px;font-weight:800;color:white;margin-bottom:5px;">Vos Résultats</div>
+      <div style="font-size:9px;color:white;margin-bottom:2px;display:flex;align-items:center;gap:4px;"><span style="opacity:0.7;font-size:8px;">✓</span>+15% à +40% de productivité</div>
+      <div style="font-size:9px;color:white;margin-bottom:2px;display:flex;align-items:center;gap:4px;"><span style="opacity:0.7;font-size:8px;">✓</span>Équipes autonomes et confiantes</div>
+      <div style="font-size:9px;color:white;margin-bottom:2px;display:flex;align-items:center;gap:4px;"><span style="opacity:0.7;font-size:8px;">✓</span>ROI mesurable dès le 1er mois</div>
+      <div style="font-size:9px;color:white;display:flex;align-items:center;gap:4px;"><span style="opacity:0.7;font-size:8px;">✓</span>Avantage compétitif durable</div>
+    </div>
+  </div>
+
+  <!-- MÉTHODOLOGIE compacte -->
+  <div class="section-title" style="margin-bottom:4px;">Notre méthodologie en 3 étapes</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px;">
+
+    <div style="border:1.5px solid var(--purple-light);border-radius:8px;overflow:hidden;">
+      <div style="background:var(--purple-mid);padding:5px 8px;display:flex;align-items:center;gap:6px;">
+        <div style="width:16px;height:16px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:white;flex-shrink:0;">1</div>
+        <div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.7);">3 à 10 jours</div>
+          <div style="font-size:10px;font-weight:800;color:white;line-height:1.1;">Audit Stratégique</div>
+        </div>
+      </div>
+      <div style="padding:5px 8px;">
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);font-weight:700;">1.</span> Immersion terrain</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);font-weight:700;">2.</span> Consolidation &amp; quick wins</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:5px;"><span style="color:var(--purple-mid);font-weight:700;">3.</span> Restitution &amp; roadmap</div>
+        <div style="border-top:1px solid var(--purple-light);padding-top:4px;">
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> Roadmap personnalisée</div>
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> ROI estimé par cas d'usage</div>
+          <div style="font-size:7.5px;color:var(--gray-700);"><span style="color:var(--green);">✓</span> Quick wins identifiés</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1.5px solid var(--purple-light);border-radius:8px;overflow:hidden;">
+      <div style="background:#6D28D9;padding:6px 9px;display:flex;align-items:center;gap:6px;">
+        <div style="width:16px;height:16px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:white;flex-shrink:0;">2</div>
+        <div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.7);">0.5 à 2 jours</div>
+          <div style="font-size:10px;font-weight:800;color:white;line-height:1.1;">Formation sur-mesure</div>
+        </div>
+      </div>
+      <div style="padding:5px 8px;">
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);">•</span> 12 participants max/session</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);">•</span> Présentiel / Distanciel</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:5px;"><span style="color:var(--purple-mid);">•</span> Adaptée à vos besoins</div>
+        <div style="border-top:1px solid var(--purple-light);padding-top:4px;">
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> Équipes autonomes</div>
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> Financement OPCO possible</div>
+          <div style="font-size:7.5px;color:var(--gray-700);"><span style="color:var(--green);">✓</span> Certifiée Qualiopi</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1.5px solid var(--purple-light);border-radius:8px;overflow:hidden;">
+      <div style="background:#5B21B6;padding:6px 9px;display:flex;align-items:center;gap:6px;">
+        <div style="width:16px;height:16px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:white;flex-shrink:0;">3</div>
+        <div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.7);">En continu</div>
+          <div style="font-size:10px;font-weight:800;color:white;line-height:1.1;">Missions de Conseil</div>
+        </div>
+      </div>
+      <div style="padding:5px 8px;">
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);">•</span> Suivi mensuel &amp; KPIs</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:2px;"><span style="color:var(--purple-mid);">•</span> Déploiement des outils IA</div>
+        <div style="font-size:8px;color:var(--gray-700);margin-bottom:5px;"><span style="color:var(--purple-mid);">•</span> Veille &amp; recommandations</div>
+        <div style="border-top:1px solid var(--purple-light);padding-top:4px;">
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> Avantage compétitif durable</div>
+          <div style="font-size:7.5px;color:var(--gray-700);margin-bottom:1px;"><span style="color:var(--green);">✓</span> ROI mesuré &amp; optimisé</div>
+          <div style="font-size:7.5px;color:var(--gray-700);"><span style="color:var(--green);">✓</span> Organisation apprenante</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TIMELINE compacte -->
+  <div style="background:var(--gray-50);border-radius:8px;padding:6px 10px;margin-bottom:8px;">
+    <div style="font-size:9px;font-weight:800;color:var(--gray-900);text-align:center;margin-bottom:9px;">Votre parcours sur 12 mois</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;">
+      <div style="position:absolute;top:13px;left:15px;right:15px;height:2px;background:linear-gradient(to right,var(--purple-mid),var(--purple-dark));"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Audit</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Formation</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:white;border:2px solid var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:800;color:var(--purple);">M+1</div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Suivi KPI</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:white;border:2px solid var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:800;color:var(--purple);">M+6</div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Comité IA</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:white;border:2px solid var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:800;color:var(--purple);">M+9</div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Comité IA</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;z-index:1;">
+        <div style="width:26px;height:26px;background:var(--purple-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div style="font-size:7px;font-weight:600;color:var(--gray-700);">Bilan annuel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉSULTATS 4 colonnes -->
+  <div class="section-title" style="margin-bottom:4px;">Résultats pour l'entreprise</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:8px;">
+    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:8px 6px;text-align:center;">
+      <div style="width:22px;height:22px;background:var(--purple-light);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div style="font-size:15px;font-weight:900;color:var(--purple);line-height:1;margin-bottom:2px;">2-5h</div>
+      <div style="font-size:8.5px;font-weight:700;color:var(--gray-800);">Temps gagné</div>
+      <div style="font-size:7.5px;color:var(--gray-500);">pers. / semaine</div>
+    </div>
+    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:8px 6px;text-align:center;">
+      <div style="width:22px;height:22px;background:var(--purple-light);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div style="font-size:15px;font-weight:900;color:var(--purple);line-height:1;margin-bottom:2px;">Humain</div>
+      <div style="font-size:8.5px;font-weight:700;color:var(--gray-800);">Engagement</div>
+      <div style="font-size:7.5px;color:var(--gray-500);">&amp; Bien-être</div>
+    </div>
+    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:8px 6px;text-align:center;">
+      <div style="width:22px;height:22px;background:var(--purple-light);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
+      <div style="font-size:15px;font-weight:900;color:var(--purple);line-height:1;margin-bottom:2px;">98%</div>
+      <div style="font-size:8.5px;font-weight:700;color:var(--gray-800);">Satisfaction</div>
+      <div style="font-size:7.5px;color:var(--gray-500);">taux moyen stagiaires</div>
+    </div>
+    <div style="border:1px solid var(--purple-light);border-radius:8px;padding:8px 6px;text-align:center;background:var(--purple-xlight);">
+      <div style="width:22px;height:22px;background:var(--purple-light);border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+      <div style="font-size:13px;font-weight:900;color:var(--purple);line-height:1;margin-bottom:2px;">2-5 mois</div>
+      <div style="font-size:8.5px;font-weight:700;color:var(--gray-800);">ROI</div>
+      <div style="font-size:7.5px;color:var(--gray-500);">retour invest.</div>
+    </div>
+  </div>
+
+  <!-- QUALIOPI -->
+  <div style="background:var(--purple-light);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+    <span style="font-size:9px;font-weight:600;color:var(--purple-text);">Certifié <strong>Qualiopi</strong> · Formation éligible au financement OPCO · Déductible du plan de développement des compétences</span>
+  </div>
+
+  <!-- POURQUOI IAVENIR -->
+  <div class="section-title" style="margin-bottom:4px;">Pourquoi IAvenir ?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px;">
+    <div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;background:var(--gray-50);border-radius:8px;border:1px solid var(--gray-200);">
+      <div style="width:26px;height:26px;background:var(--purple-light);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--gray-900);margin-bottom:2px;">Formation 100% sur-mesure</div><div style="font-size:8.5px;color:var(--gray-500);">Exercices conçus sur vos données et processus réels — pas de contenu générique.</div></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;background:var(--gray-50);border-radius:8px;border:1px solid var(--gray-200);">
+      <div style="width:26px;height:26px;background:var(--purple-light);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--gray-900);margin-bottom:2px;">ROI mesuré à chaque étape</div><div style="font-size:8.5px;color:var(--gray-500);">Indicateurs définis en amont, mesure du temps gagné dès M+1.</div></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;background:var(--gray-50);border-radius:8px;border:1px solid var(--gray-200);">
+      <div style="width:26px;height:26px;background:var(--purple-light);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--gray-900);margin-bottom:2px;">Suivi individualisé garanti</div><div style="font-size:8.5px;color:var(--gray-500);">Suivi individualisé garanti — pas de formation en amphi anonyme.</div></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;padding:7px 10px;background:var(--gray-50);border-radius:8px;border:1px solid var(--gray-200);">
+      <div style="width:26px;height:26px;background:var(--purple-light);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" fill="none" stroke="#7C3AED" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--gray-900);margin-bottom:2px;">Accompagnement dans la durée</div><div style="font-size:8.5px;color:var(--gray-500);">Comités IA, veille techno et suivi KPI pour ancrer les acquis sur 12 mois.</div></div>
+    </div>
+  </div>
+
+  <!-- PRÊT À PASSER À L'ACTION -->
+  <div style="background:linear-gradient(135deg, var(--purple-xlight) 0%, #EDE9FE 100%);border:1.5px solid var(--purple-light);border-radius:12px;padding:10px 14px;margin-top:auto;">
+    <div style="font-size:14px;font-weight:900;color:var(--purple-dark);text-align:center;margin-bottom:1px;">Prêt à passer à l'action ?</div>
+    <div style="font-size:9.5px;color:var(--gray-500);text-align:center;margin-bottom:9px;">Contactez-nous pour démarrer votre transformation IA</div>
+
+    <!-- Sélecteur (masqué à l'impression) -->
+    <div class="no-print" style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;position:relative;z-index:10;">
+      <button onclick="selectContact('mathieu')" id="btn-mathieu" style="padding:5px 16px;border-radius:6px;border:1.5px solid var(--purple-mid);background:var(--purple-mid);color:white;font-size:9px;font-weight:700;cursor:pointer;">Mathieu</button>
+      <button onclick="selectContact('antoine')" id="btn-antoine" style="padding:5px 16px;border-radius:6px;border:1.5px solid var(--purple-light);background:white;color:var(--gray-500);font-size:9px;font-weight:700;cursor:pointer;">Antoine</button>
+    </div>
+
+    <!-- Contact linéaire -->
+    <div style="background:white;border:1px solid var(--purple-light);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--purple-mid);display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:12px;" id="contact-avatar">ML</div>
+        <div>
+          <div style="font-size:12px;font-weight:800;color:var(--gray-900);line-height:1.2;" id="contact-name">Mathieu Legeas</div>
+          <div style="font-size:8.5px;color:var(--gray-500);">Fondateur &amp; Expert IA</div>
+        </div>
+      </div>
+      <div style="width:1px;height:32px;background:var(--gray-200);flex-shrink:0;"></div>
+      <div style="display:flex;gap:8px;flex:1;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <svg width="11" height="11" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span style="font-size:9.5px;color:var(--gray-700);font-weight:600;" id="contact-phone">07 61 60 22 77</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <svg width="11" height="11" fill="none" stroke="#7C3AED" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span style="font-size:9.5px;color:var(--gray-700);font-weight:600;" id="contact-email"></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+var d = 'iavenir-formation.fr';
+var contacts = {
+  mathieu: { initials: 'ML', name: 'Mathieu Legeas', phone: '07 61 60 22 77', email: 'mathieu.legeas@' + d },
+  antoine: { initials: 'AO', name: 'Antoine Oger',   phone: '06 16 47 88 02', email: 'antoine.oger@' + d }
+};
+function selectContact(who) {
+  var c = contacts[who];
+  document.getElementById('contact-avatar').textContent = c.initials;
+  document.getElementById('contact-name').textContent   = c.name;
+  document.getElementById('contact-phone').textContent  = c.phone;
+  document.getElementById('contact-email').textContent  = c.email;
+  var active   = { background: 'var(--purple-mid)', color: 'white',           border: '1.5px solid var(--purple-mid)' };
+  var inactive = { background: 'white',             color: 'var(--gray-500)', border: '1.5px solid var(--purple-light)' };
+  var styles = who === 'mathieu' ? { mathieu: active, antoine: inactive } : { mathieu: inactive, antoine: active };
+  ['mathieu','antoine'].forEach(function(k) {
+    var btn = document.getElementById('btn-' + k);
+    btn.style.background = styles[k].background;
+    btn.style.color      = styles[k].color;
+    btn.style.border     = styles[k].border;
+  });
+}
+window.onload = function() {
+  document.getElementById('contact-email').textContent = contacts['mathieu'].email;
+};
+</script>
+</body>
+</html>
