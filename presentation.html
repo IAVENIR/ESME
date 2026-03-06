@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -19,7 +19,7 @@
 <body class="bg-white text-gray-900">
 <div id="app"></div>
 <script>
-const PRIX_CADRAGE=600,PRIX_CONSULTANT=780;
+const PRIX_CADRAGE=490,PRIX_CONSULTANT=780;
 const state={parcours:'complet',includeAudit:true,includeFormation:true,includeDeploiement:false,auditConfig:{collaborateurs:10},formationConfig:{format:'presentiel',duration:1,participants:10,sessions:1},deploiementConfig:{jours:20}};
 
 const ic={
@@ -52,7 +52,7 @@ function calcROI(){const p=state.formationConfig.participants,rate=3500/151.67,h
 function render(){
   const isCadrage=state.parcours==='cadrage',isComplet=state.parcours==='complet',isFormation=state.parcours==='formation';
   const audit=calcAudit(),formation=calcFormation(),deploy=calcDeploy(),roi=calcROI();
-  let total=isCadrage?600:(state.includeAudit?audit.total:0)+(state.includeFormation?formation.final:0)+(state.includeDeploiement?deploy.total:0);
+  let total=isCadrage?490:(state.includeAudit?audit.total:0)+(state.includeFormation?formation.final:0)+(state.includeDeploiement?deploy.total:0);
 
   document.getElementById('app').innerHTML=`
     <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
@@ -134,7 +134,7 @@ function render(){
           <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
             <h3 class="text-white font-bold mb-5 flex items-center gap-2">${ic.bar} Récapitulatif</h3>
             <div class="space-y-3 mb-4">
-              ${isCadrage?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Cadrage Stratégique</span><span class="text-white font-bold">600 €</span></div><div class="text-xs text-emerald-400 mt-1">✓ Déductible de l'Audit</div>`:`${state.includeAudit?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Audit (${audit.days}j)</span><span class="text-white font-bold">${fmt(audit.total)}</span></div>`:''} ${state.includeFormation?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Formation (${formation.sessions} sess.)</span><span class="text-white font-bold">${fmt(formation.final)}</span></div>`:''} ${state.includeDeploiement?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Déploiement IA (${deploy.jours}j)</span><span class="text-purple-400 font-bold">${fmt(deploy.total)}</span></div>`:''}`}
+              ${isCadrage?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Cadrage Stratégique</span><span class="text-white font-bold">490 €</span></div><div class="text-xs text-emerald-400 mt-1">✓ Déductible de l'Audit</div>`:`${state.includeAudit?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Audit (${audit.days}j)</span><span class="text-white font-bold">${fmt(audit.total)}</span></div>`:''} ${state.includeFormation?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Formation (${formation.sessions} sess.)</span><span class="text-white font-bold">${fmt(formation.final)}</span></div>`:''} ${state.includeDeploiement?`<div class="flex justify-between"><span class="text-gray-400 text-sm">Déploiement IA (${deploy.jours}j)</span><span class="text-purple-400 font-bold">${fmt(deploy.total)}</span></div>`:''}`}
             </div>
             <div class="border-t border-gray-700 pt-3 flex justify-between items-center">
               <span class="text-gray-300 font-bold">Total HT</span>
@@ -168,15 +168,15 @@ function cadrageView(){return`<div class="fade-in max-w-3xl mx-auto">
   <div class="bg-white rounded-3xl border-2 border-emerald-300 shadow-xl overflow-hidden">
     <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 p-8 text-white flex items-start justify-between flex-wrap gap-4">
       <div><div class="text-emerald-100 text-xs font-bold uppercase tracking-wider mb-2">Ticket d'entrée · Sans engagement</div><h3 class="text-3xl font-bold mb-1">Cadrage Stratégique IA</h3><p class="text-emerald-100">Identifiez vos cas d'usage prioritaires en 2h</p></div>
-      <div class="text-right"><div class="text-5xl font-bold">600 €</div><div class="text-emerald-200 text-sm">HT · Distanciel</div><div class="mt-2 bg-white/20 border border-white/30 rounded-lg px-3 py-1 text-xs font-semibold">✓ Déductible de l'Audit</div></div>
+      <div class="text-right"><div class="text-5xl font-bold">490 €</div><div class="text-emerald-200 text-sm">HT · Distanciel</div><div class="mt-2 bg-white/20 border border-white/30 rounded-lg px-3 py-1 text-xs font-semibold">✓ Déductible de l'Audit</div></div>
     </div>
     <div class="p-8 grid md:grid-cols-2 gap-8">
-      <div><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Déroulé · 2h visio</div><div class="space-y-5">${[['1h','Interviews structurées','2 interlocuteurs clés — direction + opérationnel'],['1h','Restitution live','Analyse et présentation des recommandations']].map(([t,h,s])=>`<div class="flex gap-4"><div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 font-bold text-sm flex-shrink-0 border border-emerald-100">${t}</div><div><div class="font-semibold text-gray-900">${h}</div><div class="text-sm text-gray-500 mt-0.5">${s}</div></div></div>`).join('')}</div></div>
+      <div><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Déroulé · 2h visio</div><div class="space-y-5">${[['1h30','Interview structurée','1 interlocuteur clé'],['30min','Restitution','Analyse et présentation des recommandations']].map(([t,h,s])=>`<div class="flex gap-4"><div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 font-bold text-sm flex-shrink-0 border border-emerald-100">${t}</div><div><div class="font-semibold text-gray-900">${h}</div><div class="text-sm text-gray-500 mt-0.5">${s}</div></div></div>`).join('')}</div></div>
       <div><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Livrable · 1 page</div><div class="bg-gray-50 rounded-2xl p-5 space-y-3 border border-gray-100">${['3 cas d\'usage prioritaires identifiés','Estimation ROI par cas d\'usage','Préconisation : Formation ou Déploiement IA','Quick wins actionnables immédiatement'].map(t=>`<div class="flex items-start gap-3"><span class="text-iavenir-500 flex-shrink-0 mt-0.5">${ic.check}</span><span class="text-gray-700 text-sm">${t}</span></div>`).join('')}</div></div>
     </div>
     <div class="mx-8 mb-8 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex items-start gap-4">
       <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0 text-emerald-600">${ic.bar}</div>
-      <div><div class="font-bold text-emerald-800 mb-1">Les 600 € sont intégralement déduits de l'Audit Stratégique</div><div class="text-sm text-emerald-700">Si vous lancez un Audit IAvenir dans les 60 jours, le montant est soustrait du devis. Vous ne payez pas deux fois.</div></div>
+      <div><div class="font-bold text-emerald-800 mb-1">Les 490 € sont intégralement déduits de l'Audit Stratégique</div><div class="text-sm text-emerald-700">Si vous lancez un Audit IAvenir dans les 60 jours, le montant est soustrait du devis. Vous ne payez pas deux fois.</div></div>
     </div>
   </div>
   <div class="text-center mt-6"><p class="text-gray-400 text-sm mb-3">Vous souhaitez aller directement à l'accompagnement complet ?</p><button onclick="setParcours('complet')" class="bg-iavenir-500 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-iavenir-600 transition">Voir l'Accompagnement IAvenir →</button></div>
@@ -190,7 +190,6 @@ function accompagnementView(){return`<div class="fade-in">
       <div class="bg-gradient-to-r from-iavenir-500 to-iavenir-700 p-8 text-white">
         <div class="flex items-start justify-between flex-wrap gap-4">
           <div class="flex items-start gap-4"><div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0 text-white">${ic.search}</div><div><h3 class="text-2xl font-bold mb-1">Audit Stratégique</h3><p class="text-iavenir-100">Diagnostic complet · Préconisation cas d'usage par cas d'usage</p></div></div>
-          <div class="text-right"><div class="text-2xl font-bold">à partir de 6 500 €</div><div class="text-iavenir-200 text-sm">HT</div></div>
         </div>
       </div>
       <div class="p-8 grid md:grid-cols-2 gap-8">
@@ -216,14 +215,14 @@ function accompagnementView(){return`<div class="fade-in">
       <div class="bg-gradient-to-r from-iavenir-400 to-iavenir-600 p-5 text-white">
         <div class="flex items-center gap-3"><div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">${ic.grad}</div><div><div class="text-iavenir-100 text-xs font-semibold uppercase tracking-wide">Cas d'usage maîtrisable</div><div class="font-bold text-lg">Formation</div></div></div>
       </div>
-      <div class="p-5"><p class="text-sm text-gray-500 mb-4 italic">Quand vos équipes peuvent devenir autonomes sur le cas d'usage.</p><div class="space-y-2 mb-4">${['Sessions de 12 participants max','80% pratique sur vos cas métier','Présentiel ou distanciel','Financement OPCO possible'].map(t=>`<div class="flex items-center gap-2 text-sm text-gray-700"><span class="text-iavenir-500 flex-shrink-0">${ic.check}</span>${t}</div>`).join('')}</div><div class="bg-iavenir-50 rounded-xl p-3 border border-iavenir-100"><div class="text-xs text-gray-500 mb-0.5">Prix</div><div class="font-bold text-iavenir-700">1 400 € → 4 900 € / session</div><div class="text-xs text-gray-400">selon durée (0.5j, 1j, 2j)</div></div></div>
+      <div class="p-5"><p class="text-sm text-gray-500 mb-4 italic">Quand vos équipes peuvent devenir autonomes sur le cas d'usage.</p><div class="space-y-2 mb-4">${['Sessions de 12 participants max','80% pratique sur vos cas métier','Présentiel ou distanciel','Financement OPCO possible'].map(t=>`<div class="flex items-center gap-2 text-sm text-gray-700"><span class="text-iavenir-500 flex-shrink-0">${ic.check}</span>${t}</div>`).join('')}</div></div>
     </div>
     <!-- Déploiement IA -->
     <div class="bg-white rounded-2xl border-2 border-gray-200 shadow-lg overflow-hidden hover:border-purple-300 transition-colors">
       <div class="bg-gradient-to-r from-purple-500 to-purple-700 p-5 text-white">
         <div class="flex items-center gap-3"><div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">${ic.rocket}</div><div><div class="text-purple-100 text-xs font-semibold uppercase tracking-wide">Cas d'usage complexe</div><div class="font-bold text-lg">Déploiement IA</div></div></div>
       </div>
-      <div class="p-5"><p class="text-sm text-gray-500 mb-4 italic">Quand le cas d'usage requiert une expertise technique que la formation ne peut pas couvrir.</p><div class="space-y-2 mb-4">${['Consultant spécialisé dédié','Durée définie à l\'issue de l\'Audit','Déploiement clé en main','Suivi et mesure des résultats'].map(t=>`<div class="flex items-center gap-2 text-sm text-gray-700"><span class="text-purple-500 flex-shrink-0">${ic.check}</span>${t}</div>`).join('')}</div><div class="bg-purple-50 rounded-xl p-3 border border-purple-100"><div class="text-xs text-gray-500 mb-0.5">Prix</div><div class="font-bold text-purple-700">780 € / jour consultant</div><div class="text-xs text-gray-400">durée estimée dans le livrable Audit</div></div></div>
+      <div class="p-5"><p class="text-sm text-gray-500 mb-4 italic">Quand le cas d'usage requiert une expertise technique que la formation ne peut pas couvrir.</p><div class="space-y-2 mb-4">${['Consultant spécialisé dédié','Durée définie à l\'issue de l\'Audit','Déploiement clé en main','Suivi et mesure des résultats'].map(t=>`<div class="flex items-center gap-2 text-sm text-gray-700"><span class="text-purple-500 flex-shrink-0">${ic.check}</span>${t}</div>`).join('')}</div></div>
     </div>
   </div>
 
@@ -242,7 +241,6 @@ function formationView(){return`<div class="fade-in max-w-3xl mx-auto">
     <div class="bg-gradient-to-r from-iavenir-500 to-iavenir-700 p-8 text-white">
       <div class="flex items-start justify-between flex-wrap gap-4">
         <div class="flex items-center gap-4"><div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-white">${ic.grad}</div><div><div class="text-iavenir-100 text-xs uppercase tracking-wider font-bold mb-1">Qualiopi</div><h3 class="text-2xl font-bold">Formation sur-mesure</h3><p class="text-iavenir-100">Montée en compétences de vos équipes</p></div></div>
-        <div class="text-right"><div class="text-2xl font-bold">1 400 → 4 900 €</div><div class="text-iavenir-200 text-sm">HT / session</div></div>
       </div>
     </div>
     <div class="p-8 grid md:grid-cols-2 gap-8">
@@ -256,8 +254,8 @@ function formationView(){return`<div class="fade-in max-w-3xl mx-auto">
 function cfgCadrage(){return`<div class="max-w-md mx-auto">
   <div class="bg-white rounded-3xl border-2 border-emerald-300 shadow-lg overflow-hidden">
     <div class="bg-emerald-500 p-6 text-white text-center"><div class="text-emerald-100 text-xs uppercase tracking-wider font-bold mb-1">Cadrage Stratégique</div><div class="text-2xl font-bold">Prix fixe</div></div>
-    <div class="p-8"><div class="text-center mb-6"><div class="text-5xl font-bold text-emerald-600">600 €</div><div class="text-gray-400 text-sm">HT · Sans surprise</div><div class="mt-3 inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-4 py-2 rounded-full text-sm font-semibold">${ic.check} Déductible de l'Audit (60 jours)</div></div>
-    <div class="space-y-3 mb-6">${[[ic.video,'Distanciel (visio)'],[ic.clock,'2 heures'],[ic.users,'2 interlocuteurs côté client'],[ic.file,'1 page — 3 cas d\'usage + ROI']].map(([icon,txt])=>`<div class="flex items-center justify-between py-2.5 border-b border-gray-100 last:border-0"><div class="flex items-center gap-3 text-gray-400">${icon}<span class="text-sm text-gray-500">Inclus</span></div><span class="text-sm font-semibold text-gray-800">${txt}</span></div>`).join('')}</div>
+    <div class="p-8"><div class="text-center mb-6"><div class="text-5xl font-bold text-emerald-600">490 €</div><div class="text-gray-400 text-sm">HT · Sans surprise</div><div class="mt-3 inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-4 py-2 rounded-full text-sm font-semibold">${ic.check} Déductible de l'Audit (60 jours)</div></div>
+    <div class="space-y-3 mb-6">${[[ic.video,'Distanciel (visio)'],[ic.clock,'1h30 interview + 30 min retour'],[ic.users,'1 interlocuteur côté client'],[ic.file,'1 page — 3 cas d\'usage + ROI']].map(([icon,txt])=>`<div class="flex items-center justify-between py-2.5 border-b border-gray-100 last:border-0"><div class="flex items-center gap-3 text-gray-400">${icon}<span class="text-sm text-gray-500">Inclus</span></div><span class="text-sm font-semibold text-gray-800">${txt}</span></div>`).join('')}</div>
     <div class="bg-gray-800 rounded-2xl p-5 text-center"><div class="text-white font-bold mb-2">Planifier votre Cadrage</div><div class="text-gray-400 text-sm">mathieu.legeas@iavenir-formation.fr</div><div class="text-gray-400 text-sm mt-1">07 61 60 22 77</div></div></div>
   </div>
 </div>`}
