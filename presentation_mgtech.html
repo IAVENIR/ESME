@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAvenir × MGtech — Formation Découverte IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .fade-in{animation:fadeIn .4s ease both}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .animate-bounce{animation:bounce 2s infinite}
+  </style>
+  <script>
+    tailwind.config={theme:{extend:{colors:{iavenir:{50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',400:'#a78bfa',500:'#8B5CF6',600:'#7c3aed',700:'#6d28d9',800:'#5b21b6',900:'#4c1d95'}}}}};
+  </script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl font-bold text-iavenir-500">IAvenir</div>
+      <div class="text-gray-300">&times;</div>
+      <div class="text-lg font-semibold text-gray-700">MGtech</div>
+    </div>
+    <div class="hidden md:flex items-center gap-6 text-sm">
+      <a href="#programme" class="text-gray-500 hover:text-iavenir-500 transition">Programme</a>
+      <a href="#objectifs" class="text-gray-500 hover:text-iavenir-500 transition">Objectifs</a>
+      <a href="#financement" class="text-gray-500 hover:text-iavenir-500 transition">Qualiopi & OPCO</a>
+      <a href="#action" class="bg-iavenir-500 text-white px-4 py-2 rounded-full hover:bg-iavenir-600 transition">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="bg-gradient-to-br from-iavenir-900 via-iavenir-800 to-iavenir-700 pt-28 pb-20 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-20 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-20 w-96 h-96 bg-iavenir-400 rounded-full blur-3xl"></div>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Organisme certifi&eacute; Qualiopi
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Formation D&eacute;couverte<br><span class="text-iavenir-300">Intelligence Artificielle</span></h1>
+    <p class="text-xl text-iavenir-200 mb-8 max-w-2xl mx-auto">Une journ&eacute;e pour comprendre l'IA et commencer &agrave; l'utiliser au quotidien dans votre m&eacute;tier d'expertise.</p>
+
+    <div class="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+        <div class="text-iavenir-300 flex justify-center mb-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="text-white font-bold text-lg">7</div>
+        <div class="text-iavenir-300 text-xs">participants</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+        <div class="text-iavenir-300 flex justify-center mb-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div class="text-white font-bold text-lg">1 jour</div>
+        <div class="text-iavenir-300 text-xs">7 heures</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+        <div class="text-iavenir-300 flex justify-center mb-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
+        <div class="text-white font-bold text-lg">0 pr&eacute;requis</div>
+        <div class="text-iavenir-300 text-xs">tous niveaux</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+        <div class="text-iavenir-300 flex justify-center mb-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg></div>
+        <div class="text-white font-bold text-lg">OPCO</div>
+        <div class="text-iavenir-300 text-xs">finan&ccedil;able</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIFS P&Eacute;DAGOGIQUES -->
+<section id="objectifs" class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Objectifs p&eacute;dagogiques</h2>
+      <p class="text-gray-500">Ce que chaque participant saura faire &agrave; l'issue de la journ&eacute;e</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-iavenir-50 border border-iavenir-200 rounded-2xl p-6">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">D&eacute;couvrir l'IA et le prompt engineering</h3>
+        <p class="text-sm text-gray-600">S'initier aux concepts fondamentaux de l'intelligence artificielle et aux techniques de prompt engineering.</p>
+      </div>
+      <div class="bg-iavenir-50 border border-iavenir-200 rounded-2xl p-6">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">Identifier les cas d'usage pour l'expertise</h3>
+        <p class="text-sm text-gray-600">Apprendre &agrave; d&eacute;celer et adapter les applications de l'IA aux besoins sp&eacute;cifiques de l'expertise et du conseil.</p>
+      </div>
+      <div class="bg-iavenir-50 border border-iavenir-200 rounded-2xl p-6">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">S'exercer &agrave; l'IA en milieu professionnel</h3>
+        <p class="text-sm text-gray-600">Pratiquer l'utilisation des outils IA sur des cas concrets issus de votre quotidien m&eacute;tier, en conditions r&eacute;elles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAS D'USAGE SECTORIELS -->
+<section class="py-12 bg-iavenir-50 border-y border-iavenir-100">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">L'IA concr&egrave;tement dans votre m&eacute;tier</h2>
+      <p class="text-gray-500">Des exemples adapt&eacute;s au secteur de l'expertise et du conseil</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-5 border border-iavenir-200 shadow-sm">
+        <div class="w-10 h-10 bg-iavenir-100 rounded-xl flex items-center justify-center text-iavenir-600 mb-3">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2 text-sm">Rapports & Documents</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Structurer un rapport d'expertise, r&eacute;diger une synth&egrave;se de dossier, produire des notes techniques pour les assureurs.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-iavenir-200 shadow-sm">
+        <div class="w-10 h-10 bg-iavenir-100 rounded-xl flex items-center justify-center text-iavenir-600 mb-3">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2 text-sm">Recherche & Analyse</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Rechercher des r&eacute;f&eacute;rences r&eacute;glementaires, analyser des pi&egrave;ces techniques, synth&eacute;tiser des documents volumineux.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-iavenir-200 shadow-sm">
+        <div class="w-10 h-10 bg-iavenir-100 rounded-xl flex items-center justify-center text-iavenir-600 mb-3">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2 text-sm">Communication & Emails</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">R&eacute;diger des emails professionnels aux assureurs, produire des courriers types, automatiser les relances.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section id="programme" class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">Programme de formation</h2>
+      <p class="text-gray-500 max-w-xl mx-auto mb-6">Choisissez le format adapt&eacute; &agrave; vos objectifs</p>
+      <div class="inline-flex bg-gray-100 rounded-full p-1 gap-1">
+        <button id="btn1j" onclick="setFormat('1jour')" class="px-6 py-2.5 rounded-full text-sm font-semibold transition-all bg-iavenir-500 text-white shadow">1 Jour &middot; 7h</button>
+        <button id="btn2j" onclick="setFormat('2jours')" class="px-6 py-2.5 rounded-full text-sm font-semibold transition-all text-gray-500 hover:text-gray-800">2 Jours &middot; 14h</button>
+      </div>
+    </div>
+    <div id="programme-content"></div>
+  </div>
+</section>
+<script>
+const ck=`<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`;
+const ci=(t,d,c)=>`<div class="flex items-start gap-2"><span class="text-iavenir-500 flex-shrink-0 mt-0.5">${ck}</span><span class="text-sm text-gray-600">${t}</span></div>`;
+
+function slot(time,dur,title,content,highlight){
+  const ring=highlight?'bg-iavenir-600 ring-4 ring-iavenir-100':'bg-iavenir-500';
+  const box=highlight?'bg-white border-2 border-iavenir-300 shadow-md':'bg-iavenir-50 border border-iavenir-200';
+  const badge=highlight?'bg-iavenir-500 text-white':'bg-iavenir-100 text-iavenir-700';
+  return `<div class="relative">
+    <div class="absolute -left-[2.55rem] top-1 w-4 h-4 ${ring} rounded-full border-4 border-white shadow"></div>
+    <div class="${box} rounded-xl p-5">
+      <div class="flex items-center justify-between mb-2">
+        <div class="font-bold text-gray-900">${time}</div>
+        <div class="${badge} px-3 py-1 rounded-full text-xs font-bold">${dur}</div>
+      </div>
+      <div class="text-iavenir-600 font-bold mb-2">${title}</div>
+      ${content}
+    </div>
+  </div>`;
+}
+
+function axeHeader(num,title,color){
+  const bg=color==='blue'?'bg-blue-600':'bg-iavenir-500';
+  const sub=color==='blue'?'text-blue-200':'text-iavenir-200';
+  return `<div class="${bg} rounded-2xl p-6 text-white text-center mb-8">
+    <div class="text-sm uppercase tracking-widest ${sub} font-bold mb-1">${num}</div>
+    <h3 class="text-2xl font-bold">${title}</h3>
+  </div>`;
+}
+
+function dejeuner(){
+  return `<div class="text-center my-8">
+    <div class="inline-flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-6 py-3 text-gray-500 font-semibold text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zm4-4v2m4-2v2m4-2v2"/></svg>
+      Pause d&eacute;jeuner &middot; 12h30 &mdash; 13h30
+    </div>
+  </div>`;
+}
+
+function toolBadges(){
+  return `<div class="flex flex-wrap gap-2 mb-3">
+    <span class="bg-iavenir-100 text-iavenir-700 px-2.5 py-1 rounded-full text-xs font-semibold">ChatGPT</span>
+    <span class="bg-iavenir-100 text-iavenir-700 px-2.5 py-1 rounded-full text-xs font-semibold">Mistral</span>
+    <span class="bg-iavenir-100 text-iavenir-700 px-2.5 py-1 rounded-full text-xs font-semibold">Gemini</span>
+    <span class="bg-iavenir-100 text-iavenir-700 px-2.5 py-1 rounded-full text-xs font-semibold">Claude</span>
+    <span class="text-xs text-gray-400 self-center">&mdash; au choix</span>
+  </div>`;
+}
+
+function atelierCards(){
+  return `<div class="grid md:grid-cols-3 gap-3">
+    <div class="bg-iavenir-50 rounded-lg p-3 border border-iavenir-100">
+      <div class="text-xs text-iavenir-600 font-bold mb-1">Analyse de document</div>
+      <div class="text-xs text-gray-500">Upload d'un document technique, extraction des points cl&eacute;s, r&eacute;daction d'une synth&egrave;se</div>
+    </div>
+    <div class="bg-iavenir-50 rounded-lg p-3 border border-iavenir-100">
+      <div class="text-xs text-iavenir-600 font-bold mb-1">R&eacute;daction assist&eacute;e</div>
+      <div class="text-xs text-gray-500">R&eacute;diger un email professionnel, une note technique, un courrier type</div>
+    </div>
+    <div class="bg-iavenir-50 rounded-lg p-3 border border-iavenir-100">
+      <div class="text-xs text-iavenir-600 font-bold mb-1">Analyse de donn&eacute;es</div>
+      <div class="text-xs text-gray-500">Upload d'un fichier Excel, extraction et analyse de donn&eacute;es cl&eacute;s</div>
+    </div>
+  </div>`;
+}
+
+function rgpdBlock(){
+  return `<div class="grid md:grid-cols-2 gap-2">
+    ${ci('Protection des donn&eacute;es et confidentialit&eacute;')}
+    ${ci('Impact environnemental de l\'IA')}
+    ${ci('Bonnes pratiques d\'utilisation responsable')}
+    ${ci('<b>Param&eacute;trage des outils IA</b> (r&eacute;glages, privacy, pr&eacute;f&eacute;rences)')}
+  </div>`;
+}
+
+function render1jour(){
+  return `
+    <div class="mb-12">
+      ${axeHeader('Axe 1','Comprendre les fondamentaux IA')}
+      <div class="relative pl-8 border-l-2 border-iavenir-200 space-y-6 ml-4">
+        ${slot('9h30 &mdash; 10h15','45 min','D&eacute;couvrir l\'Intelligence Artificielle',`
+          <div class="grid md:grid-cols-3 gap-2">
+            ${ci('Historique de l\'IA')}${ci('Fonctionnement des LLM')}${ci('Limites et biais')}
+          </div>`)}
+        ${slot('10h30 &mdash; 12h00','1h30','D&eacute;couvrir le Prompt Engineering',`
+          <p class="text-sm text-gray-600 mb-3">Th&eacute;orie courte + exercices pratiques tout au long de la s&eacute;quence :</p>
+          <div class="grid md:grid-cols-2 gap-2">
+            ${ci('Les 6 &eacute;l&eacute;ments d\'un prompt efficace')}
+            ${ci('<b>Exercice :</b> faire identifier &agrave; l\'IA les causes possibles d\'un sinistre &agrave; partir d\'une description')}
+            ${ci('Techniques : it&eacute;ration, auto-&eacute;valuation, reverse prompting')}
+            ${ci('<b>Exercice :</b> g&eacute;n&eacute;rer une trame de questions d\'investigation pour un dossier type')}
+          </div>`)}
+        ${slot('12h00 &mdash; 12h30','30 min','Identifier ses cas d\'usage IA',`
+          <p class="text-sm text-gray-600">Brainstorming participatif : chaque participant identifie les t&acirc;ches de son quotidien o&ugrave; l'IA pourrait l'aider (rapports, emails, recherche documentaire, gestion administrative...).</p>`)}
+      </div>
+    </div>
+    ${dejeuner()}
+    <div>
+      ${axeHeader('Axe 2','Les ateliers pratiques')}
+      <div class="relative pl-8 border-l-2 border-iavenir-200 space-y-6 ml-4">
+        ${slot('13h30 &mdash; 15h30','2h00','Atelier &mdash; Prise en main d\'un outil IA',
+          toolBadges()+`<p class="text-sm text-gray-600 mb-3">Atelier guid&eacute; sur un sujet simple et concret adapt&eacute; &agrave; votre m&eacute;tier d'expertise :</p>`+atelierCards(),true)}
+        ${slot('15h45 &mdash; 16h15','30 min','RGPD, Environnement & Utilisation responsable',rgpdBlock())}
+        ${slot('16h15 &mdash; 17h00','45 min','&Eacute;valuation & Cl&ocirc;ture',`
+          <p class="text-sm text-gray-600">Quiz de validation des acquis (Kahoot), bilan de la journ&eacute;e, &eacute;valuation de la formation, &eacute;changes libres.</p>`)}
+      </div>
+    </div>`;
+}
+
+function jourHeader(num,label,color){
+  const bg=color==='blue'?'bg-blue-100 text-blue-800 border-blue-300':'bg-iavenir-100 text-iavenir-800 border-iavenir-300';
+  const line=color==='blue'?'bg-blue-200':'bg-iavenir-200';
+  return `<div class="flex items-center gap-3 mb-6">
+    <div class="h-0.5 flex-1 ${line}"></div>
+    <div class="${bg} border px-5 py-2 rounded-full text-sm font-bold">${label} &middot; 7h</div>
+    <div class="h-0.5 flex-1 ${line}"></div>
+  </div>`;
+}
+
+function render2jours(){
+  return `
+    <!-- JOUR 1 -->
+    ${jourHeader(1,'Jour 1 &mdash; Fondamentaux & Prise en main')}
+    <div class="mb-12">
+      ${axeHeader('Axe 1','Comprendre les fondamentaux IA')}
+      <div class="relative pl-8 border-l-2 border-iavenir-200 space-y-6 ml-4">
+        ${slot('9h30 &mdash; 10h15','45 min','D&eacute;couvrir l\'Intelligence Artificielle',`
+          <div class="grid md:grid-cols-3 gap-2">
+            ${ci('Historique de l\'IA')}${ci('Fonctionnement des LLM')}${ci('Limites et biais')}
+          </div>`)}
+        ${slot('10h30 &mdash; 12h00','1h30','D&eacute;couvrir le Prompt Engineering',`
+          <p class="text-sm text-gray-600 mb-3">Th&eacute;orie courte + exercices pratiques tout au long de la s&eacute;quence :</p>
+          <div class="grid md:grid-cols-2 gap-2">
+            ${ci('Les 6 &eacute;l&eacute;ments d\'un prompt efficace')}
+            ${ci('<b>Exercice :</b> faire identifier &agrave; l\'IA les causes possibles d\'un sinistre &agrave; partir d\'une description')}
+            ${ci('Techniques : it&eacute;ration, auto-&eacute;valuation, reverse prompting')}
+            ${ci('<b>Exercice :</b> g&eacute;n&eacute;rer une trame de questions d\'investigation pour un dossier type')}
+          </div>`)}
+        ${slot('12h00 &mdash; 12h30','30 min','Identifier ses cas d\'usage IA',`
+          <p class="text-sm text-gray-600">Brainstorming participatif : chaque participant identifie les t&acirc;ches de son quotidien o&ugrave; l'IA pourrait l'aider.</p>`)}
+      </div>
+    </div>
+    ${dejeuner()}
+    <div class="mb-16">
+      ${axeHeader('Axe 2','Premi&egrave;re prise en main')}
+      <div class="relative pl-8 border-l-2 border-iavenir-200 space-y-6 ml-4">
+        ${slot('13h30 &mdash; 15h30','2h00','Atelier &mdash; Prise en main d\'un outil IA',
+          toolBadges()+`<p class="text-sm text-gray-600 mb-3">Atelier guid&eacute; sur un sujet simple et concret adapt&eacute; &agrave; votre m&eacute;tier d'expertise :</p>`+atelierCards(),true)}
+        ${slot('15h45 &mdash; 16h15','30 min','Restitution collective & retour d\'exp&eacute;rience',`
+          <p class="text-sm text-gray-600">Pr&eacute;sentation des r&eacute;sultats, comparaison des prompts utilis&eacute;s, partage des bonnes pratiques.</p>`)}
+        ${slot('16h15 &mdash; 17h00','45 min','Synth&egrave;se Jour 1 & pr&eacute;paration Jour 2',`
+          <p class="text-sm text-gray-600">Bilan des acquis, quiz rapide (Kahoot), pr&eacute;sentation du programme du lendemain et cas &agrave; pr&eacute;parer.</p>`)}
+      </div>
+    </div>
+
+    <!-- JOUR 2 -->
+    ${jourHeader(2,'Jour 2 &mdash; Approfondissement & Autonomie','blue')}
+    <div class="mb-12">
+      ${axeHeader('Axe 3','Immersion m&eacute;tier','blue')}
+      <div class="relative pl-8 border-l-2 border-blue-200 space-y-6 ml-4">
+        ${slot('9h30 &mdash; 10h15','45 min','Retour sur le Jour 1 & approfondissement',`
+          <div class="grid md:grid-cols-2 gap-2">
+            ${ci('Retour sur les difficult&eacute;s rencontr&eacute;es')}
+            ${ci('Techniques de prompting avanc&eacute;es : cha&icirc;nes de prompts, personas expert')}
+          </div>`)}
+        ${slot('10h30 &mdash; 12h30','2h00','Atelier avanc&eacute; &mdash; Traiter un dossier complet avec l\'IA',`
+          ${toolBadges()}
+          <p class="text-sm text-gray-600 mb-3">Mise en situation compl&egrave;te sur un dossier d'expertise :</p>
+          <div class="grid md:grid-cols-3 gap-3">
+            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
+              <div class="text-xs text-blue-600 font-bold mb-1">Analyse du dossier</div>
+              <div class="text-xs text-gray-500">R&eacute;ception d'un dossier sinistre, analyse des pi&egrave;ces, identification des causes</div>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
+              <div class="text-xs text-blue-600 font-bold mb-1">Production du rapport</div>
+              <div class="text-xs text-gray-500">R&eacute;daction du rapport d'expertise complet assist&eacute; par l'IA</div>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
+              <div class="text-xs text-blue-600 font-bold mb-1">Communication assureur</div>
+              <div class="text-xs text-gray-500">R&eacute;daction de la synth&egrave;se et du courrier de restitution</div>
+            </div>
+          </div>`,true)}
+      </div>
+    </div>
+    ${dejeuner()}
+    <div>
+      ${axeHeader('Axe 4','Cadre & Autonomie','blue')}
+      <div class="relative pl-8 border-l-2 border-blue-200 space-y-6 ml-4">
+        ${slot('13h30 &mdash; 14h30','1h00','Restitution & d&eacute;briefing de l\'atelier',`
+          <p class="text-sm text-gray-600">Chaque participant pr&eacute;sente son travail. Analyse collective, feedback personnalis&eacute;, meilleures pratiques.</p>`)}
+        ${slot('14h30 &mdash; 15h30','1h00','RGPD, Environnement & Utilisation responsable',rgpdBlock())}
+        ${slot('15h45 &mdash; 17h00','1h15','&Eacute;valuation & Cl&ocirc;ture',`
+          <div class="grid md:grid-cols-2 gap-2">
+            ${ci('Quiz de validation des acquis (Kahoot)')}
+            ${ci('Plan d\'action individuel &agrave; 30 jours')}
+            ${ci('&Eacute;valuation de la formation')}
+            ${ci('Remise de l\'attestation de comp&eacute;tences')}
+          </div>`)}
+      </div>
+    </div>`;
+}
+
+function setFormat(f){
+  document.getElementById('programme-content').innerHTML=f==='1jour'?render1jour():render2jours();
+  document.getElementById('btn1j').className='px-6 py-2.5 rounded-full text-sm font-semibold transition-all '+(f==='1jour'?'bg-iavenir-500 text-white shadow':'text-gray-500 hover:text-gray-800');
+  document.getElementById('btn2j').className='px-6 py-2.5 rounded-full text-sm font-semibold transition-all '+(f==='2jours'?'bg-iavenir-500 text-white shadow':'text-gray-500 hover:text-gray-800');
+}
+setFormat('1jour');
+</script>
+
+<!-- P&Eacute;DAGOGIE -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Approche p&eacute;dagogique</h2>
+      <p class="text-gray-500">80% de pratique, 20% de th&eacute;orie &mdash; adapt&eacute;e &agrave; tous les niveaux</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">Apprentissage par la pratique</h3>
+        <p class="text-sm text-gray-500">Chaque concept est imm&eacute;diatement appliqu&eacute; sur des cas concrets li&eacute;s &agrave; votre quotidien professionnel.</p>
+      </div>
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">Adapt&eacute;e &agrave; tous les niveaux</h3>
+        <p class="text-sm text-gray-500">Groupe h&eacute;t&eacute;rog&egrave;ne bienvenu : le formateur adapte le rythme pour que chacun progresse &agrave; son rythme.</p>
+      </div>
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+        <div class="w-12 h-12 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600 mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2">Outils directement r&eacute;utilisables</h3>
+        <p class="text-sm text-gray-500">Repartez avec des prompts m&eacute;tier et des r&eacute;flexes concrets applicables d&egrave;s le lendemain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALIOPI & OPCO -->
+<section id="financement" class="py-16 bg-iavenir-50">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Certification & Financement</h2>
+      <p class="text-gray-500">Une formation certifi&eacute;e, finan&ccedil;able par votre OPCO</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl border-2 border-iavenir-300 shadow-lg p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 bg-iavenir-100 rounded-2xl flex items-center justify-center text-iavenir-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Certifi&eacute; Qualiopi</h3>
+            <p class="text-sm text-gray-500">Actions de formation</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 mb-4">IAvenir est certifi&eacute; Qualiopi au titre de la cat&eacute;gorie &laquo; Actions de formation &raquo;. Cette certification atteste de la qualit&eacute; de nos formations.</p>
+        <div class="space-y-2">
+          <div class="flex items-start gap-2"><span class="text-iavenir-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">Programme conforme au r&eacute;f&eacute;rentiel national</span></div>
+          <div class="flex items-start gap-2"><span class="text-iavenir-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">Suivi et &eacute;valuation des acquis</span></div>
+          <div class="flex items-start gap-2"><span class="text-iavenir-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">Attestation de fin de formation</span></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border-2 border-emerald-300 shadow-lg p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Finan&ccedil;able OPCO</h3>
+            <p class="text-sm text-gray-500">Prise en charge possible jusqu'&agrave; 100%</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 mb-4">Cette formation est &eacute;ligible &agrave; une prise en charge par votre OPCO. Nous vous accompagnons dans le montage du dossier.</p>
+        <div class="space-y-2">
+          <div class="flex items-start gap-2"><span class="text-emerald-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">&Eacute;ligible tous les OPCO (ATLAS, AKTO...)</span></div>
+          <div class="flex items-start gap-2"><span class="text-emerald-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">Aide au montage du dossier</span></div>
+          <div class="flex items-start gap-2"><span class="text-emerald-500 flex-shrink-0 mt-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></span><span class="text-sm text-gray-700">Convention et programme d&eacute;taill&eacute; fournis</span></div>
+        </div>
+        <div class="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center">
+          <div class="text-sm text-emerald-800 font-semibold">Investissement pour MGtech</div>
+          <div class="text-2xl font-bold text-emerald-700 mt-1">2 900 &euro; &agrave; 4 900 &euro; HT</div>
+          <div class="text-xs text-emerald-600 mt-1">Selon le format (1 ou 2 jours) &middot; Prise en charge OPCO possible jusqu'&agrave; 100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION -->
+<section id="action" class="py-16 bg-gray-900">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-bold text-white mb-2">Prochaines &eacute;tapes</h2>
+      <p class="text-gray-400">Passons &agrave; l'action pour MGtech</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+        <h3 class="text-white font-bold mb-5 flex items-center gap-2">
+          <svg class="w-5 h-5 text-iavenir-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Parcours
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3"><div class="w-3 h-3 bg-iavenir-500 rounded-full flex-shrink-0"></div><span class="text-gray-300 text-sm">Validation du programme</span></div>
+          <div class="flex items-center gap-3"><div class="w-3 h-3 bg-iavenir-600 rounded-full flex-shrink-0"></div><span class="text-gray-300 text-sm">Montage du dossier OPCO</span></div>
+          <div class="flex items-center gap-3"><div class="w-3 h-3 bg-iavenir-700 rounded-full flex-shrink-0"></div><span class="text-gray-300 text-sm">Formation dans vos locaux</span></div>
+          <div class="flex items-center gap-3"><div class="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></div><span class="text-gray-300 text-sm">Suivi post-formation</span></div>
+        </div>
+      </div>
+      <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+        <h3 class="text-white font-bold mb-5">R&eacute;capitulatif</h3>
+        <div class="space-y-3 mb-4">
+          <div class="flex justify-between"><span class="text-gray-400 text-sm">Format</span><span class="text-white font-bold">D&eacute;couverte</span></div>
+          <div class="flex justify-between"><span class="text-gray-400 text-sm">Dur&eacute;e</span><span class="text-white font-bold">1 jour (7h) ou 2 jours (14h)</span></div>
+          <div class="flex justify-between"><span class="text-gray-400 text-sm">Participants</span><span class="text-white font-bold">7 personnes</span></div>
+          <div class="flex justify-between"><span class="text-gray-400 text-sm">Pr&eacute;requis</span><span class="text-white font-bold">Aucun</span></div>
+        </div>
+        <div class="border-t border-gray-700 pt-3 flex justify-between items-center">
+          <span class="text-gray-300 font-bold">Investissement</span>
+          <span class="text-xl font-bold text-iavenir-400">2 900 &agrave; 4 900 &euro; HT</span>
+        </div>
+        <div class="mt-3 text-xs text-emerald-400 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          Financement OPCO possible
+        </div>
+      </div>
+      <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+        <h3 class="text-white font-bold mb-5">Votre contact</h3>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 bg-iavenir-500 rounded-full flex items-center justify-center text-white font-bold text-lg">ML</div>
+          <div>
+            <div class="text-white font-bold">Mathieu Legeas</div>
+            <div class="text-gray-400 text-xs">Cofondateur &middot; Expert IA</div>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="bg-gray-700 rounded-xl p-3 flex items-center gap-3">
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span class="text-gray-300 text-sm">mathieu.legeas@iavenir-formation.fr</span>
+          </div>
+          <div class="bg-iavenir-900/50 border border-iavenir-700 rounded-xl p-3 flex items-center gap-3">
+            <svg class="w-4 h-4 text-iavenir-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <span class="text-iavenir-300 text-sm font-semibold">Certifi&eacute; Qualiopi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-950 text-gray-500 py-6 text-center text-sm">
+  <div class="text-iavenir-400 font-bold text-lg mb-1">IAvenir &times; MGtech</div>
+  Formation & Conseil en Intelligence Artificielle &middot; Qualiopi
+</footer>
+
+</body>
+</html>
