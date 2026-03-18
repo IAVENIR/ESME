@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EIMI — Synthèse d'accompagnement IA</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #6C3FA0; --purple-dark: #4A2270; --purple-light: #F3EAFA;
+    --dark: #1A1A2E; --dark-mid: #2D2D44; --white: #FFFFFF;
+    --gray: #8E8E9E; --gray-light: #F7F7FA; --text: #2C2C3A; --border: #E8E8EE;
+    --green: #27AE60; --green-light: #E8F8EF;
+    --orange: #E67E22; --orange-light: #FEF5E7;
+    --blue: #2E86C1; --blue-light: #EBF5FB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  .hero { background: var(--dark); padding: 70px 0 60px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--purple); }
+  .hero::after { content: ''; position: absolute; right: -120px; top: -120px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(108,63,160,0.12) 0%, transparent 70%); }
+  .hero .container { position: relative; z-index: 1; }
+  .hero-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(108,63,160,0.8); margin-bottom: 14px; font-weight: 500; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-size: clamp(34px, 5vw, 52px); color: var(--white); font-weight: 400; line-height: 1.15; margin-bottom: 12px; }
+  .hero h1 em { color: rgba(139,95,191,0.9); font-style: italic; }
+  .hero-sub { font-size: 16px; color: var(--gray); max-width: 620px; margin-bottom: 28px; }
+  .hero-meta { display: flex; gap: 28px; font-size: 13px; color: #666680; }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 8px; }
+  .section-title { font-family: 'Instrument Serif', serif; font-size: clamp(26px, 3.5vw, 36px); color: var(--dark); font-weight: 400; line-height: 1.2; margin-bottom: 6px; }
+  .section-desc { font-size: 15px; color: var(--gray); margin-bottom: 36px; max-width: 660px; }
+
+  /* Phase blocks */
+  .phase-block { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 28px; }
+  .phase-header { padding: 24px 28px; display: flex; align-items: center; gap: 18px; }
+  .phase-header.purple { background: var(--purple); }
+  .phase-header.dark { background: var(--dark-mid); }
+  .phase-num { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Instrument Serif', serif; font-size: 22px; color: var(--white); flex-shrink: 0; }
+  .phase-header-text h3 { font-size: 19px; color: var(--white); font-weight: 700; margin-bottom: 2px; }
+  .phase-header-text p { font-size: 13px; color: rgba(255,255,255,0.6); }
+  .phase-body { padding: 28px; }
+  .phase-intro { font-size: 15px; color: var(--text); margin-bottom: 24px; line-height: 1.65; max-width: 740px; }
+
+  /* Mission items */
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .mission-item { background: var(--gray-light); border-radius: 10px; padding: 18px 20px; }
+  .mission-item h5 { font-size: 13.5px; color: var(--dark); font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .mission-item h5::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
+  .mission-item p { font-size: 12.5px; color: var(--gray); line-height: 1.5; padding-left: 14px; }
+
+  /* Invest summary */
+  .invest-box { background: var(--purple-light); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+  .invest-box .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+  .invest-box .label { font-size: 14px; color: var(--dark); }
+  .invest-box .value { font-size: 16px; font-weight: 700; color: var(--purple); }
+  .invest-box .total { border-top: 2px solid var(--purple); margin-top: 8px; padding-top: 10px; }
+  .invest-box .total .label { font-weight: 700; }
+  .invest-box .total .value { font-size: 20px; }
+
+  /* Phase badge */
+  .phase-badge { display: inline-block; background: var(--purple-light); color: var(--purple); font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 8px; line-height: 1.4; }
+
+  /* Big table for agents */
+  .agents-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+  .agents-table th { background: var(--dark); color: var(--white); padding: 12px 14px; text-align: left; font-weight: 600; font-size: 11.5px; letter-spacing: 0.3px; }
+  .agents-table th.center { text-align: center; }
+  .agents-table td { padding: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .agents-table tr:nth-child(even) td { background: var(--gray-light); }
+  .agents-table .besoin-name { font-weight: 700; color: var(--dark); font-size: 13.5px; }
+  .agents-table .besoin-desc { font-size: 11.5px; color: var(--gray); margin-top: 3px; }
+  .agents-table .option-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 4px; }
+  .agents-table .opt1 { background: var(--green-light); color: var(--green); }
+  .agents-table .opt2 { background: var(--orange-light); color: var(--orange); }
+  .agents-table .price { font-weight: 700; color: var(--dark); font-size: 14px; }
+  .agents-table .price-sub { font-size: 11px; color: var(--gray); }
+  .agents-table .dur { font-weight: 600; color: var(--purple); }
+  .agents-table .pers { font-size: 12px; color: var(--gray); }
+  .agents-table .tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: 600; }
+  .agents-table .tag-rag { background: var(--blue-light); color: var(--blue); }
+  .agents-table .tag-agent { background: var(--orange-light); color: var(--orange); }
+  .agents-table .tag-ragagent { background: var(--purple-light); color: var(--purple); }
+
+  /* Total row */
+  .agents-table tr.total-row td { background: var(--purple-light); font-weight: 700; border-top: 2px solid var(--purple); }
+  .agents-table tr.total-row .price { color: var(--purple); font-size: 16px; }
+
+  /* Sub-row for option 2 */
+  .agents-table tr.option-row td { border-bottom: none; padding-top: 4px; padding-bottom: 14px; }
+
+  /* Notes */
+  .note { background: var(--gray-light); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-size: 13px; color: var(--text); line-height: 1.55; }
+  .note strong { color: var(--purple); }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .tl-item { position: relative; padding-bottom: 28px; padding-left: 28px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--purple); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--purple); }
+  .tl-period { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 3px; }
+  .tl-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+  .tl-desc { font-size: 13.5px; color: var(--gray); line-height: 1.5; }
+
+  .footer { background: var(--dark); padding: 36px 0; text-align: center; }
+  .footer p { font-size: 13px; color: var(--gray); }
+  .footer .name { color: var(--white); font-weight: 700; }
+
+  @media print { .hero { padding: 30px 0 20px; } section { padding: 32px 0; } .phase-block { break-inside: avoid; } }
+  @media (max-width: 700px) { .mission-grid { grid-template-columns: 1fr; } .agents-table { font-size: 11px; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-label">Proposition d'accompagnement</div>
+    <h1>Stratégie IA <em>Achats & Maintenance</em></h1>
+    <p class="hero-sub">Deux phases d'accompagnement : mission de conseil pour structurer l'environnement IA, puis déploiement d'agents connectés au SI sur les cas d'usage prioritaires.</p>
+    <div class="hero-meta">
+      <span>Mars 2026</span>
+      <span>Préparé par IAvenir</span>
+    </div>
+  </div>
+</header>
+
+<!-- PHASE 1 -->
+<section>
+  <div class="container">
+    <div class="section-label">Phase 1</div>
+    <h2 class="section-title">Mission de conseil — Référent IA</h2>
+    <p class="section-desc">Un consultant spécialisé intègre vos équipes pendant 3 mois pour structurer l'ensemble de l'environnement IA : stratégie, outils, assistants métier, gouvernance, puis formation des utilisateurs.</p>
+
+    <div class="phase-block">
+      <div class="phase-header purple">
+        <div class="phase-num">1</div>
+        <div class="phase-header-text">
+          <h3>Consultant référent IA — Fiche de mission</h3>
+          <p>3 mois · ~20 jours/mois · 800 €/jour</p>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-intro">Le consultant assume le rôle de Builder IA : un seul profil conçoit, configure et publie les assistants métier. Les utilisateurs les utilisent sans pouvoir modifier la configuration. Ce rôle est indispensable pour garantir la qualité, la gouvernance et la cohérence de l'environnement.</p>
+
+        <div class="mission-grid">
+          <div class="mission-item">
+            <h5>Stratégie & choix des licences</h5>
+            <p>Analyse de l'environnement SI, recommandation de la plateforme IA (ChatGPT, Copilot, Mistral…), choix du modèle de licences, coordination avec la DSI.</p>
+          </div>
+          <div class="mission-item">
+            <h5>Charte IA entreprise</h5>
+            <p>Rédaction de la charte d'usage IA, politique de confidentialité des données, règles d'utilisation, cadrage RGPD, validation avec la direction et la DSI.</p>
+          </div>
+          <div class="mission-item">
+            <h5>Création des assistants métier</h5>
+            <p>Conception, pré-configuration et verrouillage de ~10 assistants métier (GPTs ou Copilot) adaptés aux cas d'usage identifiés : achats, maintenance, chargés d'affaires…</p>
+          </div>
+          <div class="mission-item">
+            <h5>Formation des équipes</h5>
+            <p>Formation des utilisateurs à la prise en main des assistants. Formation avancée pour les profils clés : apprendre à créer eux-mêmes des assistants et monter en autonomie.</p>
+          </div>
+        </div>
+
+        <div class="invest-box">
+          <div class="row">
+            <span class="label">Taux journalier moyen</span>
+            <span class="value">800 € / jour</span>
+          </div>
+          <div class="row">
+            <span class="label">Volume mensuel</span>
+            <span class="value">~20 jours / mois</span>
+          </div>
+          <div class="row">
+            <span class="label">Durée de la mission</span>
+            <span class="value">3 mois</span>
+          </div>
+          <div class="row total">
+            <span class="label">Budget estimé Phase 1</span>
+            <span class="value">~48 000 €</span>
+          </div>
+        </div>
+
+        <div class="phase-badge">Le consultant prépare le terrain pour la Phase 2 : les assistants sont opérationnels, les équipes formées, la gouvernance en place. Le recrutement d'un référent IA interne prend le relais.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2 -->
+<section>
+  <div class="container">
+    <div class="section-label">Phase 2</div>
+    <h2 class="section-title">Agents IA connectés au SI</h2>
+    <p class="section-desc">Déploiement cas d'usage par cas d'usage. Chaque agent est connecté directement aux outils existants via leurs API (Kimoce, SourcingForce, messagerie), orchestré par Copilot Studio.</p>
+
+    <div class="note"><strong>Approche technique :</strong> L'agent interroge directement les API des logiciels métier pour accéder aux données structurées en temps réel (historiques d'achat, annuaire fournisseurs, interventions). C'est plus fiable, plus rapide et moins coûteux qu'un RAG documentaire sur des PDF. Le RAG n'est ajouté qu'en complément, lorsque des informations existent uniquement dans des documents non structurés (notices techniques, contrats PDF, conditions négociées).</div>
+
+    <table class="agents-table">
+      <thead>
+        <tr>
+          <th style="width:28%">Besoin identifié</th>
+          <th class="center" style="width:8%">Type</th>
+          <th class="center" style="width:7%">Pers.</th>
+          <th class="center" style="width:10%">Durée</th>
+          <th class="center" style="width:17%">Budget Année 1<br><span style="font-weight:400;font-size:10px">Prestation + infra ×12</span></th>
+          <th class="center" style="width:15%">Années 2-3<br><span style="font-weight:400;font-size:10px">Infra + maintenance / an</span></th>
+          <th class="center" style="width:15%">Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- GMAO Option 1 -->
+        <tr>
+          <td>
+            <div class="besoin-name">Agent GMAO — Diagnostic maintenance</div>
+            <div class="besoin-desc">Connecté à l'API Kimoce. Le technicien interroge l'historique des interventions, équipements et pièces en langage naturel.</div>
+            <div style="margin-top:6px"><span class="option-label opt1">Option 1 — API Kimoce seule</span></div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">200</td>
+          <td style="text-align:center" class="dur">2 mois</td>
+          <td style="text-align:center"><span class="price">~27 000 €</span><br><span class="price-sub">25K€ presta + 2K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~1 600 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">MVP rapide<br>Couverture 60-70%</td>
+        </tr>
+        <!-- GMAO Option 2 -->
+        <tr class="option-row">
+          <td>
+            <span class="option-label opt2">Option 2 — API + RAG notices + Web</span>
+          </td>
+          <td style="text-align:center"><span class="tag tag-ragagent">API + RAG</span></td>
+          <td style="text-align:center" class="pers">200</td>
+          <td style="text-align:center" class="dur">4 mois</td>
+          <td style="text-align:center"><span class="price">~53 500 €</span><br><span class="price-sub">50K€ presta + 3.5K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~3 500 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">Solution pérenne<br>Couverture 90-95%</td>
+        </tr>
+        <!-- Contrôle historique prix -->
+        <tr>
+          <td>
+            <div class="besoin-name">Contrôle historique des prix</div>
+            <div class="besoin-desc">Agent connecté à l'API SourcingForce. L'acheteur interroge l'historique d'achats en langage naturel : prix, fournisseur, date, référence.</div>
+            <div style="margin-top:6px"><span class="option-label opt1">Option 1 — API SourcingForce seule</span></div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">443</td>
+          <td style="text-align:center" class="dur">2 mois</td>
+          <td style="text-align:center"><span class="price">~22 000 €</span><br><span class="price-sub">20K€ presta + 2K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~1 800 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">Données structurées<br>Résultats précis</td>
+        </tr>
+        <!-- Contrôle historique prix - Option 2 -->
+        <tr class="option-row">
+          <td>
+            <span class="option-label opt2">Option 2 — API + RAG docs complémentaires</span>
+            <div class="besoin-desc" style="margin-top:3px">Ajout RAG sur contrats cadres, conditions BFA, avenants PDF non présents dans l'API.</div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-ragagent">API + RAG</span></td>
+          <td style="text-align:center" class="pers">443</td>
+          <td style="text-align:center" class="dur">3 mois</td>
+          <td style="text-align:center"><span class="price">~34 000 €</span><br><span class="price-sub">30K€ presta + 4K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~3 800 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">API + documents<br>contractuels</td>
+        </tr>
+        <!-- Gestion risques sous-traitants Suisse -->
+        <tr>
+          <td>
+            <div class="besoin-name">Gestion risques sous-traitants Suisse</div>
+            <div class="besoin-desc">Agent de conformité connecté au SI. Extraction des dates d'expiration des attestations, relances automatiques aux fournisseurs en retard.</div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">1-2</td>
+          <td style="text-align:center" class="dur">1-2 mois</td>
+          <td style="text-align:center"><span class="price">~17 000 €</span><br><span class="price-sub">15K€ presta + 2K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~1 800 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">Obligation légale<br>Périmètre restreint</td>
+        </tr>
+        <!-- Automatisation négociation petits devis -->
+        <tr>
+          <td>
+            <div class="besoin-name">Automatisation négociation petits devis</div>
+            <div class="besoin-desc">Agent connecté à l'API SourcingForce + messagerie. Reçoit la DA, consulte l'historique prix via API, génère l'email de négociation, le place en validation.</div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">7</td>
+          <td style="text-align:center" class="dur">2 mois</td>
+          <td style="text-align:center"><span class="price">~20 500 €</span><br><span class="price-sub">18K€ presta + 2.5K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~2 400 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">8 000 DA/an<br>Semi-automatisé</td>
+        </tr>
+        <!-- Recherche fournisseurs connectée SI -->
+        <tr>
+          <td>
+            <div class="besoin-name">Recherche fournisseurs connectée SI</div>
+            <div class="besoin-desc">Agent connecté à l'API SourcingForce (annuaire, notations, historique commandes). Accès temps réel aux données structurées pour orienter les choix.</div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">378</td>
+          <td style="text-align:center" class="dur">2 mois</td>
+          <td style="text-align:center"><span class="price">~20 000 €</span><br><span class="price-sub">18K€ presta + 2K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~1 800 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">Annuaire + historique<br>Données structurées</td>
+        </tr>
+        <!-- Gestion litiges automatisation -->
+        <tr>
+          <td>
+            <div class="besoin-name">Gestion litiges — automatisation complète</div>
+            <div class="besoin-desc">Agent connecté à l'API SourcingForce + messagerie. Classification automatique des litiges, suivi, relances programmées, génération des réponses.</div>
+          </td>
+          <td style="text-align:center"><span class="tag tag-agent">Agent API</span></td>
+          <td style="text-align:center" class="pers">443</td>
+          <td style="text-align:center" class="dur">2 mois</td>
+          <td style="text-align:center"><span class="price">~22 500 €</span><br><span class="price-sub">20K€ presta + 2.5K€ infra</span></td>
+          <td style="text-align:center"><span class="price">~2 400 €</span><br><span class="price-sub">/ an</span></td>
+          <td class="pers">Connexion messagerie<br>+ API SourcingForce</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note"><strong>Lecture du tableau :</strong> Chaque ligne est un cas d'usage indépendant. Le client peut choisir de déployer 1, 2 ou 6 agents — les coûts sont additifs. L'Année 1 inclut la prestation IAvenir (cadrage + développement + mise en production) et 12 mois d'infrastructure. Les Années 2-3 ne contiennent que l'infrastructure récurrente (tokens LLM, Copilot Studio, hébergement). Pas de prestation, coût stable et prévisible.</div>
+
+    <div class="note" style="background: var(--orange-light); color: #7D4E00;"><strong>Avertissement :</strong> Les montants présentés ci-dessus constituent des <strong>estimations indicatives</strong> destinées à fournir un ordre de grandeur pour la prise de décision. Le chiffrage détaillé de chaque cas d'usage sera réalisé lors de la phase de cadrage technique, en fonction notamment des accès API réellement disponibles sur les logiciels métier (SourcingForce, Kimoce), de l'organisation des bases de données, des droits d'accès DSI, et des éventuels coûts de licence complémentaires imposés par les éditeurs. Chaque cas d'usage fera l'objet d'une proposition spécifique avant engagement.</div>
+
+    <div class="note"><strong>Prérequis Phase 2 :</strong> Phase 1 réalisée (environnement structuré, gouvernance en place). Accès API SourcingForce et Kimoce à vérifier avec la DSI avant tout engagement. Faisabilité technique confirmée lors du cadrage de chaque cas d'usage.</div>
+  </div>
+</section>
+
+<!-- VISION GLOBALE -->
+<section>
+  <div class="container">
+    <div class="section-label">Vision globale</div>
+    <h2 class="section-title">Calendrier et investissement total</h2>
+    <p class="section-desc">Un démarrage par la mission de conseil, puis déploiement progressif des agents par ordre de priorité.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-period">Mois 1-3</div>
+        <div class="tl-title">Phase 1 — Mission consultant référent IA</div>
+        <div class="tl-desc">Stratégie, licences, charte IA, création des ~10 assistants métier, formation des équipes. Budget : ~48 000 €.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Mois 4-6</div>
+        <div class="tl-title">Phase 2a — Premiers agents prioritaires</div>
+        <div class="tl-desc">Déploiement des 1-2 cas d'usage les plus critiques (ex : Agent GMAO + Contrôle historique des prix). Choix validé avec le client après Phase 1.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Mois 6-12</div>
+        <div class="tl-title">Phase 2b — Agents complémentaires</div>
+        <div class="tl-desc">Déploiement progressif des autres cas d'usage selon les priorités et les résultats des premiers pilotes. Passation vers le référent IA interne.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Année 2+</div>
+        <div class="tl-title">Autonomie et extension</div>
+        <div class="tl-desc">Le référent IA interne maintient les agents. Ouverture à d'autres métiers et cas d'usage. Coûts récurrents uniquement (infrastructure).</div>
+      </div>
+    </div>
+
+    <div class="note"><strong>Point clé :</strong> Chaque agent est indépendant — le client choisit de déployer 1, 2 ou 6 cas d'usage selon ses priorités. La recommandation est de démarrer par la Phase 1 (formation + assistants) puis de choisir 1-2 agents prioritaires pour valider l'approche avant d'étendre.</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p><span class="name">Antoine Oger — IAvenir</span><br>Disponible pour tout complément d'information</p>
+  </div>
+</footer>
+
+</body>
+</html>
