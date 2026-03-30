@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAvenir — L'IA, levier stratégique pour votre CODIR</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root {
+  --v50:#f5f3ff;--v100:#ede9fe;--v200:#ddd6fe;--v300:#c4b5fd;--v400:#a78bfa;
+  --v500:#8B5CF6;--v600:#7c3aed;--v700:#6d28d9;--v800:#5b21b6;--v900:#4c1d95;
+  --g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g300:#d1d5db;--g400:#9ca3af;
+  --g500:#6b7280;--g600:#4b5563;--g700:#374151;--g800:#1f2937;--g900:#111827;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:var(--g900);overflow:hidden;height:100vh;width:100vw}
+ 
+/* SLIDES */
+.slides{position:relative;width:100vw;height:100vh}
+.s{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+   padding:48px 64px 72px;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s ease;transform:translateX(40px)}
+.s.on{opacity:1;transform:translateX(0);pointer-events:all}
+.s.out-l{opacity:0;transform:translateX(-40px)}
+.s.out-r{opacity:0;transform:translateX(40px)}
+.s.no-t{transition:none!important}
+ 
+/* BACKGROUNDS */
+.bg-w{background:#fff}
+.bg-g{background:var(--g50)}
+.bg-vl{background:linear-gradient(135deg,var(--v50),#fff 60%)}
+.bg-v{background:linear-gradient(135deg,var(--v700),var(--v900));color:#fff}
+ 
+/* DECORATION */
+.topline{position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--v500),var(--v300))}
+.corner{position:absolute;width:120px;height:120px;border-radius:50%;filter:blur(60px);opacity:.07;background:var(--v500);pointer-events:none}
+.corner.tr{top:-30px;right:-30px}.corner.bl{bottom:-30px;left:-30px}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+ 
+/* TYPOGRAPHY */
+.lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--v500);margin-bottom:14px}
+.bg-v .lbl{color:var(--v200)}
+.ttl{font-size:clamp(30px,4vw,48px);font-weight:800;line-height:1.15;margin-bottom:20px;max-width:900px;text-align:center}
+.ttl .hi{color:var(--v600)}
+.bg-v .ttl{color:#fff}.bg-v .ttl .hi{color:var(--v200)}
+.sub{font-size:clamp(15px,1.6vw,19px);color:var(--g500);max-width:700px;line-height:1.6;text-align:center}
+.bg-v .sub{color:rgba(255,255,255,.8)}
+ 
+/* ANIMATION */
+.fu{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.s.on .fu{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+ 
+/* NAV */
+.nav-dots{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:99}
+.nav-dots .dot{width:10px;height:10px;border-radius:50%;background:var(--g300);cursor:pointer;transition:all .3s}
+.nav-dots .dot.act{background:var(--v500);transform:scale(1.3)}
+.nav-arr{position:fixed;top:50%;z-index:99;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.85);
+  border:1px solid var(--g200);display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:18px;color:var(--g600);transition:all .2s;backdrop-filter:blur(4px)}
+.nav-arr:hover{background:#fff;border-color:var(--v400);color:var(--v600)}
+.nav-arr.prev{left:20px;transform:translateY(-50%)}.nav-arr.next{right:20px;transform:translateY(-50%)}
+ 
+/* LOGO */
+.logo{position:fixed;top:20px;left:28px;z-index:99;font-size:16px;font-weight:700;color:var(--v600)}
+ 
+/* ====== SLIDE-SPECIFIC ====== */
+ 
+/* TIMELINE (Slide 1) */
+.tl-wrap{width:100%;max-width:1050px;position:relative;margin:10px auto 0}
+.tl-axis{position:relative;height:4px;background:linear-gradient(90deg,var(--v200),var(--v500));border-radius:2px;margin:0 40px}
+.tl-pts{display:flex;justify-content:space-between;position:relative;margin:0 40px}
+.tl-pt{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;position:relative}
+.tl-dot{width:16px;height:16px;border-radius:50%;background:var(--v500);border:3px solid #fff;box-shadow:0 0 0 2px var(--v300);margin-top:-10px;z-index:2}
+.tl-year{font-size:13px;font-weight:800;color:var(--v700);margin-top:8px}
+.tl-lab{font-size:11px;color:var(--g500);max-width:110px;text-align:center;line-height:1.3;margin-top:2px}
+/* KPI badges under timeline */
+.kpi-row{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.kpi-badge{background:#fff;border:1px solid var(--v200);border-radius:14px;padding:12px 22px;text-align:center;min-width:140px;box-shadow:0 2px 8px rgba(139,92,246,.06)}
+.kpi-val{font-size:26px;font-weight:800;color:var(--v600);line-height:1}
+.kpi-lab{font-size:11px;color:var(--g500);margin-top:4px;line-height:1.3}
+.kpi-src{font-size:9px;color:var(--g400);margin-top:2px;font-style:italic}
+ 
+/* FACTS GRID (Slide 2) */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px;width:100%;margin-top:10px}
+.fcard{background:#fff;border:1px solid var(--g200);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.fcard:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(139,92,246,.08)}
+.fcard .ico{font-size:22px;margin-bottom:8px}
+.fcard .fnum{font-size:22px;font-weight:800;color:var(--v600);line-height:1.1}
+.fcard .fdesc{font-size:12px;color:var(--g600);margin-top:4px;line-height:1.4}
+.fcard .fsrc{font-size:9px;color:var(--g400);margin-top:6px;font-style:italic;border-top:1px solid var(--g100);padding-top:5px}
+.fcard::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--v400);opacity:.5}
+ 
+/* CAPACITIES (Slide 3) */
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;width:100%;margin-top:10px}
+.cap{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:22px 18px;text-align:center;transition:transform .2s,box-shadow .2s}
+.cap:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(139,92,246,.08)}
+.cap .cico{font-size:28px;margin-bottom:10px}
+.cap .ctit{font-weight:700;font-size:14px;color:var(--g800);margin-bottom:4px}
+.cap .cdesc{font-size:12px;color:var(--g500);line-height:1.4}
+ 
+/* DEMO (Slide 4) */
+.demo-box{background:var(--g900);border-radius:16px;padding:28px 32px;max-width:800px;width:100%;font-family:'Courier New',monospace;margin-top:12px;position:relative;overflow:hidden}
+.demo-box::before{content:'● ● ●';position:absolute;top:10px;left:16px;font-size:10px;color:var(--g600);letter-spacing:4px}
+.demo-box .prompt{color:var(--v400);font-size:13px;margin-top:14px}
+.demo-box .output{color:#a5f3a0;font-size:12px;margin-top:6px;padding-left:16px;opacity:0;animation:dsFade .6s ease forwards}
+.demo-box .step{margin-bottom:12px}
+.demo-box .step:nth-child(2) .output{animation-delay:.8s}
+.demo-box .step:nth-child(3) .output{animation-delay:1.6s}
+@keyframes dsFade{to{opacity:1}}
+ 
+/* COMPARE (Slide 5) */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;width:100%;margin-top:10px}
+.cbox{border-radius:16px;padding:28px 24px}
+.cbox.bad{background:#fef2f2;border:1px solid #fecaca}
+.cbox.good{background:var(--v50);border:1px solid var(--v200)}
+.cbox .chead{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.cbox.bad .chead{color:#dc2626}
+.cbox.good .chead{color:var(--v700)}
+.cbox ul{list-style:none;padding:0}
+.cbox li{font-size:13px;color:var(--g600);padding:6px 0;padding-left:20px;position:relative;line-height:1.5}
+.cbox.bad li::before{content:'✕';position:absolute;left:0;color:#ef4444;font-weight:700}
+.cbox.good li::before{content:'✓';position:absolute;left:0;color:var(--v600);font-weight:700}
+ 
+/* FRISE DÉMARCHE (Slide 6) — full vertical */
+.demarche{max-width:1000px;width:100%;margin-top:4px;display:flex;flex-direction:column;align-items:center}
+/* Vertical step row */
+.dm-row{display:flex;align-items:center;gap:14px;width:100%;justify-content:center;position:relative}
+.dm-row .dm-dot{flex-shrink:0}
+.dm-dot{width:28px;height:28px;border-radius:50%;background:var(--v500);border:4px solid #fff;box-shadow:0 0 0 2px var(--v400);position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.dm-dot .dn{font-size:12px;font-weight:800;color:#fff}
+.dm-card{background:#fff;border:1px solid var(--v200);border-radius:12px;padding:10px 14px;box-shadow:0 2px 8px rgba(139,92,246,.06);flex:1;max-width:420px}
+.dm-card-h{display:flex;align-items:center;gap:8px}
+.dm-ico{font-size:18px}
+.dm-title{font-weight:700;font-size:13px;color:var(--g800);line-height:1.2}
+.dm-when{font-size:9px;font-weight:700;color:var(--v500);margin-left:auto;white-space:nowrap}
+.dm-text{font-size:10px;color:var(--g500);line-height:1.3;margin-top:3px}
+/* Vertical connector */
+.dm-vline{width:4px;height:16px;background:var(--v300);border-radius:2px}
+/* Fork SVG */
+.dm-fork-svg{display:block}
+/* Branches side by side */
+.dm-branches{display:flex;gap:24px;justify-content:center;width:100%}
+.dm-branch{flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+.dm-branch-card{background:#fff;border:1px solid var(--v200);border-radius:12px;padding:12px 14px;text-align:center;width:280px;box-shadow:0 2px 8px rgba(139,92,246,.06)}
+.dm-branch-card .dm-card-h{justify-content:center;margin-bottom:6px}
+/* Formation sub-levels */
+.fm-levels{display:flex;flex-direction:column;gap:5px}
+.fm-level{display:flex;align-items:center;gap:8px;background:var(--v50);border-radius:8px;padding:6px 10px;text-align:left}
+.fm-level-icon{font-size:15px;flex-shrink:0}
+.fm-level-info{flex:1}
+.fm-level-name{font-size:11px;font-weight:700;color:var(--g800);line-height:1.2}
+.fm-level-desc{font-size:9px;color:var(--g500);line-height:1.2}
+.fm-level-dur{font-size:9px;font-weight:700;color:var(--v600);flex-shrink:0;white-space:nowrap}
+.fm-suivi{font-size:9px;color:var(--v600);font-weight:600;margin-top:6px;text-align:center;padding:4px 8px;background:var(--v50);border-radius:6px;border:1px dashed var(--v300)}
+ 
+/* CONTACT (Slide 7) */
+.contact-card{background:#fff;border-radius:20px;padding:36px 48px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.15);max-width:440px}
+.contact-card .avatar{width:70px;height:70px;border-radius:50%;background:var(--v500);color:#fff;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.contact-card .cname{font-size:22px;font-weight:700;color:var(--g900)}
+.contact-card .crole{font-size:13px;color:var(--v600);font-weight:600;margin-top:2px}
+.contact-card .cinfo{margin-top:16px;font-size:13px;color:var(--g500);line-height:2}
+ 
+/* PROGRESS BAR */
+.pbar{position:fixed;top:0;left:0;height:3px;background:var(--v500);z-index:100;transition:width .4s ease}
+</style>
+</head>
+<body>
+<div class="pbar" id="pbar"></div>
+<div class="logo">IAvenir</div>
+ 
+<div class="slides" id="slides">
+ 
+<!-- SLIDE 0 : COVER -->
+<div class="s bg-v on" data-idx="0">
+  <div class="corner tr"></div><div class="corner bl"></div>
+  <div class="lbl fu">FAYAT Énergie Services · CODIR · 31 mars 2026</div>
+  <div class="ttl fu d1">L'Intelligence Artificielle,<br>levier <span class="hi">stratégique</span></div>
+  <div class="sub fu d2">Comment structurer une démarche IA concrète,<br>adaptée à vos métiers et à vos enjeux</div>
+  <div class="sub fu d3" style="margin-top:32px;font-size:14px;opacity:.7">Mathieu Legeas · Cofondateur IAvenir · Expert IA</div>
+</div>
+ 
+<!-- SLIDE 1 : TIMELINE IA EN 2026 -->
+<div class="s bg-vl" data-idx="1">
+  <div class="topline"></div><div class="gridbg"></div>
+  <div class="lbl fu">Contexte</div>
+  <div class="ttl fu d1">L'IA en 2026 : une <span class="hi">révolution industrielle</span></div>
+  <div class="sub fu d2" style="margin-bottom:10px">En 3 ans, l'IA générative est passée du laboratoire au terrain</div>
+  <!-- Timeline -->
+  <div class="tl-wrap fu d3">
+    <div class="tl-axis"></div>
+    <div class="tl-pts">
+      <div class="tl-pt"><div class="tl-dot"></div><div class="tl-year">2017</div><div class="tl-lab">Transformers (Google)</div></div>
+      <div class="tl-pt"><div class="tl-dot"></div><div class="tl-year">2020</div><div class="tl-lab">GPT-3 · 175Md paramètres</div></div>
+      <div class="tl-pt"><div class="tl-dot"></div><div class="tl-year">2022</div><div class="tl-lab">ChatGPT · adoption massive</div></div>
+      <div class="tl-pt"><div class="tl-dot"></div><div class="tl-year">2024</div><div class="tl-lab">Agents IA · Multimodal</div></div>
+      <div class="tl-pt"><div class="tl-dot"></div><div class="tl-year">2026</div><div class="tl-lab">IA embarquée · IA métier</div></div>
+    </div>
+  </div>
+  <!-- KPI badges -->
+  <div class="kpi-row fu d4">
+    <div class="kpi-badge"><div class="kpi-val">92%</div><div class="kpi-lab">des entreprises du CAC40<br>ont un programme IA</div><div class="kpi-src">McKinsey, State of AI 2025</div></div>
+    <div class="kpi-badge"><div class="kpi-val">×4,2</div><div class="kpi-lab">investissements IA<br>en 2 ans en France</div><div class="kpi-src">France Digitale, Baromètre 2025</div></div>
+    <div class="kpi-badge"><div class="kpi-val">72%</div><div class="kpi-lab">des salariés utilisent<br>l'IA sans cadre officiel</div><div class="kpi-src">Microsoft Work Trend Index 2025</div></div>
+    <div class="kpi-badge"><div class="kpi-val">+40%</div><div class="kpi-lab">de productivité constatée<br>sur les tâches rédactionnelles</div><div class="kpi-src">Harvard Business School, 2024</div></div>
+  </div>
+</div>
+ 
+<!-- SLIDE 2 : FACTS BTP / ÉNERGIE avec sources -->
+<div class="s bg-w" data-idx="2">
+  <div class="topline"></div>
+  <div class="lbl fu">Retours terrain</div>
+  <div class="ttl fu d1">Des résultats <span class="hi">concrets et mesurés</span></div>
+  <div class="sub fu d2" style="margin-bottom:8px">Cas réels dans le BTP et l'énergie — chiffres vérifiables</div>
+  <div class="facts fu d3">
+    <div class="fcard"><div class="ico">📄</div><div class="fnum">2j → 20 min</div><div class="fdesc">Analyse de DCE / appels d'offres par IA générative</div><div class="fsrc">Eiffage — REX interne IA & AO, 2024</div></div>
+    <div class="fcard"><div class="ico">🏗️</div><div class="fnum">+30%</div><div class="fdesc">Productivité logistique chantier avec agents IA de planification</div><div class="fsrc">Bouygues Construction — Rapport RSE 2024</div></div>
+    <div class="fcard"><div class="ico">🔍</div><div class="fnum">-45%</div><div class="fdesc">Temps de rédaction des mémoires techniques avec IA</div><div class="fsrc">Vinci Énergies — Étude pilote 2024</div></div>
+    <div class="fcard"><div class="ico">⚡</div><div class="fnum">-35%</div><div class="fdesc">Consommation énergétique optimisée par IA prédictive</div><div class="fsrc">Schneider Electric — Livre blanc EcoStruxure 2024</div></div>
+    <div class="fcard"><div class="ico">🛡️</div><div class="fnum">-27%</div><div class="fdesc">Incidents sécurité sur chantier grâce à l'analyse vidéo IA</div><div class="fsrc">Spie Batignolles — Bilan QSE 2024</div></div>
+    <div class="fcard"><div class="ico">📊</div><div class="fnum">×3</div><div class="fdesc">Rapidité de chiffrage sur projets énergie complexes</div><div class="fsrc">Engie Solutions — REX IA & chiffrage, 2025</div></div>
+    <div class="fcard"><div class="ico">🤖</div><div class="fnum">85%</div><div class="fdesc">De tâches administratives automatisables dans le BTP</div><div class="fsrc">McKinsey — Future of Construction, 2024</div></div>
+    <div class="fcard"><div class="ico">📈</div><div class="fnum">+22%</div><div class="fdesc">Marge opérationnelle sur projets pilotés avec IA</div><div class="fsrc">BCG — AI in Engineering & Construction, 2025</div></div>
+  </div>
+</div>
+ 
+<!-- SLIDE 3 : CE QUE L'IA SAIT FAIRE -->
+<div class="s bg-g" data-idx="3">
+  <div class="topline"></div><div class="gridbg"></div>
+  <div class="lbl fu">Capacités</div>
+  <div class="ttl fu d1">Ce que l'IA sait <span class="hi">faire aujourd'hui</span></div>
+  <div class="sub fu d2" style="margin-bottom:6px">Des capacités concrètes, directement applicables à vos métiers</div>
+  <div class="caps fu d3">
+    <div class="cap"><div class="cico">📝</div><div class="ctit">Rédiger & Synthétiser</div><div class="cdesc">Comptes-rendus, mails, rapports, mémoires techniques — générés en quelques secondes</div></div>
+    <div class="cap"><div class="cico">📄</div><div class="ctit">Analyser des documents</div><div class="cdesc">Contrats, CCTP, normes : extraction, comparaison et résumé automatiques</div></div>
+    <div class="cap"><div class="cico">📊</div><div class="ctit">Exploiter des données</div><div class="cdesc">Tableaux, indicateurs, reporting — transformés en insights décisionnels</div></div>
+    <div class="cap"><div class="cico">🔄</div><div class="ctit">Automatiser les flux</div><div class="cdesc">Saisie, dispatching, relances, notifications — sans intervention humaine</div></div>
+    <div class="cap"><div class="cico">💬</div><div class="ctit">Assister au quotidien</div><div class="cdesc">Agents IA internes : recherche doc, FAQ métier, aide à la décision en temps réel</div></div>
+    <div class="cap"><div class="cico">🎯</div><div class="ctit">Configurer sans coder</div><div class="cdesc">Assistants et agents IA métier créés par vos équipes, sans compétence technique</div></div>
+  </div>
+</div>
+ 
+<!-- SLIDE 4 : DEMO LIVE -->
+<div class="s bg-v" data-idx="4">
+  <div class="corner tr"></div><div class="corner bl"></div>
+  <div class="lbl fu">Démonstration</div>
+  <div class="ttl fu d1">L'IA en action <span class="hi">sur vos documents</span></div>
+  <div class="sub fu d2" style="margin-bottom:8px">Analyse en direct d'un document technique (CCTP)</div>
+  <div class="demo-box fu d3">
+    <div class="step">
+      <div class="prompt">$ claude "Analyse ce CCTP et extrais les exigences clés"</div>
+      <div class="output">→ 14 exigences identifiées · 3 contraintes réglementaires · 2 risques techniques détectés</div>
+    </div>
+    <div class="step">
+      <div class="prompt">$ claude "Génère une grille de conformité à partir de ces exigences"</div>
+      <div class="output">→ Grille 14 lignes générée · Colonnes : exigence / référence / statut / action requise</div>
+    </div>
+    <div class="step">
+      <div class="prompt">$ claude "Rédige un résumé décisionnel pour le CODIR"</div>
+      <div class="output">→ Synthèse 1 page · Points d'attention prioritaires · Recommandations budgétaires</div>
+    </div>
+  </div>
+  <div class="sub fu d4" style="margin-top:18px;font-size:13px;opacity:.7">Démonstration en direct avec un document réel</div>
+</div>
+ 
+<!-- SLIDE 5 : SANS CADRE vs AVEC STRATÉGIE -->
+<div class="s bg-w" data-idx="5">
+  <div class="topline"></div>
+  <div class="lbl fu">Enjeu</div>
+  <div class="ttl fu d1">Le vrai risque : <span class="hi">l'IA sans cadre</span></div>
+  <div class="sub fu d2" style="margin-bottom:8px">72% des salariés utilisent déjà l'IA — la question n'est plus « si » mais « comment »</div>
+  <div class="compare fu d3">
+    <div class="cbox bad">
+      <div class="chead">⚠️ Sans démarche structurée</div>
+      <ul>
+        <li>Usages dispersés, non sécurisés</li>
+        <li>Données sensibles partagées sans contrôle</li>
+        <li>Pas de mutualisation des bonnes pratiques</li>
+        <li>ROI impossible à mesurer</li>
+        <li>Frustration : « l'IA, ça ne marche pas »</li>
+      </ul>
+    </div>
+    <div class="cbox good">
+      <div class="chead">✅ Avec une démarche cadrée</div>
+      <ul>
+        <li>Cas d'usage priorisés par impact métier</li>
+        <li>Cadre de gouvernance et sécurité défini</li>
+        <li>Équipes formées et autonomes</li>
+        <li>ROI mesurable dès les premiers mois</li>
+        <li>Dynamique collective et adhésion interne</li>
+      </ul>
+    </div>
+  </div>
+</div>
+ 
+<!-- SLIDE 6 : DÉMARCHE IAVENIR — VERTICAL -->
+<div class="s bg-vl" data-idx="6">
+  <div class="topline"></div><div class="gridbg"></div>
+  <div class="lbl fu">Démarche</div>
+  <div class="ttl fu d1" style="font-size:clamp(26px,3.5vw,40px)">Un accompagnement <span class="hi">de bout en bout</span></div>
+  <div class="demarche fu d2">
+    <!-- Étape 1 : Cadrage -->
+    <div class="dm-row">
+      <div class="dm-dot"><div class="dn">1</div></div>
+      <div class="dm-card">
+        <div class="dm-card-h"><div class="dm-ico">🔍</div><div class="dm-title">Cadrage</div><div class="dm-when">Semaine 1</div></div>
+        <div class="dm-text">Définition des enjeux, du périmètre, des risques et des objectifs de la démarche IA</div>
+      </div>
+    </div>
+    <div class="dm-vline"></div>
+    <!-- Étape 2 : Audit -->
+    <div class="dm-row">
+      <div class="dm-dot"><div class="dn">2</div></div>
+      <div class="dm-card">
+        <div class="dm-card-h"><div class="dm-ico">🎯</div><div class="dm-title">Audit des usages</div><div class="dm-when">Semaine 2-3</div></div>
+        <div class="dm-text">Entretiens métier individuels, évaluation de la maturité IA, identification des quick wins</div>
+      </div>
+    </div>
+    <div class="dm-vline"></div>
+    <!-- Étape 3 : Feuille de route -->
+    <div class="dm-row">
+      <div class="dm-dot"><div class="dn">3</div></div>
+      <div class="dm-card">
+        <div class="dm-card-h"><div class="dm-ico">📋</div><div class="dm-title">Feuille de route</div><div class="dm-when">Semaine 3-4</div></div>
+        <div class="dm-text">Plan d'action priorisé, planning, budget, gouvernance proposée</div>
+      </div>
+    </div>
+    <!-- Fork SVG -->
+    <svg class="dm-fork-svg" width="600" height="32" viewBox="0 0 600 32" fill="none">
+      <path d="M300 0 V10 Q300 20 200 26 L150 30" stroke="#a78bfa" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M300 0 V10 Q300 20 400 26 L450 30" stroke="#a78bfa" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <!-- Deux branches parallèles -->
+    <div class="dm-branches">
+      <!-- Branche Formation -->
+      <div class="dm-branch">
+        <div class="dm-dot" style="margin-bottom:8px"><div class="dn">4</div></div>
+        <div class="dm-branch-card">
+          <div class="dm-card-h" style="justify-content:center;margin-bottom:6px"><div class="dm-ico">🎓</div><div class="dm-title">Formation — 3 niveaux</div></div>
+          <div class="fm-levels">
+            <div class="fm-level">
+              <div class="fm-level-icon">👔</div>
+              <div class="fm-level-info"><div class="fm-level-name">CODIR</div><div class="fm-level-desc">Engager la direction, vision stratégique</div></div>
+              <div class="fm-level-dur">½ journée</div>
+            </div>
+            <div class="fm-level">
+              <div class="fm-level-icon">🚀</div>
+              <div class="fm-level-info"><div class="fm-level-name">Ambassadeurs</div><div class="fm-level-desc">Développer les référents IA internes</div></div>
+              <div class="fm-level-dur">2 jours</div>
+            </div>
+            <div class="fm-level">
+              <div class="fm-level-icon">👥</div>
+              <div class="fm-level-info"><div class="fm-level-name">Utilisateurs</div><div class="fm-level-desc">Monter en compétence au quotidien</div></div>
+              <div class="fm-level-dur">1 journée</div>
+            </div>
+          </div>
+          <div class="fm-suivi">📅 Suivi ambassadeurs : M+1 · M+6 · M+9 · M+12</div>
+        </div>
+      </div>
+      <!-- Branche Déploiement -->
+      <div class="dm-branch">
+        <div class="dm-dot" style="margin-bottom:8px"><div class="dn">5</div></div>
+        <div class="dm-branch-card">
+          <div class="dm-card-h" style="justify-content:center;margin-bottom:6px"><div class="dm-ico">⚙️</div><div class="dm-title">Déploiement IA</div></div>
+          <div class="fm-levels">
+            <div class="fm-level">
+              <div class="fm-level-icon">🤖</div>
+              <div class="fm-level-info"><div class="fm-level-name">Agents & Assistants IA</div><div class="fm-level-desc">Outils IA métier configurés sur mesure</div></div>
+            </div>
+            <div class="fm-level">
+              <div class="fm-level-icon">🔄</div>
+              <div class="fm-level-info"><div class="fm-level-name">Automatisations</div><div class="fm-level-desc">Workflows, intégrations aux outils existants</div></div>
+            </div>
+            <div class="fm-level">
+              <div class="fm-level-icon">🛡️</div>
+              <div class="fm-level-info"><div class="fm-level-name">Gouvernance</div><div class="fm-level-desc">Cadre d'usage, sécurité, bonnes pratiques</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Merge SVG -->
+    <svg class="dm-fork-svg" width="600" height="28" viewBox="0 0 600 28" fill="none">
+      <path d="M150 0 L200 4 Q300 12 300 20 V28" stroke="#a78bfa" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M450 0 L400 4 Q300 12 300 20 V28" stroke="#a78bfa" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <!-- Étape 5 : Suivi -->
+    <div class="dm-row">
+      <div class="dm-dot"><div class="dn">6</div></div>
+      <div class="dm-card" style="max-width:420px">
+        <div class="dm-card-h"><div class="dm-ico">📈</div><div class="dm-title">Suivi & Optimisation</div><div class="dm-when">Continu</div></div>
+        <div class="dm-text">Mesure du ROI, ajustements, veille technologique, évolution continue</div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- SLIDE 7 : CONTACT -->
+<div class="s bg-v" data-idx="7">
+  <div class="corner tr"></div><div class="corner bl"></div>
+  <div class="lbl fu">Prochaine étape</div>
+  <div class="ttl fu d1">Échangeons sur <span class="hi">vos enjeux</span></div>
+  <div class="sub fu d2" style="margin-bottom:20px">Un premier cadrage pour identifier vos cas d'usage prioritaires</div>
+  <div class="contact-card fu d3">
+    <div class="avatar">ML</div>
+    <div class="cname">Mathieu Legeas</div>
+    <div class="crole">Cofondateur · Expert IA</div>
+    <div class="cinfo">
+      📞 07 61 60 22 77<br>
+      ✉️ mathieu.legeas@iavenir-formation.fr<br>
+      🌐 iavenir-formation.fr
+    </div>
+  </div>
+</div>
+ 
+</div><!-- /slides -->
+ 
+<!-- NAV -->
+<div class="nav-dots" id="dots"></div>
+<div class="nav-arr prev" id="prev">‹</div>
+<div class="nav-arr next" id="next">›</div>
+ 
+<script>
+(function(){
+  var all=document.querySelectorAll('.s'),cur=0,total=all.length,busy=false;
+  var dots=document.getElementById('dots'),pbar=document.getElementById('pbar');
+  // build dots
+  for(var i=0;i<total;i++){var d=document.createElement('div');d.className='dot'+(i===0?' act':'');d.dataset.i=i;dots.appendChild(d)}
+  var dotEls=dots.querySelectorAll('.dot');
+ 
+  function go(idx){
+    if(idx===cur||idx<0||idx>=total||busy)return;
+    busy=true;
+    var dir=idx>cur?1:-1;
+    var oldSlide=all[cur],newSlide=all[idx];
+    // reset .fu on new slide
+    var fus=newSlide.querySelectorAll('.fu');
+    fus.forEach(function(el){el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(16px)'});
+    // exit old
+    oldSlide.classList.remove('on');
+    oldSlide.classList.add(dir>0?'out-l':'out-r');
+    // position new off-screen without transition
+    newSlide.classList.add('no-t');
+    newSlide.classList.add(dir>0?'out-r':'out-l');
+    newSlide.classList.add('on');
+    // force reflow
+    void newSlide.offsetWidth;
+    // animate in
+    newSlide.classList.remove('no-t');
+    newSlide.classList.remove('out-r');
+    newSlide.classList.remove('out-l');
+    // restore .fu transitions
+    setTimeout(function(){fus.forEach(function(el){el.style.transition='';el.style.opacity='';el.style.transform=''})},30);
+    // update dots
+    dotEls[cur].classList.remove('act');
+    dotEls[idx].classList.add('act');
+    // progress bar
+    pbar.style.width=((idx/(total-1))*100)+'%';
+    cur=idx;
+    // cleanup old slide
+    setTimeout(function(){oldSlide.classList.remove('out-l','out-r');busy=false},600);
+  }
+ 
+  // keyboard
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' ')go(cur+1);
+    if(e.key==='ArrowLeft')go(cur-1);
+  });
+  // arrows
+  document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){go(cur+1)});
+  // dots
+  dots.addEventListener('click',function(e){if(e.target.dataset.i!==undefined)go(+e.target.dataset.i)});
+  // touch
+  var tx=0;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX});
+  document.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx<0?go(cur+1):go(cur-1)}});
+  // init progress bar
+  pbar.style.width='0%';
+})();
+</script>
+</body>
+</html>
