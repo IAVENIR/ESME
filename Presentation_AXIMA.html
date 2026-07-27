@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Restitution d'audit stratégique IA · AXIMA Sécurité Incendie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F1;--surface:#EFEEE9;--surface2:#F0ECF6;--border:#DDD9D1;--text:#3D3929;--text-dim:#7A7568;
+--text-bright:#1C1A14;--white:#FDFCFA;--violet:#8B5CF6;--violet-dark:#6D28D9;--violet-deep:#4C1D95;--violet-light:#F0ECF6;
+--green:#059669;--green-bg:#EDF8F0;--green-text:#065F46;--blue:#2563EB;--blue-bg:#EDF0F8;--blue-text:#1E40AF;
+--amber:#D97706;--amber-bg:#FBF6E8;--amber-text:#92400E;--red:#DC2626;--red-bg:#FEF2F2;--red-text:#991B1B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:960px;margin:0 auto;padding:3rem 2.5rem}
+section{padding:4.5rem 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h1,h2,.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400}
+h1{font-size:2.6rem;line-height:1.15;color:var(--text-bright)}
+h2{font-size:1.9rem;line-height:1.2;color:var(--text-bright);margin-bottom:1rem}
+.section-num{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-dark);
+display:flex;align-items:center;gap:.6rem;margin-bottom:1.1rem}
+.section-num::before{content:"";display:block;width:24px;height:2px;background:var(--violet)}
+.lead{font-size:1.02rem;color:var(--text);max-width:760px;margin-bottom:1.6rem}
+.small{font-size:.82rem;color:var(--text-dim)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:2.2rem 0}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.1rem}
+.stat .num{font-family:'DM Serif Display',serif;font-size:2.2rem;line-height:1}
+.stat .label{font-size:.74rem;color:var(--text-dim);margin-top:.45rem;line-height:1.35}
+.cards{display:grid;gap:1rem;margin:1.6rem 0}
+.cols-2{grid-template-columns:1fr 1fr}
+.cols-3{grid-template-columns:1fr 1fr 1fr}
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.25rem}
+.card h3{font-size:.92rem;color:var(--text-bright);margin-bottom:.45rem}
+.card p{font-size:.83rem;color:var(--text);line-height:1.55}
+.card-accent{border-top:3px solid var(--violet)}
+.takeaway{background:var(--violet-light);border-left:3px solid var(--violet);border-radius:6px;
+padding:1.05rem 1.3rem;font-size:.93rem;color:var(--violet-dark);margin:1.8rem 0 0;font-weight:500}
+.irritant{display:flex;gap:1.2rem;align-items:flex-start;background:var(--white);border:1px solid var(--border);
+border-radius:10px;padding:1.15rem 1.3rem;margin-bottom:.75rem}
+.irritant-num{font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--violet);flex-shrink:0;width:2rem;text-align:center;line-height:1.2}
+.irritant h3{font-size:.95rem;color:var(--text-bright);margin-bottom:.3rem}
+.irritant p{font-size:.83rem;color:var(--text)}
+.irritant-badge{margin-left:auto;flex-shrink:0;font-size:.68rem;font-weight:700;padding:.28rem .7rem;border-radius:20px;white-space:nowrap}
+.badge-high{background:var(--red-bg);color:var(--red-text)}
+.badge-med{background:var(--amber-bg);color:var(--amber-text)}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.83rem}
+th{background:var(--violet-dark);color:#fff;text-align:left;padding:.65rem .9rem;font-weight:600;font-size:.78rem}
+td{padding:.62rem .9rem;border-top:1px solid #EEEBE4;vertical-align:top}
+tr:nth-child(even) td{background:#F7F6F2}
+.family-header{display:flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:var(--text-dim);margin:2rem 0 .8rem}
+.family-dot{width:11px;height:11px;border-radius:50%}
+.usecase{display:flex;gap:1.1rem;align-items:flex-start;background:var(--white);border:1px solid var(--border);
+border-radius:10px;padding:1rem 1.2rem;margin-bottom:.65rem}
+.usecase-id{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--violet-dark);font-weight:700;flex-shrink:0;min-width:4.2rem;padding-top:.1rem}
+.usecase h3{font-size:.9rem;color:var(--text-bright);margin-bottom:.25rem}
+.usecase p{font-size:.8rem;color:var(--text)}
+.usecase-meta{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
+.usecase-tag{font-size:.68rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.15rem .5rem;color:var(--text-dim)}
+.usecase-gain{margin-left:auto;flex-shrink:0;text-align:right;min-width:9.5rem}
+.usecase-gain .before{font-size:.72rem;color:var(--text-dim)}
+.usecase-gain .after{font-size:1rem;font-weight:700;color:var(--green)}
+.org-level{display:flex;gap:1.2rem;align-items:flex-start;background:var(--white);border:1px solid var(--border);
+border-radius:10px;padding:1.2rem 1.3rem;margin-bottom:.8rem}
+.org-badge{flex-shrink:0;font-size:.7rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;margin-top:.1rem}
+.org-level h3{font-size:.95rem;color:var(--text-bright);margin-bottom:.3rem}
+.org-level p{font-size:.83rem;color:var(--text)}
+.footer{padding:3rem 0 4rem;text-align:center;color:var(--text-dim);font-size:.8rem}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--violet-dark);margin-bottom:.4rem}
+/* mockups */
+.mock-tabs{display:flex;gap:.5rem;padding:.5rem;background:var(--surface);border-radius:8px;margin:1.4rem 0 1rem}
+.mock-btn{flex:1;border:none;border-radius:6px;padding:.6rem 1rem;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;background:transparent;color:var(--text-dim)}
+.mock-btn.active{background:var(--white);color:var(--violet-dark);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.mocknote{background:var(--amber-bg);border:1px solid #F0D6AE;border-radius:8px;padding:.75rem 1rem;font-size:.78rem;color:var(--amber-text);margin-bottom:1rem}
+.cop{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;font-size:.8rem}
+.cop-top{background:#f3f2f1;border-bottom:1px solid #e1dfdd;padding:.7rem 1.1rem;font-weight:600;color:#242424;display:flex;align-items:center;gap:.6rem}
+.cop-logo{color:#0f6cbd;font-size:1.05rem}
+.cop-badge{margin-left:auto;font-size:.7rem;background:#eef4fb;color:#0f6cbd;border-radius:20px;padding:.15rem .7rem;font-weight:600}
+.cop-body{display:grid;grid-template-columns:280px 1fr}
+.cop-side{border-right:1px solid #e1dfdd;padding:.85rem;background:#faf9f8}
+.cop-side-h{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:#605e5c;font-weight:700;margin-bottom:.6rem}
+.cop-agent{display:flex;gap:.6rem;align-items:center;padding:.5rem;border-radius:8px}
+.cop-agent:hover{background:#f0f0f0}
+.cop-ic{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#0f6cbd,#8B5CF6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.cop-nm{font-size:.76rem;font-weight:600;color:#242424;line-height:1.25}
+.cop-sub{font-size:.66rem;color:#797775}
+.cop-chat{padding:1.2rem;background:#fff}
+.cop-q{background:#eef4fb;border-radius:12px 12px 4px 12px;padding:.7rem .9rem;font-size:.79rem;max-width:82%;margin:0 0 .9rem auto;color:#242424}
+.cop-a{background:#faf9f8;border:1px solid #eee;border-radius:4px 12px 12px 12px;padding:.9rem;font-size:.78rem;max-width:94%}
+.cop-a-h{display:flex;align-items:center;gap:.5rem;font-weight:700;color:#0f6cbd;margin-bottom:.55rem}
+.cop-a p{margin-bottom:.4rem}
+.cop-src{margin-top:.6rem;font-size:.68rem;color:#797775;border-top:1px dashed #ddd;padding-top:.45rem}
+.pj{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1px solid #cfd6e0;border-radius:8px;padding:.42rem .65rem;margin-top:.55rem;font-size:.7rem;color:#333;font-weight:600}
+.pj .pj-ic{width:22px;height:22px;border-radius:5px;background:#DC2626;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;flex-shrink:0}
+.pj .pj-meta{font-weight:400;color:#797775;font-size:.64rem}
+.mini-h{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:.65rem 0 .3rem}
+.mini-li{font-size:.74rem;line-height:1.5;padding-left:.9rem;position:relative}
+.mini-li::before{content:"·";position:absolute;left:.25rem;font-weight:700}
+.teams{border:1px solid var(--border);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:250px 1fr;min-height:360px;font-size:.8rem}
+.tm-side{background:#2B2A33;color:#e6e6ea;padding:.9rem .7rem}
+.tm-side-h{font-size:.64rem;text-transform:uppercase;letter-spacing:.09em;color:#a6a6b0;font-weight:700;margin:.2rem .35rem .7rem}
+.tm-agent{display:flex;gap:.55rem;align-items:center;padding:.5rem .45rem;border-radius:7px}
+.tm-agent.active,.tm-agent:hover{background:#3b3a45}
+.tm-av{width:24px;height:24px;border-radius:7px;background:#6264A7;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0}
+.tm-nm{font-size:.72rem;font-weight:600;line-height:1.25}
+.tm-id{font-size:.62rem;color:#a6a6b0}
+.tm-main{background:#fff;display:flex;flex-direction:column}
+.tm-head{border-bottom:1px solid #e6e6ea;padding:.75rem 1.1rem;font-weight:600;color:#242424}
+.tm-chat{padding:1.2rem;display:flex;flex-direction:column;gap:.8rem}
+.tm-msg{display:flex}.tm-user{justify-content:flex-end}
+.tm-b{max-width:84%;padding:.7rem .9rem;border-radius:12px;font-size:.78rem}
+.tm-user .tm-b{background:#6264A7;color:#fff;border-radius:12px 12px 4px 12px}
+.tm-bot .tm-b{background:#f5f5f7;color:#242424;border-radius:12px 12px 12px 4px}
+.tm-sources{margin-top:.6rem;display:flex;flex-direction:column;gap:.35rem}
+.tm-s{display:flex;justify-content:space-between;background:#fff;border:1px solid #e0e0e6;border-radius:7px;padding:.4rem .65rem;font-size:.68rem;color:#444}
+.tm-score{color:#6264A7;font-weight:700}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.cols-2,.cols-3{grid-template-columns:1fr}
+.cop-body,.teams{grid-template-columns:1fr}h1{font-size:2rem}.usecase-gain{display:none}}
+</style></head><body>
+<div class="container">
+
+<!-- ============ 01 OUVERTURE ============ -->
+<section>
+  <div class="section-num">01 Ouverture</div>
+  <h1>Audit stratégique<br>Intelligence Artificielle</h1>
+  <p class="lead" style="margin-top:1rem">AXIMA Sécurité Incendie · Groupe EQUANS · Agence Hauts-de-France (Lille)<br>
+  <span class="small">Restitution des conclusions · Juillet 2026</span></p>
+  <div class="stats">
+    <div class="stat"><div class="num" style="color:var(--violet)">11</div><div class="label">Entretiens conduits</div></div>
+    <div class="stat"><div class="num" style="color:var(--violet)">10</div><div class="label">Fonctions auditées</div></div>
+    <div class="stat"><div class="num" style="color:var(--violet)">106</div><div class="label">Cas d'usage identifiés</div></div>
+    <div class="stat"><div class="num" style="color:var(--green)">≈100</div><div class="label">Actionnables à court terme</div></div>
+  </div>
+  <div class="cards cols-2">
+    <div class="card card-accent" style="border-color:var(--green)"><h3>1. Cartographier les besoins métier</h3><p>Recenser les cas d'usage de l'IA générative dans chaque fonction de l'agence, à partir des irritants concrets exprimés par les équipes.</p></div>
+    <div class="card card-accent" style="border-color:var(--blue)"><h3>2. Prioriser les usages</h3><p>Hiérarchiser le portefeuille selon l'impact, la faisabilité dans l'environnement EQUANS et la rapidité de mise en œuvre.</p></div>
+    <div class="card card-accent" style="border-color:var(--amber)"><h3>3. Établir le diagnostic de maturité</h3><p>Évaluer l'environnement numérique, les usages IA existants et le niveau d'acculturation des profils.</p></div>
+    <div class="card card-accent" style="border-color:var(--violet)"><h3>4. Formuler des préconisations actionnables</h3><p>Proposer les solutions, la gouvernance et une feuille de route en trois horizons, alignées sur la démarche d'agence pilote.</p></div>
+  </div>
+  <div class="cards cols-3">
+    <div class="card"><h3>Rapport d'audit</h3><p>Le document de référence. Diagnostic, cartographie, fiches détaillées, gouvernance et roadmap, avec glossaire en annexe.</p></div>
+    <div class="card"><h3>Cartographie Excel</h3><p>Les 106 cas d'usage documentés selon une grille de quinze champs. L'outil de pilotage du portefeuille.</p></div>
+    <div class="card"><h3>Plan de déploiement interactif</h3><p>L'outil de travail par métier et par horizon, avec le détail de chaque cas et les mockups des solutions.</p></div>
+  </div>
+</section>
+
+<!-- ============ 02 CONSTATS ============ -->
+<section>
+  <div class="section-num">02 Constats terrain</div>
+  <h2>Cinq irritants transverses, cités de manière convergente par des profils différents</h2>
+  <p class="lead">Ils dessinent un même problème de fond. Un temps considérable est absorbé par des tâches répétitives et documentaires, au détriment du cœur de métier.</p>
+  <div class="irritant"><div class="irritant-num">1</div><div><h3>Une charge de courriels et d'administratif massive</h3><p>Jusqu'à environ soixante-dix messages et quatre heures par jour pour les profils les plus exposés du hub des affaires, entre traitement de la boîte, saisies et suivis manuels.</p></div><div class="irritant-badge badge-high">Impact fort</div></div>
+  <div class="irritant"><div class="irritant-num">2</div><div><h3>Une dépendance forte aux sachants</h3><p>Le savoir réglementaire est concentré sur un expert unique. Un enjeu de transmission et de continuité autant que d'efficacité.</p></div><div class="irritant-badge badge-high">Impact fort</div></div>
+  <div class="irritant"><div class="irritant-num">3</div><div><h3>Des saisies et ressaisies entre outils non connectés</h3><p>Listings tapés à la main, reports d'un tableau à l'autre, doubles saisies entre documents et applications de gestion.</p></div><div class="irritant-badge badge-high">Impact fort</div></div>
+  <div class="irritant"><div class="irritant-num">4</div><div><h3>Des documents volumineux produits et contrôlés manuellement</h3><p>Mémoires techniques, rapports d'audit de 60 à 140 pages, dossiers de réception. Avec les risques d'erreur et de non-conformité associés.</p></div><div class="irritant-badge badge-high">Impact fort</div></div>
+  <div class="irritant"><div class="irritant-num">5</div><div><h3>Une information dispersée et difficile à retrouver</h3><p>Serveurs, bibliothèques documentaires et messageries cloisonnés. La recherche par mots-clés échoue souvent et la mémoire des affaires passées n'est pas capitalisée.</p></div><div class="irritant-badge badge-high">Impact fort</div></div>
+  <div class="takeaway">L'agence ne part pas de zéro. Le socle Microsoft 365 est solide et la direction est déjà utilisatrice au quotidien. La réponse à ces irritants devra impérativement s'inscrire dans le cadre d'outils défini par le Groupe EQUANS.</div>
+</section>
+
+<!-- ============ 03 MATURITE ============ -->
+<section>
+  <div class="section-num">03 Maturité et environnement</div>
+  <h2>Un socle bureautique solide, des logiciels métier peu connectés, un écosystème IA borné par le groupe</h2>
+  <table style="margin:1.4rem 0">
+    <tr><th style="width:34%">Brique IA homologuée</th><th>État et rôle dans la trajectoire</th></tr>
+    <tr><td><b>Copilot</b></td><td>Déployé en configuration de base. Ses fonctions les plus utiles (transcription, SharePoint, création et partage d'assistants) relèvent de droits étendus à homogénéiser. Outil naturel des assistants du quotidien.</td></tr>
+    <tr><td><b>One AI</b></td><td>Assistant interne du groupe, accès élargi récent. Choix de modèles, import de documents, bibliothèque de prompts. Point de convergence potentiel, selon sa feuille de route.</td></tr>
+    <tr><td><b>RSI Bot</b></td><td>Moteur documentaire interne dédié aux référentiels, en version bêta. Préfiguration naturelle de l'assistant réglementaire connecté.</td></tr>
+    <tr><td><b>NotebookLM</b></td><td>Environnement documentaire homologué, solution de transition pour les dossiers de projet interrogeables.</td></tr>
+  </table>
+  <div class="cards cols-3">
+    <div class="card card-accent" style="border-color:var(--green)"><h3>Les avant-gardistes</h3><p>Peu nombreux mais réels. La direction, utilisatrice quotidienne, et quelques profils ayant déjà construit leurs propres assistants. Le vivier des futurs ambassadeurs.</p></div>
+    <div class="card card-accent" style="border-color:var(--blue)"><h3>Les curieux pragmatiques</h3><p>La majorité des responsables rencontrés. Pas encore d'usage installé, mais des besoins très précis sur leurs irritants. Le cœur de cible des quick wins.</p></div>
+    <div class="card card-accent" style="border-color:var(--amber)"><h3>Les prudents</h3><p>Une vigilance légitime sur les limites, notamment au bureau d'études et sur le réglementaire. Des garde-fous de conception, pas des résistances à lever.</p></div>
+  </div>
+  <div class="takeaway">Les usages individuels d'outils personnels, observés ponctuellement, se résorbent par la mise à disposition d'outils officiels à la hauteur. La qualité de la première expérience proposée aux équipes est déterminante.</div>
+</section>
+
+<!-- ============ 04 CAS D'USAGE ============ -->
+<section>
+  <div class="section-num">04 Cas d'usage identifiés</div>
+  <h2>Cent six cas cartographiés, dont cent deux déployables</h2>
+  <p class="lead">Avant le détail des cas, deux clés de lecture. La famille de solution, qui dit ce que fait la solution, et la grille de phasage, qui dit quand elle devient actionnable.</p>
+
+  <div class="family-header"><div class="family-dot" style="background:var(--violet)"></div>Trois familles de solutions</div>
+  <div class="cards cols-3">
+    <div class="card card-accent" style="border-color:var(--green)"><h3>Assistants</h3><p>Prompts structurés, documents en entrée, résultat ciblé. Déployables immédiatement, sans connexion au système d'information. Couvrent la centaine de cas du court terme.</p></div>
+    <div class="card card-accent" style="border-color:var(--blue)"><h3>RAG</h3><p>Moteurs conversationnels sur corpus, réponses sourcées. Bases « fixes » (référentiels, procédures, REX) et dossiers de projet « vivants ». Ce qui n'appartient qu'à AXIMA.</p></div>
+    <div class="card card-accent" style="border-color:var(--amber)"><h3>Agents</h3><p>Enchaînement d'étapes, appel d'assistants, connexion aux outils. L'horizon le plus créateur de valeur, engagé sur des assistants éprouvés. Ce sont eux qui portent les automatisations de bout en bout, du document reçu à l'action préparée.</p></div>
+  </div>
+
+  <div class="family-header"><div class="family-dot" style="background:var(--violet)"></div>La grille de lecture du phasage</div>
+  <div class="cards cols-2">
+    <div class="card card-accent" style="border-color:var(--violet)"><h3>Phase 1 / Phase 2</h3><p>La Phase 1 regroupe les cas adressables par un assistant simple, sans connexion au système d'information. La Phase 2 regroupe les cas dont la version cible exige une infrastructure connectée, RAG ou agent, donc des prérequis (SharePoint organisé, arbitrages DSI, droits avancés).</p></div>
+    <div class="card card-accent" style="border-color:var(--violet)"><h3>Niveau 1 / Niveau 2</h3><p>La plupart des cas Phase 2 disposent d'un premier palier actionnable immédiatement. Au Niveau 1, l'utilisateur dépose ses fichiers et l'assistant produit un résultat opérationnel. Au Niveau 2, la même logique est alimentée automatiquement par les outils internes. Dans un environnement peu connecté, cette lecture fait basculer l'essentiel de la valeur en court terme.</p></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num" style="color:var(--text-bright)">102</div><div class="label">Cas déployables</div></div>
+    <div class="stat"><div class="num" style="color:var(--green)">≈100</div><div class="label">Assistants et Niveaux 1 · court terme</div></div>
+    <div class="stat"><div class="num" style="color:var(--blue)">14</div><div class="label">RAG · moyen terme</div></div>
+    <div class="stat"><div class="num" style="color:var(--amber)">14</div><div class="label">Agents · long terme</div></div>
+  </div>
+
+  <div class="family-header"><div class="family-dot" style="background:var(--green)"></div>Assistants · court terme</div>
+  <div class="usecase"><div class="usecase-id">SC-08</div><div><h3>Analyse du CCTP</h3><p>Fiche de synthèse technique sourcée à chaque affaire, mutualisée entre commerce, études et exécution.</p><div class="usecase-meta"><span class="usecase-tag">Phase 1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Socle commun</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">COM-03</div><div><h3>Génération assistée du mémoire technique</h3><p>Rédaction section par section, plan calqué sur le barème du règlement de consultation.</p><div class="usecase-meta"><span class="usecase-tag">Phase 1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Commerce</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">BE-01</div><div><h3>Synthèse technique d'étude par zone</h3><p>Tableau risque, densité, cloisons, têtes, avec contrôle de cohérence du classement et liste des manques.</p><div class="usecase-meta"><span class="usecase-tag">Phase 1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Bureau d'études</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">MON-01</div><div><h3>Listing de matériel par dictée vocale</h3><p>La lecture du plan à voix haute devient la liste au format attendu, courriel aux achats préparé.</p><div class="usecase-meta"><span class="usecase-tag">Phase 1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Montage</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">TRE-01</div><div><h3>Mise en forme du rapport d'audit trentenaire</h3><p>Reformatage du rapport brut au format livrable, suppression des rubriques vides, à chaque audit.</p><div class="usecase-meta"><span class="usecase-tag">Phase 1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Trentenaire</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">RAF-18</div><div><h3>Gestion assistée de la boîte mail (Niveau 1)</h3><p>Résumé, priorisation, brouillons de réponse, consultation vocale en déplacement. Version agent à terme.</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Affaires</span></div></div></div>
+
+  <div class="family-header"><div class="family-dot" style="background:var(--blue)"></div>RAG · moyen terme</div>
+  <div class="usecase"><div class="usecase-id">SC-01</div><div><h3>Assistant réglementaire par norme</h3><p>Un assistant dédié par référentiel (APSAD, NFPA, FM Global, NF EN), réponses sourcées au chapitre. La priorité affirmée de la direction, et la réponse à l'enjeu de transmission.</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1 → N2</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Socle · piloté Technique</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">RAF-02</div><div><h3>Dossier projet vivant interrogeable</h3><p>Pièces, comptes rendus et courriels d'une affaire, interrogés à tout moment. « Qu'est-ce qu'on s'était dit il y a six mois ? »</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1 → N2</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Affaires</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">SC-02</div><div><h3>Capitalisation des retours d'expérience</h3><p>La mémoire des affaires et des validations passées, interrogeable par tous. « A-t-on déjà fait X ? »</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1 → N2</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Socle commun</span></div></div></div>
+
+  <div class="family-header"><div class="family-dot" style="background:var(--amber)"></div>Agents · long terme</div>
+  <div class="usecase"><div class="usecase-id">SC-11</div><div><h3>Orchestration de l'analyse du dossier de consultation</h3><p>Un seul dépôt du DCE, les trois assistants CCTP, CCAP et RC enchaînés, une fiche consolidée pour le go / no-go.</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · agentique</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Socle commun</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">ACH-01</div><div><h3>Consultations fournisseurs générées</h3><p>Le listing relié à la bibliothèque fournisseurs, les brouillons de consultation prêts à vérifier et envoyer.</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1 → N2</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Achats</span></div></div></div>
+  <div class="usecase"><div class="usecase-id">TECH-03</div><div><h3>Analyse des levées de réserve</h3><p>Avis de l'organisme confronté au référentiel, actions réparties, courrier ou retour pédagogique sourcé au chargé d'affaires.</p><div class="usecase-meta"><span class="usecase-tag">Phase 2 · N1 → N2</span><span class="usecase-tag">Fort</span><span class="usecase-tag">Technique</span></div></div></div>
+  <div class="takeaway">Le gisement prioritaire est le hub des affaires et de la production, quarante cas à lui seul. C'est le périmètre où l'agence a le plus à gagner en autonomie, et le moins susceptible d'être servi rapidement par les déploiements nationaux.</div>
+</section>
+
+<!-- ============ 05 SOLUTIONS ============ -->
+<section>
+  <div class="section-num">05 Solutions retenues</div>
+  <h2>Des solutions portées exclusivement par le socle EQUANS</h2>
+  <p class="lead">Les trois familles présentées au bloc précédent se répartissent sur les briques homologuées du groupe. L'arbitrage entre ces briques ne peut être rendu sans la DSI, le cadrage constitue l'étape n°1 de la trajectoire.</p>
+  <table style="margin:1.6rem 0 0.5rem">
+    <tr><th style="width:33%">Famille de besoins</th><th style="width:34%">Outil recommandé (provisoire)</th><th>Conditions</th></tr>
+    <tr><td>Assistants du quotidien</td><td>Copilot (droits homogénéisés) / One AI</td><td>Bibliothèque d'assistants partagés, prompts calibrés métier</td></tr>
+    <tr><td>RAG « fixes »</td><td>RSI Bot (préfiguration) / NotebookLM / One AI selon feuille de route</td><td>Corpus structurés, sourçage obligatoire, gouvernance des versions</td></tr>
+    <tr><td>RAG « vivants »</td><td>NotebookLM en transition / environnement projet One AI à confirmer</td><td>SharePoint organisé par affaire, alimentation disciplinée</td></tr>
+    <tr><td>Agents et orchestrations</td><td>Copilot Studio (à terme)</td><td>Droits avancés, assistants éprouvés, cadrage DSI</td></tr>
+  </table>
+  <div class="takeaway">La convergence vers One AI comme outil unique est une cible recommandable. Elle ne sera posée fermement que si sa feuille de route est confirmée et datée par la DSI. Dans l'intervalle, le dispositif transitoire réparti reste pleinement productif grâce au Niveau 1.</div>
+
+  <div class="mock-tabs">
+    <button id="mock-btn-cop" class="mock-btn active" onclick="switchMockup('cop')">Copilot · Assistants de l'agence</button>
+    <button id="mock-btn-teams" class="mock-btn" onclick="switchMockup('teams')">Teams · Bases interrogeables (RAG)</button>
+  </div>
+  <div class="mocknote">Mockups illustratifs, non fonctionnels. Le fond, les assistants métier retenus, est ce qui compte. La forme sera transposée aux outils du groupe (Copilot, One AI, RSI Bot).</div>
+
+  <div id="mock-cop">
+    <div class="cop">
+      <div class="cop-top"><span class="cop-logo">◆</span> Microsoft 365 Copilot <span class="cop-badge">Assistants de l'agence</span></div>
+      <div class="cop-body">
+        <div class="cop-side">
+          <div class="cop-side-h">Assistants métier</div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Pré-analyse d'appel d'offres (go / no-go)</div><div class="cop-sub">COM-01 · Commerce</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Analyse du CCTP</div><div class="cop-sub">SC-08 · Socle commun</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Synthèse d'étude par zone</div><div class="cop-sub">BE-01 · Bureau d'études</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Listing matériel par dictée vocale</div><div class="cop-sub">MON-01 · Montage</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Consultations fournisseurs</div><div class="cop-sub">ACH-01 · Achats</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Contrôle de conformité au référentiel</div><div class="cop-sub">TECH-01 · Technique</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">Mise en forme rapport trentenaire</div><div class="cop-sub">TRE-01 · Trentenaire</div></div></div>
+          <div class="cop-agent"><div class="cop-ic">✦</div><div><div class="cop-nm">CR des réunions internes</div><div class="cop-sub">CDG-01 · Chef de groupe</div></div></div>
+        </div>
+        <div class="cop-chat">
+          <div class="cop-q">Voici le CCTP du marché. Sors-moi la synthèse des clauses techniques.
+            <div class="pj"><span class="pj-ic">PDF</span> CCTP_Cellule_logistique.pdf <span class="pj-meta">· 84 pages · pièce jointe</span></div>
+          </div>
+          <div class="cop-a">
+            <div class="cop-a-h"><span class="cop-ic" style="width:20px;height:20px;font-size:.65rem">✦</span> Assistant d'analyse du CCTP · synthèse des clauses techniques</div>
+            <p><b>Prestations et périmètre vendu</b> · sprinklage ESFR sur cellule logistique, réserve sous eau, poste de contrôle unique, source d'eau dédiée (p.12).</p>
+            <p><b>Spécifications</b> · têtes ESFR K200 en toiture, densité et surface impliquée selon la classe de risque du stockage, réseau acier galvanisé (p.14, p.22).</p>
+            <p><b>Référentiel imposé</b> · APSAD R1, édition en vigueur, réception par l'organisme de certification (p.31).</p>
+            <p><b>Contraintes d'exécution</b> · travaux en co-activité, phasage par cellule, hauteur sous toiture 12 m, nacelles (p.47).</p>
+            <p><b>Points de vigilance</b> · classement de risque de la réserve à confirmer selon le contenu réel, interface avec le lot désenfumage, délai d'approvisionnement des têtes.</p>
+            <div class="cop-src">Chaque élément renvoie à la page source du CCTP déposé · validation humaine avant usage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mock-teams" style="display:none">
+    <div class="teams">
+      <div class="tm-side">
+        <div class="tm-side-h">Bases interrogeables · SharePoint connecté</div>
+        <div class="tm-agent active"><span class="tm-av">◈</span><div><div class="tm-nm">Base des mémoires techniques</div><div class="tm-id">SC-02 · dossier SharePoint « Mémoires »</div></div></div>
+        <div class="tm-agent"><span class="tm-av">◈</span><div><div class="tm-nm">Assistant réglementaire par norme</div><div class="tm-id">SC-01</div></div></div>
+        <div class="tm-agent"><span class="tm-av">◈</span><div><div class="tm-nm">Recherche documentaire</div><div class="tm-id">SC-03</div></div></div>
+        <div class="tm-agent"><span class="tm-av">◈</span><div><div class="tm-nm">Dossier projet vivant</div><div class="tm-id">RAF-02</div></div></div>
+        <div class="tm-agent"><span class="tm-av">◈</span><div><div class="tm-nm">Assistant QSE / sécurité</div><div class="tm-id">SC-07</div></div></div>
+        <div class="tm-agent"><span class="tm-av">◈</span><div><div class="tm-nm">Assistant RH libre-service</div><div class="tm-id">ADM-06</div></div></div>
+      </div>
+      <div class="tm-main">
+        <div class="tm-head">◈ Base des mémoires techniques · anciens mémoires connectés depuis SharePoint</div>
+        <div class="tm-chat">
+          <div class="tm-msg tm-user"><div class="tm-b">Voici le CCTP du marché en cours. Quels sont nos mémoires techniques les plus proches, avec les convergences et divergences majeures ?
+            <div class="pj" style="border-color:#7e80c0;background:#585a9e"><span class="pj-ic">PDF</span> <span style="color:#fff">CCTP_Marché_en_cours.pdf</span> <span class="pj-meta" style="color:#d9daf0">· pièce jointe</span></div>
+          </div></div>
+          <div class="tm-msg tm-bot"><div class="tm-b">
+            Trois mémoires réalisés présentent la plus forte proximité avec ce CCTP.
+            <div class="tm-sources">
+              <div class="tm-s"><span>Mémoire · Plateforme logistique, ESFR réserve sous eau (2025)</span><span class="tm-score">87 %</span></div>
+              <div class="tm-s"><span>Mémoire · Entrepôt frigorifique, extension de réseau (2024)</span><span class="tm-score">74 %</span></div>
+              <div class="tm-s"><span>Mémoire · Site agroalimentaire, protection mixte (2024)</span><span class="tm-score">68 %</span></div>
+            </div>
+            <div class="mini-h" style="color:#2e7d54">Convergences majeures</div>
+            <div class="mini-li">Cellule logistique grande hauteur, protection ESFR en toiture, réseau sous eau</div>
+            <div class="mini-li">Poste de contrôle unique et source d'eau dédiée, phasage en co-activité</div>
+            <div class="mini-h" style="color:#b05c10">Divergences majeures</div>
+            <div class="mini-li">Classe de risque du stockage différente, densité et surface impliquée à recalculer</div>
+            <div class="mini-li">Référentiel imposé APSAD R1 ici, FM Global sur le mémoire frigorifique</div>
+            <div class="mini-li">Réserve sous mezzanine absente des trois affaires passées, section à rédiger à neuf</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 ORGANISATION ============ -->
+<section>
+  <div class="section-num">06 Organisation des équipes</div>
+  <h2>Trois niveaux, un build centralisé à l'échelle de l'agence</h2>
+  <p class="lead">Un assistant se crée une fois, se valide, puis se partage. Tous les profils d'un même métier disposent des mêmes outils. Ce principe, posé par la direction, est la réponse au risque principal du déploiement, la dispersion.</p>
+  <div class="org-level"><div class="org-badge" style="background:var(--violet-light);color:var(--violet-dark)">Pilotage</div><div><h3>La direction d'agence</h3><p>Porte la vision, arbitre le portefeuille, garantit le cadre et assume l'interface avec le groupe et la DSI. Anime la revue périodique du portefeuille.</p></div></div>
+  <div class="org-level"><div class="org-badge" style="background:var(--green-bg);color:var(--green-text)">Build</div><div><h3>Les ambassadeurs métier</h3><p>Un noyau de profils moteurs, formés de manière approfondie. Ils conçoivent, calibrent, testent et partagent les assistants de leur métier, puis forment leurs collègues. Droits étendus (création et partage d'assistants, SharePoint, transcription).</p></div></div>
+  <div class="org-level"><div class="org-badge" style="background:var(--blue-bg);color:var(--blue-text)">Usage</div><div><h3>Les utilisateurs métier</h3><p>Formation d'usage courte. Ils utilisent les assistants partagés, valident les résultats et remontent les besoins. Droits standard, relevés à mesure que les usages se confirment.</p></div></div>
+  <div class="takeaway">Les droits suivent les rôles, pas les grades. La bibliothèque d'assistants partagée devient le patrimoine IA de l'agence, transmissible au groupe.</div>
+</section>
+
+<!-- ============ 07 ROADMAP ============ -->
+<section>
+  <div class="section-num">07 Roadmap de déploiement</div>
+  <h2>Trois horizons, un jalon d'ouverture avec la DSI</h2>
+  <div style="margin-top:2rem">
+    <div style="display:flex;gap:1.5rem">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:16px;height:16px;border-radius:50%;background:var(--green)"></div><div style="width:2px;flex:1;background:var(--border)"></div></div>
+      <div style="padding-bottom:2.5rem">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-text)">Court terme (0 à 6 mois)</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--green)">≈100 cas</div>
+        <p style="font-size:.82rem;line-height:1.6;max-width:640px">Cadrage DSI et activation des droits en jalon d'ouverture. Formation des ambassadeurs à la rentrée, déploiement des assistants prioritaires et des Niveaux 1, gouvernance et bibliothèque, organisation du SharePoint. Aucun prérequis externe, la valeur démarre immédiatement.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:1.5rem">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:16px;height:16px;border-radius:50%;background:var(--blue)"></div><div style="width:2px;flex:1;background:var(--border)"></div></div>
+      <div style="padding-bottom:2.5rem">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-text)">Moyen terme (6 à 12 mois)</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--blue)">14 cas RAG</div>
+        <p style="font-size:.82rem;line-height:1.6;max-width:640px">Premiers RAG gouvernés, l'assistant réglementaire en tête, avec gouvernance des versions pilotée par la technique. Dossier projet vivant sur affaires pilotes, formation d'usage généralisée, promotion des Niveaux 1 vers les Niveaux 2, premiers retours au groupe.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:1.5rem">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="width:16px;height:16px;border-radius:50%;background:var(--amber)"></div></div>
+      <div>
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-text)">Long terme (12 à 24 mois)</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--amber)">14 cas agents</div>
+        <p style="font-size:.82rem;line-height:1.6;max-width:640px">Orchestration de l'analyse du DCE, agents connectés (boîte mail, facturation, achats, revue, échéances, levées de réserve). Bilan structuré et dossier d'essaimage vers le groupe. L'industrialisation suit la preuve, jamais l'inverse.</p>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway">La structure est volontairement conditionnelle. Si les arbitrages du groupe tardent, l'horizon 1 continue de produire. S'ils arrivent tôt, les horizons 2 et 3 s'accélèrent d'autant. Dans les deux cas, l'agence avance.</div>
+</section>
+
+<!-- ============ 08 CONDITIONS ============ -->
+<section>
+  <div class="section-num">08 Conditions de réussite</div>
+  <h2>Six facteurs clés</h2>
+  <div class="cards cols-2">
+    <div class="card card-accent" style="border-color:var(--violet)"><h3>Former avant de déployer</h3><p>Parcours approfondi pour les ambassadeurs, formation d'usage pour les équipes, parcours vocaux pour le terrain. Le premier investissement de la trajectoire, déjà planifié à la rentrée.</p></div>
+    <div class="card card-accent" style="border-color:var(--blue)"><h3>Obtenir les arbitrages du groupe</h3><p>Cadrage DSI (modèles, RAG, connexions) et homogénéisation des droits. Un jalon piloté, avec demandes formalisées et suivi, pas une formalité.</p></div>
+    <div class="card card-accent" style="border-color:var(--green)"><h3>Préparer la donnée</h3><p>Organisation du SharePoint et constitution des corpus (référentiels, REX, bibliothèque fournisseurs). Le chantier discret qui conditionne tout le moyen terme.</p></div>
+    <div class="card card-accent" style="border-color:var(--amber)"><h3>Tenir le modèle organisationnel</h3><p>Build centralisé, assistants validés puis partagés à l'identique, bibliothèque unique. Protéger la disponibilité des ambassadeurs, assumer le refus des variantes individuelles.</p></div>
+    <div class="card card-accent" style="border-color:var(--violet-deep)"><h3>Des outils officiels à la hauteur</h3><p>La première expérience proposée aux équipes doit être au niveau de ce qu'elles connaissent des outils grand public. Les droits homogénéisés avant la généralisation.</p></div>
+    <div class="card card-accent" style="border-color:var(--text-dim)"><h3>Piloter par la valeur, dans la durée</h3><p>Revue trimestrielle du portefeuille, adoption mesurée, gains documentés et racontés. Un engagement visible de la direction au-delà du lancement.</p></div>
+  </div>
+  <div class="takeaway">La validation humaine reste systématique, et non négociable sur le réglementaire. L'IA assiste, elle ne décide pas. C'est un principe de conception, et la condition de la confiance.</div>
+</section>
+
+<!-- ============ 09 SYNTHESE ============ -->
+<section>
+  <div class="section-num">09 Synthèse et arbitrages</div>
+  <h2>Tous les ingrédients sont réunis</h2>
+  <p class="lead">Une direction porteuse d'une vision formalisée en trois volets, des équipes lucides sur leurs irritants et demandeuses de concret, des profils moteurs identifiés dans presque tous les métiers, un calendrier déjà posé avec la DSI. La démarche d'agence pilote donne à l'ensemble son cadre, déployer sans attendre, documenter, et servir de vitrine au groupe.</p>
+  <div class="cards cols-2">
+    <div class="card"><h3>1. Valider la trajectoire d'ensemble</h3><p>Trois familles, trois horizons, socle EQUANS, modèle opératoire en trois niveaux. La validation donne le mandat de la suite.</p></div>
+    <div class="card"><h3>2. Tenir le cadrage DSI et obtenir les droits</h3><p>Les quatre questions formalisées, l'activation des droits étendus pour la direction et les ambassadeurs, le point de décision sur la cible One AI.</p></div>
+    <div class="card"><h3>3. Désigner officiellement les ambassadeurs</h3><p>Des mandats explicites, une disponibilité protégée, un groupe de travail restreint qui fait vivre les assistants.</p></div>
+    <div class="card"><h3>4. Confirmer le scénario d'amorçage</h3><p>L'accompagnement recommandé, dans lequel s'inscrit la démarche déjà validée. L'arbitrage porte sur son périmètre exact.</p></div>
+    <div class="card"><h3>5. Lancer les fondations documentaires</h3><p>Organisation du SharePoint et préparation des corpus, les référentiels normatifs en tête, au service de la transmission du savoir réglementaire.</p></div>
+    <div class="card"><h3>6. Acter le lancement à la rentrée</h3><p>La formation des ambassadeurs et de l'encadrement, calée sur le calendrier validé, comme premier acte visible de la trajectoire.</p></div>
+  </div>
+  <div class="takeaway">Le facteur déterminant n'est pas la technologie, ce sont les décisions. Commencer par ce qui produit, prouver, et faire de cette preuve l'argument de l'étape suivante. C'est exactement la vocation d'une agence pilote.</div>
+</section>
+
+<div class="footer">
+  <div class="footer-brand">IAvenir.</div>
+  Confidentiel · Juillet 2026 · AXIMA Sécurité Incendie, Groupe EQUANS · Agence Hauts-de-France
+</div>
+
+</div>
+<script>
+function switchMockup(tab){
+  document.getElementById('mock-cop').style.display = tab==='cop'?'block':'none';
+  document.getElementById('mock-teams').style.display = tab==='teams'?'block':'none';
+  document.getElementById('mock-btn-cop').classList.toggle('active', tab==='cop');
+  document.getElementById('mock-btn-teams').classList.toggle('active', tab==='teams');
+}
+</script>
+</body></html>
