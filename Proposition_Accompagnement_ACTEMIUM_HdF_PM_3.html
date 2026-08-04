@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposition d'accompagnement · ACTEMIUM Hauts-de-France Project Management</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F5F1;--surface:#EFEEE9;--surface2:#F0ECF6;--border:#DDD9D1;--text:#3D3929;
+  --text-dim:#7A7568;--text-bright:#1C1A14;--white:#FDFCFA;--violet:#8B5CF6;--violet-dark:#6D28D9;
+  --violet-deep:#4C1D95;--violet-light:#F0ECF6;--green:#059669;--green-bg:#EDF8F0;--green-text:#065F46;
+  --blue:#2563EB;--blue-bg:#EDF0F8;--blue-text:#1E40AF;--amber:#D97706;--amber-bg:#FBF6E8;--amber-text:#92400E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:960px;margin:0 auto;padding:3rem 2.5rem}
+section{padding:3.6rem 0;border-bottom:1px solid var(--border)}
+section:first-of-type{padding-top:1.5rem}
+.section-num{font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-dark);margin-bottom:1.6rem;display:flex;align-items:center;gap:.7rem}
+.section-num::before{content:"";width:24px;height:2px;background:var(--violet)}
+h1{font-family:'DM Serif Display',serif;font-size:2.3rem;line-height:1.08;color:var(--text-bright);margin-bottom:.6rem}
+h2{font-family:'DM Serif Display',serif;font-size:1.8rem;line-height:1.15;color:var(--text-bright);margin-bottom:1.1rem}
+h3{font-size:1rem;color:var(--text-bright)}
+.lead{font-size:1.02rem;color:var(--text-dim);max-width:740px;margin-bottom:1.2rem}
+p{font-size:.92rem}
+.brand{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--violet-dark)}
+.tagline{font-size:.72rem;color:var(--text-dim);letter-spacing:.04em;margin-top:.1rem}
+.subtitle{font-size:1.02rem;color:var(--text-dim);margin-bottom:.4rem}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
+.opt-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.opt-head{padding:1.1rem 1.3rem;color:#fff}
+.opt-1 .opt-head{background:linear-gradient(120deg,#4C1D95,#7C3AED)}
+.opt-2 .opt-head{background:linear-gradient(120deg,#475569,#64748B)}
+.opt-head .opt-tag{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.opt-head .opt-title{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-top:.15rem}
+.opt-head .opt-sub{font-size:.8rem;opacity:.9;margin-top:.25rem}
+.opt-body{padding:1.2rem 1.3rem;flex:1;display:flex;flex-direction:column;gap:.7rem}
+.opt-row{display:flex;gap:.7rem;font-size:.86rem;align-items:baseline}
+.opt-row b{flex-shrink:0;width:118px;color:var(--text-bright);font-weight:600;font-size:.8rem}
+.opt-budget{margin-top:auto;background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center}
+.opt-budget span{font-size:.78rem;color:var(--text-dim)}
+.opt-budget b{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--text-bright);letter-spacing:.06em}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;border-radius:5px;padding:.22rem .55rem;margin:.1rem .2rem .1rem 0}
+.pill-g{background:var(--green-bg);color:var(--green-text)}
+.pill-b{background:var(--blue-bg);color:var(--blue-text)}
+.pill-a{background:var(--amber-bg);color:var(--amber-text)}
+.phase{display:grid;grid-template-columns:120px 1fr;gap:1rem;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.7rem;align-items:start}
+.phase-when{font-size:.74rem;font-weight:700;color:var(--violet-dark);text-transform:uppercase;letter-spacing:.05em;padding-top:.15rem}
+.phase h3{font-size:.95rem;margin-bottom:.25rem}
+.phase p{font-size:.84rem;color:var(--text-dim)}
+.deliv{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.deliv span{font-size:.78rem;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.35rem .7rem;color:var(--text)}
+.deliv span b{color:var(--violet-dark)}
+.limits{background:var(--amber-bg);border:1px solid #F3D9A4;border-radius:8px;padding:1rem 1.2rem;font-size:.86rem;color:var(--amber-text);margin-top:1.2rem;line-height:1.6}
+.comp-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.87rem}
+.comp-table th{background:var(--surface);text-align:left;padding:.75rem 1rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim)}
+.comp-table th.c1{color:var(--violet-dark)}
+.comp-table td{padding:.75rem 1rem;border-top:1px solid var(--border);vertical-align:top}
+.comp-table td:first-child{font-weight:600;color:var(--text-bright);width:26%}
+.comp-table .win{color:var(--green-text);font-weight:600}
+.takeaway{background:var(--violet-light);color:var(--violet-deep);border-radius:8px;padding:1.1rem 1.3rem;font-size:.95rem;font-weight:500;margin-top:1.6rem;line-height:1.55}
+.reco{background:linear-gradient(135deg,#4C1D95,#6D28D9);border-radius:14px;padding:2rem 2.1rem;color:#fff;margin-top:1.6rem}
+.reco h2{color:#fff;margin-bottom:.6rem}
+.reco p{color:#E9E3F7;font-size:.92rem;max-width:780px}
+.reco-points{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.2rem}
+.reco-item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:.85rem 1rem;font-size:.84rem;color:#E0D7F4}
+.reco-item b{display:block;color:#fff;margin-bottom:.2rem;font-size:.9rem}
+.annex{columns:2;column-gap:2rem;font-size:.84rem;color:var(--text-dim);margin-top:.8rem}
+.annex div{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--border)}
+.annex b{color:var(--violet-dark);font-weight:700;margin-right:.4rem}
+.footer{padding:2.5rem 0 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-dim)}
+.footer-brand{font-family:'DM Serif Display',serif;color:var(--violet-dark);font-size:1.05rem}
+@media(max-width:720px){.container{padding:2rem 1.3rem}.opt-grid,.reco-points{grid-template-columns:1fr}.phase{grid-template-columns:1fr}.annex{columns:1}h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 01 Contexte -->
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.2rem">
+      <div><div class="brand">IAvenir</div><div class="tagline">Formation &amp; Conseil en IA</div></div>
+      <div style="text-align:right;font-size:.78rem;color:var(--text-dim)">Juillet 2026<br>Confidentiel</div>
+    </div>
+    <div class="section-num">01 Contexte et objectif</div>
+    <h1>Proposition d'accompagnement</h1>
+    <div class="subtitle">ACTEMIUM Hauts-de-France Project Management · Mise en place des 14 assistants Copilot du bureau d'études</div>
+    <p class="lead">À l'issue du cadrage IA du 13 juillet et de sa restitution, vous avez souhaité passer à la mise en œuvre des 14 assistants de Phase 1 identifiés dans la cartographie, directement dans votre environnement Copilot, partagés sur les licences des ingénieurs d'études. Deux chemins permettent d'y arriver. Cette proposition détaille les deux, avec leur chiffrage complet, et vous indique celui que nous recommandons pour atteindre cet objectif dans de bonnes conditions.</p>
+
+    <div class="opt-grid">
+      <div class="opt-card opt-1">
+        <div class="opt-head">
+          <div class="opt-tag">Option 1 · Recommandée</div>
+          <div class="opt-title">Accompagnement complet</div>
+          <div class="opt-sub">IAvenir crée, déploie et forme. Votre BE est opérationnel en un mois.</div>
+        </div>
+        <div class="opt-body">
+          <div class="opt-row"><b>Périmètre</b><span>Création des 14 assistants Copilot de Phase 1, partage sur les licences, déploiement et formation de l'équipe.</span></div>
+          <div class="opt-row"><b>Durée</b><span>Un mois fixe.</span></div>
+          <div class="opt-row"><b>Dispositif</b><span>Un consultant IAvenir à distance, en binôme avec le responsable BE qui valide la cohérence et le niveau attendu de chaque assistant.</span></div>
+          <div class="opt-row"><b>Formation</b><span>Une demi-journée à une journée de prise en main du nouvel environnement de travail, en fin de mission.</span></div>
+          <div class="opt-row"><b>Alternant</b><span>Intégré en observation sur des journées de création ciblées, pour monter en compétences sans coût additionnel.</span></div>
+          <div class="opt-row"><b>Résultat</b><span>14 assistants opérationnels, testés sur vos dossiers réels, utilisés par toute l'équipe dès la fin de mission.</span></div>
+          <div class="opt-budget"><span>Forfait fixe<br>Un mois d'accompagnement</span><b>17 500 € HT</b></div>
+        </div>
+      </div>
+
+      <div class="opt-card opt-2">
+        <div class="opt-head">
+          <div class="opt-tag">Option 2</div>
+          <div class="opt-title">Autonomie accompagnée</div>
+          <div class="opt-sub">IAvenir forme votre alternant, qui construit la bibliothèque dans la durée.</div>
+        </div>
+        <div class="opt-body">
+          <div class="opt-row"><b>Périmètre</b><span>Formation de votre alternant à la création d'assistants Copilot, avec réalisation encadrée des 2 à 3 premiers assistants.</span></div>
+          <div class="opt-row"><b>Durée</b><span>2 semaines fixes, à l'arrivée de l'alternant en septembre.</span></div>
+          <div class="opt-row"><b>Dispositif</b><span>Conseil-formation à distance, méthode de création, de test et de validation transmise, feuille de route pour les 11 assistants restants.</span></div>
+          <div class="opt-row"><b>Formation</b><span>Incluse par construction, elle est le cœur de la mission.</span></div>
+          <div class="opt-row"><b>Alternant</b><span>Acteur principal, autonome à l'issue de la mission pour poursuivre la bibliothèque.</span></div>
+          <div class="opt-row"><b>Résultat</b><span>2 à 3 assistants livrés, une compétence interne créée, bibliothèque complète à horizon 4 à 6 mois, selon l'investissement et la montée en puissance de l'alternant.</span></div>
+          <div class="opt-budget"><span>Forfait fixe<br>Deux semaines d'accompagnement</span><b>7 500 € HT</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Option 1 détail -->
+  <section>
+    <div class="section-num">02 Option 1 · Déroulé de l'accompagnement complet</div>
+    <h2>Un mois pour un BE opérationnel</h2>
+
+    <div class="phase"><div class="phase-when">Semaine 1</div><div><h3>Cadrage et préparation</h3><p>Ateliers avec le responsable BE, formalisation des grilles d'analyse (CCTP, CCAP, bordereau, critères go / no-go), collecte des trames, de la charte graphique et des dossiers de référence pour les tests.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaines 2 à 3</div><div><h3>Création itérative des 14 assistants, par lots</h3><p>Lot 1, analyse des pièces (bordereau, CCTP, CCAP, go / no-go). Lot 2, chiffrage (remise au format DPGF, import Caneco, extraction des liaisons). Lot 3, contrôles qualité (audit mémoire, contrôle devis, fichier de remarques). Lot 4, transverse (extraits de cahiers des charges, normatif, dictée en mobilité, rapports de visite). Chaque assistant est testé sur un dossier réel et validé par le responsable BE avant passage au suivant. L'alternant assiste aux journées de création choisies ensemble.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaine 4</div><div><h3>Déploiement, formation et passation</h3><p>Partage des assistants sur les licences Copilot des ingénieurs d'études, ajustements sur les premiers retours, session de formation de l'équipe (une demi-journée à une journée), remise du kit de maintenance et bilan de mission.</p></div></div>
+
+    <div class="deliv">
+      <span><b>14</b> assistants opérationnels et partagés</span>
+      <span>Fiche d'usage par assistant</span>
+      <span>Kit de maintenance et d'évolution</span>
+      <span>Session de formation équipe</span>
+      <span>Alternant embarqué en observation</span>
+      <span>Bilan de mission et suites Phase 2</span>
+    </div>
+
+    <div class="takeaway">L'expertise IA couplée à l'expertise métier de votre BE, mobilisée en continu par la validation du responsable BE, garantit des assistants au niveau d'exigence de vos dossiers dès la première version.</div>
+  </section>
+
+  <!-- 03 Option 2 détail -->
+  <section>
+    <div class="section-num">03 Option 2 · Déroulé de l'autonomie accompagnée</div>
+    <h2>Deux semaines pour transmettre la méthode</h2>
+
+    <div class="phase"><div class="phase-when">Semaine 1</div><div><h3>Formation de l'alternant et premier assistant</h3><p>Prise en main de l'environnement de création Copilot, méthode de conception (instructions, bases de connaissances, tests), réalisation encadrée du premier assistant sur un cas démonstratif, par exemple l'analyse CCTP.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaine 2</div><div><h3>Assistants 2 et 3, méthode de validation et feuille de route</h3><p>Réalisation encadrée de deux assistants supplémentaires, par exemple l'import Caneco et l'audit du mémoire, mise en place du circuit de validation avec le responsable BE, remise de la feuille de route détaillée des 11 assistants restants.</p></div></div>
+
+    <div class="deliv">
+      <span><b>2 à 3</b> assistants livrés et partagés</span>
+      <span>Alternant formé à la méthode complète</span>
+      <span>Kit méthodologique de création</span>
+      <span>Feuille de route des 11 assistants restants</span>
+    </div>
+
+    <div class="limits">Points d'attention exprimés en toute transparence. L'alternant est présent en pointillé (rythme de l'alternance) et porte seul la suite du chantier ; la bibliothèque complète est réaliste à horizon 4 à 6 mois, avec une forte dépendance à son investissement personnel et à sa montée en puissance sur la méthode ; le niveau de résultat des assistants dépendra d'un profil junior en autonomie, avec un risque de reprise sur les cas les plus techniques (remise au format DPGF, extraction des liaisons). Un assistant livré partiellement fonctionnel pèse aussi sur la conduite du changement : des ingénieurs confrontés à un outil peu fiable l'adoptent moins, ce qui fragilise la justification de l'investissement engagé.</div>
+  </section>
+
+  <!-- 04 Comparaison -->
+  <section>
+    <div class="section-num">04 Comparaison</div>
+    <h2>Ce que chaque option change concrètement</h2>
+    <table class="comp-table">
+      <tr><th></th><th class="c1">Option 1 · Accompagnement complet</th><th>Option 2 · Autonomie accompagnée</th></tr>
+      <tr><td>Budget initial</td><td>17 500 € HT, forfait fixe</td><td class="win">7 500 € HT, forfait fixe</td></tr>
+      <tr><td>Environnement opérationnel</td><td class="win">Un mois, les 14 assistants utilisables par toute l'équipe</td><td>4 à 6 mois, dépendant du rythme de l'alternance et de la montée en puissance de l'alternant</td></tr>
+      <tr><td>Niveau de résultat</td><td class="win">Garanti par le binôme expertise IA × validation BE, testé sur dossiers réels</td><td>Dépendant d'un profil junior seul après 2 semaines</td></tr>
+      <tr><td>Montée en compétences interne</td><td class="win">Alternant intégré en observation sur les journées de création</td><td class="win">Alternant acteur principal, autonomie maximale</td></tr>
+      <tr><td>Charge sur vos équipes</td><td>Validation par le responsable BE au fil de l'eau</td><td>Encadrement de l'alternant dans la durée, arbitrages techniques internes</td></tr>
+      <tr><td>Temps de retour sur les irritants du cadrage</td><td class="win">Immédiat après mission (DPGF, CCTP, Caneco, contrôles)</td><td>Progressif, assistant par assistant</td></tr>
+    </table>
+  </section>
+
+  <!-- 05 Recommandation -->
+  <section style="border-bottom:none">
+    <div class="reco">
+      <div class="section-num" style="color:#C4B5FD">05 Notre recommandation</div>
+      <h2>L'option 1, qui contient l'essentiel de l'option 2</h2>
+      <p>Les deux options mènent au même environnement cible. La différence se joue sur le moment où votre équipe en bénéficie et sur le niveau de fiabilité des assistants livrés. En intégrant votre alternant aux journées de création, l'option 1 répond aussi à votre objectif de montée en compétences interne, tout en sécurisant le résultat par notre binôme expertise IA et expertise bureau d'études. Il pourra ensuite prendre le relais sur la maintenance et les évolutions, formé par l'observation du travail réalisé.</p>
+      <div class="reco-points">
+        <div class="reco-item"><b>Opérationnel à la rentrée</b>Un mois de mission, et vos ingénieurs d'études travaillent avec leurs assistants dès la formation de fin de mission.</div>
+        <div class="reco-item"><b>Résultat sécurisé</b>Chaque assistant validé par le responsable BE et testé sur vos dossiers réels, y compris les cas techniques les plus exigeants.</div>
+        <div class="reco-item"><b>Compétence interne préservée</b>L'alternant observe, comprend et prend le relais sur la vie de la bibliothèque, sans porter seul sa construction.</div>
+        <div class="reco-item"><b>Trajectoire ouverte</b>Le bilan de mission prépare les chantiers de Phase 2 (bases SharePoint, mémoires techniques, environnement projet).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Annexe -->
+  <section>
+    <div class="section-num">06 Annexe · Les 14 assistants de Phase 1</div>
+    <h2>Périmètre issu de la cartographie du cadrage</h2>
+    <div class="annex">
+      <div><b>AO-01</b>Assistant d'analyse du bordereau (DPGF)</div>
+      <div><b>AO-02</b>Remise au format DPGF client depuis l'export Optima</div>
+      <div><b>AO-03</b>Assistant d'analyse CCTP</div>
+      <div><b>AO-04</b>Assistant d'analyse CCAP et pièces contractuelles</div>
+      <div><b>AO-05</b>Assistant de première lecture go / no-go</div>
+      <div><b>AO-08</b>Consolidation du fichier de remarques qualité</div>
+      <div><b>AO-10</b>Assistant d'extraits ciblés de cahiers des charges</div>
+      <div><b>AO-14</b>Assistant d'audit du mémoire technique</div>
+      <div><b>AO-15</b>Assistant de contrôle du devis avant remise</div>
+      <div><b>AO-16</b>Pré-remplissage Caneco depuis le bilan de puissance</div>
+      <div><b>AO-17</b>Extraction des listes de liaisons depuis les plans PDF</div>
+      <div><b>CAP-04</b>Assistant normatif (NF C 15-100 et normes récurrentes)</div>
+      <div><b>TRA-03</b>Dictée vocale en mobilité et brouillons Outlook</div>
+      <div><b>TRA-04</b>Rapports de visite dictés à l'oral</div>
+    </div>
+    <p style="font-size:.82rem;color:var(--text-dim);margin-top:1rem">Le détail de chaque assistant (description, criticité, prérequis, verbatim d'origine) figure dans la cartographie des cas d'usage et le plan de déploiement remis lors de la restitution. Les budgets détaillés font l'objet des devis joints à la présente proposition.</p>
+  </section>
+
+  <div class="footer">
+    <div class="footer-brand">IAvenir</div>
+    <div>Confidentiel · Proposition ACTEMIUM Hauts-de-France Project Management · Juillet 2026</div>
+  </div>
+</div>
+</body>
+</html>
