@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposition d'accompagnement · FORMAPELEC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F5F1;--surface:#EFEEE9;--surface2:#F0ECF6;--border:#DDD9D1;--text:#3D3929;
+  --text-dim:#7A7568;--text-bright:#1C1A14;--white:#FDFCFA;--violet:#8B5CF6;--violet-dark:#6D28D9;
+  --violet-deep:#4C1D95;--violet-light:#F0ECF6;--green:#059669;--green-bg:#EDF8F0;--green-text:#065F46;
+  --blue:#2563EB;--blue-bg:#EDF0F8;--blue-text:#1E40AF;--amber:#D97706;--amber-bg:#FBF6E8;--amber-text:#92400E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:960px;margin:0 auto;padding:3rem 2.5rem}
+section{padding:3.6rem 0;border-bottom:1px solid var(--border)}
+section:first-of-type{padding-top:1.5rem}
+.section-num{font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-dark);margin-bottom:1.6rem;display:flex;align-items:center;gap:.7rem}
+.section-num::before{content:"";width:24px;height:2px;background:var(--violet)}
+h1{font-family:'DM Serif Display',serif;font-size:2.3rem;line-height:1.08;color:var(--text-bright);margin-bottom:.6rem}
+h2{font-family:'DM Serif Display',serif;font-size:1.8rem;line-height:1.15;color:var(--text-bright);margin-bottom:1.1rem}
+h3{font-size:1rem;color:var(--text-bright)}
+.lead{font-size:1.02rem;color:var(--text-dim);max-width:740px;margin-bottom:1.2rem}
+p{font-size:.92rem}
+.brand{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--violet-dark)}
+.tagline{font-size:.72rem;color:var(--text-dim);letter-spacing:.04em;margin-top:.1rem}
+.subtitle{font-size:1.02rem;color:var(--text-dim);margin-bottom:.4rem}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
+.opt-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.opt-head{padding:1.1rem 1.3rem;color:#fff}
+.opt-1 .opt-head{background:linear-gradient(120deg,#4C1D95,#7C3AED)}
+.opt-2 .opt-head{background:linear-gradient(120deg,#475569,#64748B)}
+.opt-head .opt-tag{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.opt-head .opt-title{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-top:.15rem}
+.opt-head .opt-sub{font-size:.8rem;opacity:.9;margin-top:.25rem}
+.opt-body{padding:1.2rem 1.3rem;flex:1;display:flex;flex-direction:column;gap:.7rem}
+.opt-row{display:flex;gap:.7rem;font-size:.86rem;align-items:baseline}
+.opt-row b{flex-shrink:0;width:100px;color:var(--text-bright);font-weight:600;font-size:.8rem}
+.opt-budget{margin-top:auto;background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center}
+.opt-budget span{font-size:.78rem;color:var(--text-dim)}
+.opt-budget b{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--text-bright);letter-spacing:.06em}
+.phase{display:grid;grid-template-columns:120px 1fr;gap:1rem;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.7rem;align-items:start}
+.phase-when{font-size:.74rem;font-weight:700;color:var(--violet-dark);text-transform:uppercase;letter-spacing:.05em;padding-top:.15rem}
+.phase h3{font-size:.95rem;margin-bottom:.25rem}
+.phase p{font-size:.84rem;color:var(--text-dim)}
+.deliv{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.deliv span{font-size:.78rem;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.35rem .7rem;color:var(--text)}
+.deliv span b{color:var(--violet-dark)}
+.limits{background:var(--amber-bg);border:1px solid #F3D9A4;border-radius:8px;padding:1rem 1.2rem;font-size:.86rem;color:var(--amber-text);margin-top:1.2rem;line-height:1.6}
+.takeaway{background:var(--violet-light);color:var(--violet-deep);border-radius:8px;padding:1.1rem 1.3rem;font-size:.95rem;font-weight:500;margin-top:1.6rem;line-height:1.55}
+.reco{background:linear-gradient(135deg,#4C1D95,#6D28D9);border-radius:14px;padding:2rem 2.1rem;color:#fff;margin-top:1.6rem}
+.reco h2{color:#fff;margin-bottom:.6rem}
+.reco p{color:#E9E3F7;font-size:.92rem;max-width:780px}
+.reco-points{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.2rem}
+.reco-item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:.85rem 1rem;font-size:.84rem;color:#E0D7F4}
+.reco-item b{display:block;color:#fff;margin-bottom:.2rem;font-size:.9rem}
+/* postes */
+.postes{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;margin-top:1.4rem}
+.poste{display:grid;grid-template-columns:250px 1fr 42px;gap:1rem;align-items:center;padding:.42rem 0}
+.poste-n{font-size:.87rem;color:var(--text-bright);font-weight:500}
+.poste-bar{height:11px;background:var(--surface);border-radius:6px;overflow:hidden}
+.poste-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#8B5CF6,#6D28D9)}
+.poste-v{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--violet-dark);text-align:right}
+.postes-foot{border-top:1px solid var(--border);margin-top:.8rem;padding-top:.7rem;display:flex;justify-content:space-between;align-items:baseline;font-size:.84rem;color:var(--text-dim)}
+.postes-foot b{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--text-bright)}
+/* paliers */
+.pal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.6rem}
+.pal{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pal-head{padding:1rem 1.2rem;color:#fff}
+.pal-tag{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.pal-t{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-top:.1rem}
+.pal-s{font-size:.78rem;opacity:.9}
+.pal-body{padding:1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;gap:.55rem}
+.pal-row{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px solid var(--border);padding-bottom:.45rem;min-height:2.1rem}
+.pal-row span{white-space:nowrap}
+.pal-row span{color:var(--text-dim)}
+.pal-row b{color:var(--text-bright);font-weight:600;text-align:right}
+.pal-budget{margin-top:auto;padding-top:.8rem;text-align:center}
+.pal-budget b{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--text-bright);display:block}
+.pal-budget span{font-size:.74rem;color:var(--text-dim)}
+.footer{padding:2.5rem 0 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-dim)}
+.footer-brand{font-family:'DM Serif Display',serif;color:var(--violet-dark);font-size:1.05rem}
+@media(max-width:720px){.container{padding:2rem 1.3rem}.opt-grid,.reco-points,.pal-grid{grid-template-columns:1fr}.phase,.poste{grid-template-columns:1fr}h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 01 -->
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.2rem">
+      <div><div class="brand">IAvenir</div><div class="tagline">Formation &amp; Conseil en IA</div></div>
+      <div style="text-align:right;font-size:.78rem;color:var(--text-dim)">Août 2026<br>Confidentiel</div>
+    </div>
+    <div class="section-num">01 Contexte et dispositif</div>
+    <h1>Proposition d'accompagnement</h1>
+    <div class="subtitle">FORMAPELEC · Déploiement des assistants IA identifiés lors de l'audit stratégique</div>
+    <p class="lead">La demande formulée à la restitution est de disposer d'un environnement de travail opérationnel rapidement, sans que chaque collaborateur ait à construire ses propres assistants. Le dispositif retenu est hybride. IAvenir construit les assistants, vos équipes les utilisent, puis la formation les rend autonomes pour les faire évoluer et en créer de nouveaux.</p>
+
+    <div class="opt-grid">
+      <div class="opt-card opt-1">
+        <div class="opt-head">
+          <div class="opt-tag">Volet 1 · objet de cette proposition</div>
+          <div class="opt-title">Conseil · construction des assistants</div>
+          <div class="opt-sub">Porté par IAvenir. Chiffré ci-après.</div>
+        </div>
+        <div class="opt-body">
+          <div class="opt-row"><b>Principe</b><span>Nous concevons, construisons, testons et livrons les assistants que vous avez priorisés.</span></div>
+          <div class="opt-row"><b>Résultat</b><span>Des assistants opérationnels, validés sur vos dossiers réels, utilisables immédiatement.</span></div>
+          <div class="opt-row"><b>Effet</b><span>Aucun temps perdu par les équipes à construire elles-mêmes leur environnement.</span></div>
+        </div>
+      </div>
+      <div class="opt-card opt-2">
+        <div class="opt-head">
+          <div class="opt-tag">Volet 2 · second temps</div>
+          <div class="opt-title">Formation · autonomie des équipes</div>
+          <div class="opt-sub">Portée et chiffrée par ESME Executive Education.</div>
+        </div>
+        <div class="opt-body">
+          <div class="opt-row"><b>Principe</b><span>Formation sur l'environnement réel, une fois les premiers assistants livrés.</span></div>
+          <div class="opt-row"><b>Contenu</b><span>Usage quotidien, maîtrise complète de l'outil, création et modification autonomes d'assistants.</span></div>
+          <div class="opt-row"><b>Effet</b><span>La bibliothèque continue de vivre et de s'étendre sans intervention externe.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <div class="section-num">02 Périmètre</div>
+    <h2>Des assistants configurés, déployables sans connexion au système d'information</h2>
+    <p class="lead">La mission porte sur les cas d'usage de l'horizon court terme de la cartographie, c'est-à-dire les cas de Phase 1 et les Niveaux 1 des cas de Phase 2. Ces assistants travaillent à partir de documents et d'exports déposés par l'utilisateur. Les bases documentaires interrogeables et les agents connectés à vos logiciels relèvent d'une étape ultérieure et feront l'objet d'une proposition distincte.</p>
+    <div class="deliv">
+      <span>Conception avec le métier concerné</span>
+      <span>Rédaction et paramétrage de la compétence</span>
+      <span>Jeu de test sur vos dossiers réels</span>
+      <span>Itérations jusqu'à un résultat exploitable</span>
+      <span>Fiche d'usage par assistant</span>
+      <span>Mise à disposition dans votre espace partagé</span>
+    </div>
+    <div class="takeaway">Un assistant n'est compté comme livré qu'après validation par le métier sur des cas réels. Un assistant non validé est repris sans surcoût.</div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <div class="section-num">03 Postes couverts</div>
+    <h2>Sept postes, 156 assistants activables au court terme</h2>
+    <p class="lead">Rappel de ce que l'audit a identifié, poste par poste. C'est dans ces listes que chaque fonction choisira les assistants à construire en premier.</p>
+    <div class="postes">
+      <div class="poste"><div class="poste-n">Pilotage commercial et direction</div><div class="poste-bar"><i style="width:100%"></i></div><div class="poste-v">39</div></div>
+      <div class="poste"><div class="poste-n">Comptabilité et finance</div><div class="poste-bar"><i style="width:85%"></i></div><div class="poste-v">33</div></div>
+      <div class="poste"><div class="poste-n">Administratif et commercial</div><div class="poste-bar"><i style="width:64%"></i></div><div class="poste-v">25</div></div>
+      <div class="poste"><div class="poste-n">Pédagogie, formation et certification de personnes</div><div class="poste-bar"><i style="width:62%"></i></div><div class="poste-v">24</div></div>
+      <div class="poste"><div class="poste-n">Qualité et certification</div><div class="poste-bar"><i style="width:38%"></i></div><div class="poste-v">15</div></div>
+      <div class="poste"><div class="poste-n">Ingénierie pédagogique</div><div class="poste-bar"><i style="width:28%"></i></div><div class="poste-v">11</div></div>
+      <div class="poste"><div class="poste-n">Communication et marketing</div><div class="poste-bar"><i style="width:23%"></i></div><div class="poste-v">9</div></div>
+      <div class="postes-foot"><span>Total des assistants activables dès le court terme</span><b>156</b></div>
+    </div>
+    <div class="takeaway">Vous n'avez pas à tout engager. Chaque fonction priorise, dans sa propre liste, les assistants qui lui coûtent le plus cher aujourd'hui. Nous consolidons ensuite la feuille de route et nous construisons.</div>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <div class="section-num">04 Volume et budget</div>
+    <h2>Trois paliers, à arbitrer selon l'ambition du démarrage</h2>
+    <p class="lead">Le palier fixe le nombre d'assistants construits par poste. La sélection à l'intérieur de chaque poste vous appartient entièrement.</p>
+    <div class="pal-grid">
+      <div class="pal">
+        <div class="pal-head" style="background:linear-gradient(120deg,#047857,#059669)">
+          <div class="pal-tag">Palier 1 · démarrage</div>
+          <div class="pal-t">3 par poste</div>
+          <div class="pal-s">L'essentiel sur chaque fonction</div>
+        </div>
+        <div class="pal-body">
+          <div class="pal-row"><span>Assistants livrés</span><b>21</b></div>
+          <div class="pal-row"><span>Durée</span><b>1 mois</b></div>
+          <div class="pal-row"><span>Postes couverts</span><b>7 sur 7</b></div>
+          <div class="pal-budget"><b>15 000 € HT</b><span>Forfait</span></div>
+        </div>
+      </div>
+      <div class="pal">
+        <div class="pal-head" style="background:linear-gradient(120deg,#1D4ED8,#2563EB)">
+          <div class="pal-tag">Palier 2 · équilibré</div>
+          <div class="pal-t">5 par poste</div>
+          <div class="pal-s">De quoi changer le quotidien</div>
+        </div>
+        <div class="pal-body">
+          <div class="pal-row"><span>Assistants livrés</span><b>35</b></div>
+          <div class="pal-row"><span>Durée</span><b>1 mois et demi</b></div>
+          <div class="pal-row"><span>Postes couverts</span><b>7 sur 7</b></div>
+          <div class="pal-budget"><b>21 000 € HT</b><span>Forfait</span></div>
+        </div>
+      </div>
+      <div class="pal">
+        <div class="pal-head" style="background:linear-gradient(120deg,#B45309,#D97706)">
+          <div class="pal-tag">Palier 3 · couverture large</div>
+          <div class="pal-t">7 par poste</div>
+          <div class="pal-s">Le cœur du portefeuille traité</div>
+        </div>
+        <div class="pal-body">
+          <div class="pal-row"><span>Assistants livrés</span><b>49</b></div>
+          <div class="pal-row"><span>Durée</span><b>2 mois</b></div>
+          <div class="pal-row"><span>Postes couverts</span><b>7 sur 7</b></div>
+          <div class="pal-budget"><b>27 000 € HT</b><span>Forfait</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="limits">Durées indicatives de charge de mission. Forfaits hors taxes, incluant la conception, la construction, la recette et le transfert. Les licences des outils ne sont pas comprises et leur mise en place conditionne le démarrage. Un rééquilibrage entre postes reste possible à volume total constant, si une fonction souhaite céder une place à une autre.</div>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <div class="section-num">05 Déroulé</div>
+    <h2>De votre priorisation aux assistants en service</h2>
+    <div class="phase"><div class="phase-when">Préalable</div><div><h3>Vous priorisez, poste par poste</h3><p>À partir du plan de déploiement remis lors de la restitution, chaque fonction désigne les assistants qu'elle veut voir construits en premier. C'est le métier qui sait ce qui lui coûte le plus cher.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaine 1</div><div><h3>Cadrage et feuille de route</h3><p>Consolidation des choix en une feuille de route unique, nombre d'assistants par service, liste des cas retenus, ordre de construction. Mise en place des conventions et de l'espace partagé.</p></div></div>
+    <div class="phase"><div class="phase-when">Cœur de mission</div><div><h3>Construction par lots métier</h3><p>Chaque assistant est conçu avec le collaborateur concerné, à partir de ses documents réels, puis rédigé, testé et ajusté jusqu'à ce que la sortie soit directement exploitable. Les assistants sont livrés au fil de l'eau, poste par poste, sans attendre la fin de la mission.</p></div></div>
+    <div class="phase"><div class="phase-when">En continu</div><div><h3>Recette par le métier</h3><p>Chaque assistant est validé par son utilisateur sur des cas réels avant d'être considéré comme livré. Les retours sont intégrés immédiatement.</p></div></div>
+    <div class="phase"><div class="phase-when">Fin de mission</div><div><h3>Transfert et bilan</h3><p>Mise à disposition documentée dans votre espace partagé, kit de maintenance, bilan de mission et préparation du volet formation.</p></div></div>
+  </section>
+
+  <!-- 06 -->
+  <section style="border-bottom:none">
+    <div class="reco">
+      <div class="section-num" style="color:#C4B5FD">06 Le dispositif complet</div>
+      <h2>Construire d'abord, former ensuite</h2>
+      <p>Faire construire les assistants par un consultant fait gagner un temps considérable au démarrage, mais laisse la structure dépendante pour la moindre évolution. Former d'abord, sans environnement à montrer, coûte du temps à tout le monde pour un résultat inégal. L'enchaînement des deux résout les deux problèmes.</p>
+      <div class="reco-points">
+        <div class="reco-item"><b>Opérationnel tout de suite</b>Vos équipes travaillent avec leurs assistants dès qu'ils sont livrés, sans avoir eu à les construire.</div>
+        <div class="reco-item"><b>Un niveau homogène</b>Une même méthode et un même niveau d'exigence sur les sept postes, plutôt que des pratiques individuelles inégales.</div>
+        <div class="reco-item"><b>Formation sur le réel</b>Les équipes se forment sur leurs propres assistants et leurs propres cas, pas sur des exemples génériques.</div>
+        <div class="reco-item"><b>Autonomie à la sortie</b>Création de nouveaux assistants et modification de ceux qui existent, sans dépendance externe.</div>
+      </div>
+    </div>
+    <div class="limits" style="margin-top:1.6rem">Prérequis au démarrage. Licences de l'outil retenu acquises et activées sur les postes concernés. Accès aux documents de travail nécessaires à la conception et aux tests. Disponibilité des collaborateurs pour la conception et la recette de leurs propres assistants, à raison d'échanges courts et espacés.</div>
+  </section>
+
+  <div class="footer">
+    <div class="footer-brand">IAvenir</div>
+    <div>Confidentiel · Proposition FORMAPELEC · Août 2026</div>
+  </div>
+</div>
+</body>
+</html>
