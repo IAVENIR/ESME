@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent IA · Réponse aux appels d'offres — IAvenir</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F1;--surface:#EFEEE9;--surface2:#F0ECF6;--border:#DDD9D1;--text:#3D3929;--text-dim:#7A7568;--text-bright:#1C1A14;--white:#FDFCFA;--violet:#8B5CF6;--violet-dark:#6D28D9;--violet-deep:#4C1D95;--violet-light:#F0ECF6;--green:#059669;--green-bg:#EDF8F0;--green-text:#065F46;--blue:#2563EB;--blue-bg:#EDF0F8;--blue-text:#1E40AF;--amber:#D97706;--amber-bg:#FBF6E8;--amber-text:#92400E;--red:#DC2626;--red-bg:#FEF2F2;--red-text:#991B1B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:960px;margin:0 auto;padding:3rem 2.5rem}
+section{padding:3.6rem 0;border-bottom:1px solid var(--border)}
+section:first-of-type{padding-top:1.5rem}
+.section-num{font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-dark);margin-bottom:1.6rem;display:flex;align-items:center;gap:.7rem}
+.section-num::before{content:"";width:24px;height:2px;background:var(--violet)}
+h1{font-family:'DM Serif Display',serif;font-size:2.3rem;line-height:1.08;color:var(--text-bright);margin-bottom:.6rem}
+h2{font-family:'DM Serif Display',serif;font-size:1.8rem;line-height:1.15;color:var(--text-bright);margin-bottom:1.1rem}
+h3{font-size:1rem;color:var(--text-bright)}
+.lead{font-size:1.02rem;color:var(--text-dim);max-width:760px;margin-bottom:1.2rem}
+p{font-size:.92rem}
+.brand{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--violet-dark)}
+.tagline{font-size:.72rem;color:var(--text-dim);letter-spacing:.04em;margin-top:.1rem}
+.subtitle{font-size:1.02rem;color:var(--text-dim);margin-bottom:.4rem}
+/* légende */
+.legend{display:flex;flex-wrap:wrap;gap:1.1rem;margin:1.4rem 0 .4rem;font-size:.78rem;color:var(--text-dim)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:.4rem;vertical-align:-1px}
+/* chips */
+.chip{display:inline-block;border-radius:999px;padding:.2rem .6rem;font-size:.73rem;font-weight:600;margin:.15rem .25rem .15rem 0;border:1px solid transparent;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.c-skill{background:var(--violet-light);color:var(--violet-dark);border-color:#DCD2EE}
+.c-out{background:var(--green-bg);color:var(--green-text);border-color:#BFE5CF;font-family:'DM Sans',sans-serif;font-weight:600}
+.c-doc{background:var(--surface);color:var(--text-dim);border-color:var(--border);font-family:'DM Sans',sans-serif}
+.c-mail{background:var(--amber-bg);color:var(--amber-text);border-color:#F3D9A4;font-family:'DM Sans',sans-serif}
+/* étapes */
+.step{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem;display:grid;grid-template-columns:44px 1fr;gap:1.1rem}
+.step-n{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#8B5CF6,#6D28D9);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1.15rem}
+.step h3{font-size:1rem;margin-bottom:.15rem}
+.step .sd{font-size:.86rem;color:var(--text-dim);margin-bottom:.55rem}
+.lbl{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim);margin:.55rem 0 .15rem}
+.arrow{text-align:center;color:var(--border);font-size:1.1rem;line-height:1;margin:.35rem 0}
+/* décision */
+.dec{border-radius:12px;padding:.95rem 1.2rem;display:grid;grid-template-columns:34px 1fr;gap:1rem;align-items:start}
+.dec-h{background:var(--violet-light);border:1px solid #DCD2EE}
+.dec-i{font-size:1.1rem;line-height:1.3}
+.dec h3{font-size:.93rem;color:var(--violet-deep);margin-bottom:.15rem}
+.dec p{font-size:.85rem;color:var(--violet-dark)}
+.stop{background:#fff;border:2px solid var(--amber);border-radius:12px;padding:1.1rem 1.3rem}
+.stop h3{color:var(--amber-text);font-size:1.05rem;margin-bottom:.3rem}
+.stop p{font-size:.87rem;color:var(--text-dim)}
+.gonogo{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.9rem}
+.gg{border-radius:9px;padding:.75rem 1rem;font-size:.85rem}
+.gg b{display:block;font-size:.9rem;margin-bottom:.15rem}
+.gg-no{background:var(--red-bg);border:1px solid #F5C9C9;color:var(--red-text)}
+.gg-go{background:var(--green-bg);border:1px solid #BFE5CF;color:var(--green-text)}
+/* trois voies */
+.voies{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;margin:.6rem 0}
+.voie{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.voie h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--violet-dark);margin-bottom:.4rem}
+.voie .src{font-size:.75rem;color:var(--text-dim);margin-top:.35rem}
+.conv{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.9rem 1.1rem;margin-top:.6rem}
+.conv .warn{background:var(--amber-bg);border:1px solid #F3D9A4;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;color:var(--amber-text);margin-top:.5rem}
+/* arbo */
+.tree{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;font-family:'JetBrains Mono',monospace;font-size:.735rem;line-height:1.85;color:var(--text);overflow-x:auto;white-space:pre}
+.tree b{color:var(--violet-dark);font-weight:500}
+.tree i{color:var(--text-dim);font-style:normal}
+/* divers */
+.deliv{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.deliv span{font-size:.78rem;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.35rem .7rem;color:var(--text)}
+.deliv span b{color:var(--violet-dark)}
+.limits{background:var(--amber-bg);border:1px solid #F3D9A4;border-radius:8px;padding:1rem 1.2rem;font-size:.86rem;color:var(--amber-text);margin-top:1.2rem;line-height:1.6}
+.takeaway{background:var(--violet-light);color:var(--violet-deep);border-radius:8px;padding:1.1rem 1.3rem;font-size:.95rem;font-weight:500;margin-top:1.6rem;line-height:1.55}
+.phase{display:grid;grid-template-columns:120px 1fr;gap:1rem;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.7rem;align-items:start}
+.phase-when{font-size:.74rem;font-weight:700;color:var(--violet-dark);text-transform:uppercase;letter-spacing:.05em;padding-top:.15rem}
+.phase h3{font-size:.95rem;margin-bottom:.25rem}
+.phase p{font-size:.84rem;color:var(--text-dim)}
+.reco{background:linear-gradient(135deg,#4C1D95,#6D28D9);border-radius:14px;padding:2rem 2.1rem;color:#fff;margin-top:1.6rem}
+.reco h2{color:#fff;margin-bottom:.6rem}
+.reco p{color:#E9E3F7;font-size:.92rem;max-width:780px}
+.reco-points{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.2rem}
+.reco-item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:.85rem 1rem;font-size:.84rem;color:#E0D7F4}
+.reco-item b{display:block;color:#fff;margin-bottom:.2rem;font-size:.9rem}
+.price{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.6rem 1.8rem;display:flex;justify-content:space-between;align-items:center;gap:1.4rem;margin-top:1.4rem}
+.price-l h3{font-size:1.05rem;margin-bottom:.2rem}
+.price-l p{font-size:.85rem;color:var(--text-dim);max-width:520px}
+.price-r{text-align:right;flex-shrink:0}
+.price-r b{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--text-bright);display:block;line-height:1.1}
+.price-r span{font-size:.76rem;color:var(--text-dim)}
+.footer{padding:2.5rem 0 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-dim)}
+.footer-brand{font-family:'DM Serif Display',serif;color:var(--violet-dark);font-size:1.05rem}
+.comp-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.85rem;margin-top:1.2rem}
+.comp-table th{background:var(--surface);text-align:left;padding:.7rem .9rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim)}
+.comp-table td{padding:.7rem .9rem;border-top:1px solid var(--border);vertical-align:top}
+.comp-table td:first-child{font-weight:600;color:var(--text-bright);width:24%}
+.mod{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.3rem;margin-top:1rem}
+.mod h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--violet-dark);margin-bottom:.5rem}
+.mod .d{font-size:.85rem;color:var(--text-dim);margin-bottom:.6rem}
+.fixe{border-left:4px solid var(--violet)}
+.var{border-left:4px solid var(--amber)}
+@media(max-width:760px){.container{padding:2rem 1.3rem}.voies,.gonogo,.reco-points{grid-template-columns:1fr}.phase,.step,.dec{grid-template-columns:1fr}.price{flex-direction:column;align-items:flex-start}h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 01 -->
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.2rem">
+      <div><div class="brand">IAvenir</div><div class="tagline">Formation &amp; Conseil en IA</div></div>
+      <div style="text-align:right;font-size:.78rem;color:var(--text-dim)">Août 2026<br>Confidentiel</div>
+    </div>
+    <div class="section-num">01 Objet</div>
+    <h1>Agent IA · réponse aux<br>appels d'offres</h1>
+    <div class="subtitle">De la veille à la remise du dossier, une chaîne outillée où vous gardez la décision</div>
+    <p class="lead">Répondre à un appel d'offres mobilise les mêmes gestes à chaque consultation, quel que soit le marché : lire les pièces, vérifier que les documents administratifs et les qualifications de l'entreprise sont valides, décider si l'affaire vaut la peine, chiffrer, produire les pièces exigées, réunir le dossier et le déposer. L'agent prend en charge ces gestes. Vous conservez les décisions, il exécute tout le reste.</p>
+    <div class="deliv">
+      <span><b>1</b> agent orchestrateur</span>
+      <span><b>9</b> compétences de socle, identiques d'un marché à l'autre</span>
+      <span>Une couche de production ajustée à vos consultations</span>
+      <span><b>4</b> points de décision</span>
+      <span>Arborescence documentaire complète</span>
+    </div>
+    <div class="takeaway">L'agent ne décide jamais de répondre ni de ne pas répondre. Il instruit, produit et alerte. L'engagement, le prix et le mémoire restent validés par vous.</div>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <div class="section-num">02 Le socle documentaire</div>
+    <h2>Ce que l'agent lit en permanence</h2>
+    <p class="lead">L'agent travaille à partir d'une arborescence unique, qui devient votre référentiel de réponse. Sa tenue à jour conditionne toute la chaîne : un dossier ne peut être déposé qu'avec des pièces valides et des capacités justifiées.</p>
+    <div class="tree"><b>REPONSES_APPELS_OFFRES/</b>
+├─ <b>00_ENTREPRISE</b>            <i>pièces administratives, attestations sociales et fiscales, assurances</i>
+├─ <b>01_CAPACITES</b>             <i>qualifications, agréments, organigramme, effectifs, moyens matériels</i>
+├─ <b>02_REFERENCES</b>            <i>affaires réalisées, attestations de bonne exécution, fiches de référence</i>
+├─ <b>03_PARTENAIRES</b>           <i>pièces et capacités des cotraitants et sous-traitants</i>
+├─ <b>04_MODELES</b>               <i>trames de mémoire, de note méthodologique, de plans qualité, de formulaires</i>
+├─ <b>05_PILOTAGE</b>              <i>bibliothèque de prix, politique commerciale, éléments manquants</i>
+├─ <b>06_AO_EN_COURS/[affaire]</b> <i>consultation · candidature · offre · dossier à déposer</i>
+├─ <b>07_AO_ARCHIVES</b>           <i>consultations closes, déposées ou abandonnées</i>
+└─ <b>99_VEILLE</b>                <i>résultats de la veille</i></div>
+    <div class="limits">Éléments à tenir à jour en permanence, sous peine de blocage au dépôt. Attestations sociales et fiscales dans leurs délais de validité, assurances en cours, qualifications et agréments non expirés, références actualisées avec leurs attestations, pièces des partenaires, bibliothèque de prix de l'exercice. L'agent contrôle ces éléments à chaque consultation et vous signale ce qui manque ou ce qui a expiré.</div>
+    <div class="takeaway">Ce que l'acheteur juge n'est pas la même chose selon le marché. Sur des travaux, ce sont les qualifications, les références et les moyens de l'entreprise. Sur une prestation intellectuelle ou de formation, ce sont les profils et les méthodes. L'arborescence porte les deux, l'agent mobilise ce que la consultation exige.</div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <div class="section-num">03 La chaîne</div>
+    <h2>Cinq étapes, quatre points où vous reprenez la main</h2>
+    <div class="legend">
+      <span><i style="background:#8B5CF6"></i>Compétence de l'agent</span>
+      <span><i style="background:#059669"></i>Livrable produit</span>
+      <span><i style="background:#7A7568"></i>Dossier source</span>
+      <span><i style="background:#D97706"></i>Relance automatique</span>
+    </div>
+
+    <div class="step"><div class="step-n">1</div><div>
+      <h3>Veille</h3>
+      <div class="sd">Détecter les consultations pertinentes sur les plateformes que vous suivez, selon vos critères de nature de prestation, de montant, de zone et de type d'acheteur.</div>
+      <div class="lbl">Compétence</div><span class="chip c-skill">veille-consultations</span>
+      <div class="lbl">Produit</div><span class="chip c-out">Tableau de veille classé et daté</span><span class="chip c-doc">99_VEILLE</span>
+    </div></div>
+    <div class="arrow">▼</div>
+    <div class="dec dec-h"><div class="dec-i">✋</div><div>
+      <h3>Décision · sélection des consultations à instruire</h3>
+      <p>Vous choisissez les affaires à instruire, téléchargez le dossier de consultation et le déposez dans l'agent. La chaîne redémarre à votre main.</p>
+    </div></div>
+    <div class="arrow">▼</div>
+
+    <div class="step"><div class="step-n">2</div><div>
+      <h3>Analyse du dossier de consultation</h3>
+      <div class="sd">Comprendre ce que demande l'acheteur, ce qui est éliminatoire, et vérifier dans le même mouvement que l'entreprise est en état de candidater.</div>
+      <div class="lbl">Analyse des pièces</div>
+      <span class="chip c-skill">analyse-reglement-consultation</span><span class="chip c-skill">analyse-cahier-des-charges</span><span class="chip c-skill">analyse-clauses-administratives</span><span class="chip c-skill">strategie-de-reponse</span>
+      <div class="lbl">Contrôle de l'entreprise</div>
+      <span class="chip c-skill">controle-pieces-administratives</span><span class="chip c-skill">controle-capacites-et-references</span>
+      <div class="lbl">Sources vérifiées</div>
+      <span class="chip c-doc">00_ENTREPRISE</span><span class="chip c-doc">01_CAPACITES</span><span class="chip c-doc">02_REFERENCES</span><span class="chip c-doc">03_PARTENAIRES</span>
+      <div class="lbl">Produits</div>
+      <span class="chip c-out">Analyses des trois pièces maîtresses</span><span class="chip c-out">Stratégie de réponse et allotissement</span><span class="chip c-out">État de conformité et liste des manques</span>
+      <div class="lbl">Alertes</div>
+      <span class="chip c-mail">Pièces ou qualifications périmées</span><span class="chip c-mail">Relance des partenaires</span>
+    </div></div>
+    <div class="arrow">▼</div>
+
+    <div class="stop">
+      <h3>Point d'arrêt · décision d'engagement</h3>
+      <p>Au vu des analyses, de la couverture réelle des prestations demandées et de l'adéquation de vos références et de vos moyens, vous décidez si l'entreprise répond. C'est la seule décision qui engage du temps de production, et elle vous appartient entièrement.</p>
+      <div class="lbl">Compétence d'aide à la décision</div><span class="chip c-skill">synthese-go-nogo</span>
+      <div class="gonogo">
+        <div class="gg gg-no"><b>Ne pas répondre</b>La chaîne s'arrête. Le dossier est archivé avec le motif, qui alimente l'historique de vos arbitrages.</div>
+        <div class="gg gg-go"><b>Répondre</b>La production de l'offre démarre, sur les trois voies parallèles ci-dessous.</div>
+      </div>
+    </div>
+    <div class="arrow">▼</div>
+
+    <div class="step"><div class="step-n">3</div><div>
+      <h3>Production de l'offre</h3>
+      <div class="sd">Trois voies menées en parallèle, qui convergent vers le mémoire technique. Leur contenu exact dépend des pièces exigées par la consultation, voir la section suivante.</div>
+      <div class="voies">
+        <div class="voie"><h4>Prix</h4><span class="chip c-skill">chiffrage-et-bordereau</span><span class="chip c-out">Bordereau et note de prix</span><div class="src">Sources · bibliothèque de prix, cahier des charges</div></div>
+        <div class="voie"><h4>Contenu technique</h4><span class="chip c-skill">production-pieces-techniques</span><span class="chip c-out">Pièces exigées par le marché</span><div class="src">Sources · trames, références, capacités et moyens</div></div>
+        <div class="voie"><h4>Candidature</h4><span class="chip c-skill">generation-formulaires-candidature</span><span class="chip c-out">Formulaires renseignés</span><span class="chip c-mail">Relance des partenaires</span><div class="src">Sources · trames et liasses de l'entreprise</div></div>
+      </div>
+      <div class="conv">
+        <span class="chip c-skill">generation-memoire-technique</span>
+        <div class="warn">Étape bloquante avant assemblage · vérification des qualifications, des références comparables et des moyens humains et matériels réellement disponibles. L'agent ne survend pas ce que l'entreprise ne sait pas tenir.</div>
+        <div style="margin-top:.55rem"><span class="chip c-out">Mémoire technique assemblé</span></div>
+        <p class="src" style="margin-top:.4rem">Compréhension du besoin, moyens affectés, méthodologie d'exécution, organisation et encadrement, références comparables, matrice de conformité, calendrier.</p>
+      </div>
+    </div></div>
+    <div class="arrow">▼</div>
+    <div class="dec dec-h"><div class="dec-i">✋</div><div>
+      <h3>Décision · validation du chiffrage et du mémoire</h3>
+      <p>Vous validez le prix et le mémoire technique avant toute consolidation. Rien ne part au dépôt sans cette double validation.</p>
+    </div></div>
+    <div class="arrow">▼</div>
+
+    <div class="step"><div class="step-n">4</div><div>
+      <h3>Consolidation</h3>
+      <div class="sd">Réunir l'ensemble du dossier, contrôler son exhaustivité pièce par pièce au regard du règlement de consultation, et produire le bordereau de dépôt.</div>
+      <div class="lbl">Compétence</div><span class="chip c-skill">consolidation-dossier-reponse</span>
+      <div class="lbl">Produits</div>
+      <span class="chip c-out">Dossier à déposer, offre et candidature</span><span class="chip c-out">Bordereau de contrôle, présent / à compléter / manquant</span>
+    </div></div>
+    <div class="arrow">▼</div>
+    <div class="dec dec-h"><div class="dec-i">✋</div><div>
+      <h3>Décision · validation finale et dépôt</h3>
+      <p>Contrôle du bordereau, aucun point rouge, puis dépôt sur la plateforme de l'acheteur. Le dépôt reste un geste humain.</p>
+    </div></div>
+    <div class="arrow">▼</div>
+
+    <div class="step"><div class="step-n">5</div><div>
+      <h3>Socle transverse</h3>
+      <div class="sd">Ces compétences entretiennent la base de travail entre deux consultations, pour que la chaîne reste performante dans la durée.</div>
+      <div class="lbl">Compétences</div>
+      <span class="chip c-skill">mise-a-jour-references</span><span class="chip c-skill">mise-a-jour-capacites-entreprise</span><span class="chip c-skill">mise-a-jour-bibliotheque-prix</span>
+      <div class="lbl">Alimentent</div>
+      <span class="chip c-doc">02_REFERENCES</span><span class="chip c-doc">01_CAPACITES</span><span class="chip c-doc">05_PILOTAGE</span>
+    </div></div>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <div class="section-num">04 Ce qui est fixe, ce qui s'adapte</div>
+    <h2>Un socle identique, une couche de production propre à vos marchés</h2>
+    <p class="lead">La chaîne ci-dessus ne change pas d'un marché à l'autre. Ce qui change, ce sont les pièces que l'acheteur exige et donc les compétences de production à configurer. C'est ce qui est arrêté au cadrage, à partir de trois ou quatre consultations réelles de votre historique.</p>
+
+    <div class="mod fixe">
+      <h4>Socle fixe · neuf compétences, quelle que soit la nature du marché</h4>
+      <div class="d">Détection, analyse des pièces, contrôle de l'entreprise, aide à la décision et assemblage final. Cette partie ne se discute pas, elle est la même pour des travaux, des services ou de la formation.</div>
+      <span class="chip c-skill">veille-consultations</span><span class="chip c-skill">analyse-reglement-consultation</span><span class="chip c-skill">analyse-cahier-des-charges</span><span class="chip c-skill">analyse-clauses-administratives</span><span class="chip c-skill">strategie-de-reponse</span><span class="chip c-skill">controle-pieces-administratives</span><span class="chip c-skill">controle-capacites-et-references</span><span class="chip c-skill">synthese-go-nogo</span><span class="chip c-skill">consolidation-dossier-reponse</span>
+    </div>
+
+    <div class="mod var">
+      <h4>Couche de production · variable, selon les pièces exigées</h4>
+      <div class="d">Le mémoire technique et le chiffrage sont présents dans la quasi-totalité des consultations. Les autres pièces se configurent à la demande, en fonction de ce que le règlement de consultation impose.</div>
+      <span class="chip c-skill">generation-memoire-technique</span><span class="chip c-skill">chiffrage-et-bordereau</span><span class="chip c-skill">generation-formulaires-candidature</span><span class="chip c-skill">dossier-de-references</span><span class="chip c-skill">planning-et-phasage</span><span class="chip c-skill">plans-qualite-securite-environnement</span><span class="chip c-skill">notes-methodologiques</span><span class="chip c-skill">fiches-techniques-et-produits</span><span class="chip c-skill">moyens-humains-et-materiels</span>
+    </div>
+
+    <table class="comp-table">
+      <tr><th>Nature du marché</th><th>Ce que l'acheteur juge d'abord</th><th>Pièces de production typiques</th></tr>
+      <tr><td>Travaux</td><td>Qualifications et agréments de l'entreprise, références de chantiers comparables, moyens matériels et encadrement, organigramme et effectifs</td><td>Mémoire technique, bordereau de prix et sous-détails, planning et phasage, plans qualité, sécurité et environnement, fiches techniques des produits</td></tr>
+      <tr><td>Services et prestations intellectuelles</td><td>Méthodologie proposée, références de missions comparables, organisation de l'équipe affectée</td><td>Mémoire technique, note méthodologique, bordereau de prix unitaires, organisation et moyens affectés</td></tr>
+      <tr><td>Formation</td><td>Certifications de l'organisme, contenus et déroulés, qualification des intervenants</td><td>Mémoire technique, fiches programme et déroulés, bordereau de prix, dossier des intervenants</td></tr>
+    </table>
+    <div class="takeaway">Le nombre de compétences n'est donc pas un chiffre fixe. Le socle en compte neuf, la couche de production en ajoute trois à six selon vos marchés. Le périmètre exact est arrêté au cadrage et n'entraîne pas de variation de prix.</div>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <div class="section-num">05 Déroulé de la mission</div>
+    <h2>Trois semaines pour un agent opérationnel</h2>
+    <div class="phase"><div class="phase-when">Semaine 1</div><div><h3>Cadrage et structuration</h3><p>Atelier avec le responsable des réponses. Analyse de trois ou quatre consultations réelles de votre historique pour arrêter la couche de production. Mise en place de l'arborescence, collecte des pièces administratives, des qualifications, des références, des trames et de la bibliothèque de prix. Formalisation de vos critères de veille et de vos règles d'engagement.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaine 2</div><div><h3>Construction des compétences</h3><p>Configuration du socle d'analyse et de contrôle, puis des compétences de production retenues au cadrage, puis de l'orchestration qui les enchaîne. Chaque compétence est testée sur une consultation réelle.</p></div></div>
+    <div class="phase"><div class="phase-when">Semaine 3</div><div><h3>Recette, prise en main et transfert</h3><p>Passage complet sur une consultation en cours, de la veille au bordereau de dépôt. Ajustements sur vos retours, session de prise en main de l'équipe, remise du kit de maintenance.</p></div></div>
+    <div class="deliv">
+      <span><b>1</b> agent orchestrateur opérationnel</span>
+      <span>Socle et couche de production configurés et testés</span>
+      <span>Arborescence documentaire en place</span>
+      <span>Fiche d'usage par compétence</span>
+      <span>Kit de maintenance et d'évolution</span>
+      <span>Session de prise en main</span>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section>
+    <div class="section-num">06 Budget</div>
+    <h2>Un forfait unique</h2>
+    <div class="price">
+      <div class="price-l">
+        <h3>Mise en place de l'agent appels d'offres</h3>
+        <p>Cadrage et définition du périmètre de production, structuration documentaire, construction et test des compétences, orchestration, recette sur une consultation réelle, prise en main de l'équipe et transfert.</p>
+      </div>
+      <div class="price-r"><b>5 000 € HT</b><span>Forfait · environ 3 semaines</span></div>
+    </div>
+    <div class="limits">Licences des outils non comprises et à mettre en place avant démarrage. Le forfait suppose que les pièces administratives, les qualifications, les références, les trames et la bibliothèque de prix existent et nous soient remises en début de mission ; leur création ou leur refonte ne fait pas partie du périmètre. La connexion automatique aux plateformes de marchés dépend des accès dont vous disposez et sera arbitrée au cadrage.</div>
+  </section>
+
+  <!-- 07 -->
+  <section style="border-bottom:none">
+    <div class="reco">
+      <div class="section-num" style="color:#C4B5FD">07 Ce que cela change</div>
+      <h2>Le temps passe de la mise en forme à la décision</h2>
+      <p>Sur une réponse à appel d'offres, l'essentiel du temps se consomme en lecture de pièces, en vérification de documents et de qualifications, en remise en forme de contenus qui existent déjà et en constitution du dossier. Ce sont exactement les gestes que l'agent absorbe. Ce qui reste, l'arbitrage d'opportunité, le prix et le positionnement, est précisément ce qui mérite votre temps.</p>
+      <div class="reco-points">
+        <div class="reco-item"><b>Plus de consultations instruites</b>La veille est continue et l'analyse d'un dossier ne coûte plus une journée. Vous pouvez regarder des affaires que vous laissiez passer.</div>
+        <div class="reco-item"><b>Moins de dossiers rejetés à la forme</b>Le contrôle des pièces et des qualifications, puis le bordereau de dépôt, éliminent l'oubli administratif, qui est la première cause d'élimination.</div>
+        <div class="reco-item"><b>Une qualité constante</b>Le mémoire, les pièces techniques et les formulaires sortent du même moule, quelle que soit la personne qui pilote la réponse.</div>
+        <div class="reco-item"><b>Une mémoire qui se constitue</b>Chaque consultation instruite, gagnée ou abandonnée, enrichit le référentiel de références et les arbitrages suivants.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="footer-brand">IAvenir</div>
+    <div>Confidentiel · Agent IA réponse aux appels d'offres · Août 2026</div>
+  </div>
+</div>
+</body>
+</html>
